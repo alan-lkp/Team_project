@@ -1,0 +1,600 @@
+__label__after_sale 退款 金额 不 对 少退 了 运费 哦 一直 没人管
+__label__after_sale 请问 一下 保温杯 坏 了 想 维修 保修期 内 怎么 处理
+__label__quality __label__payment_account __label__consult 你好 猫 粮有 异味 洗 了 好 几次 都 散 不 掉 而且 想 改绑 手机号 收不到 验证码 而且 这 款 奶粉 支持 无线 充电 吗 急
+__label__invalid 请问 一下 测试 别买 都 是 骗人 的 我 已经 举报 了
+__label__after_sale __label__consult 我要 退货 运费 谁 承担 而且 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 哦
+__label__invoice 在 吗 发票 金额 和 订单 金额 对不上
+__label__invalid 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评 呀
+__label__after_sale 售后 电话 打 不通 只能 来 这里 申请 退款 给 个 说法 吧
+__label__after_sale 售后 电话 打 不通 只能 来 这里 申请 退款
+__label__quality 空气 炸锅 用 了 两天 就 出 故障 了 质量 太 差 麻烦 尽快 处理
+__label__after_sale __label__consult 亲 面膜 寄 回去 了 什么 时候 能 给 我 退钱 顺便 说 下 想 问下 羽绒服 的 尺寸 是 多少 适合 多大 的 房间 用 哦
+__label__logistics __label__price_promo 你好 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 还有 为什么 我 买 的 价格比 别人 的 贵
+__label__price_promo 为什么 我 买 的 价格比 别人 的 贵
+__label__logistics __label__after_sale __label__consult 麻烦 问 下 台灯 显示 已 发出 但是 一直 没揽收 还有 电动牙刷 坏 了 想 维修 保修期 内 怎么 处理 还有 这个 保温杯 现在 有货 吗 多久 能发
+__label__payment_account 你好 账号 被 冻结 了 里面 的 优惠券 还 能 用 吗
+__label__logistics __label__after_sale 包裹 一直 卡 在 沈阳 中转站 出不来 而且 笔记本电脑 寄 回去 了 什么 时候 能 给 我 退钱 给 个 说法 吧
+__label__invalid 给 个 说法 吧
+__label__price_promo __label__service 你好 赠品 没有 发 订单 上 明明 写 着 有 赠品 啊 另外 打 客服 电话 一直 占线 在线 客服 也 排不上 队 一直 没人管
+__label__after_sale __label__invoice __label__consult 在 吗 换货 申请 通过 了 但是 一直 没 发货 另外 能 不能 把 发票 寄过来 我 需要 纸质 版 另外 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 啊
+__label__invalid 在 吗 哈哈
+__label__payment_account 你好 支付 密码 忘 了 怎么 重置
+__label__invoice __label__consult 同一个 订单 开 两张 发票 可以 吗 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__logistics 包裹 一直 卡 在 成都 中转站 出不来
+__label__logistics 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 实在 是 没 办法 了
+__label__logistics __label__service 麻烦 问 下 快递 员 说 放 门口 就行 东西 到 现在 都 没 看到 另外 转接 了 四个 客服 问题 还是 没 解决
+__label__logistics 东西 到 了 但是 没 送到 我家 显示 已 签收 了
+__label__logistics __label__invoice 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 而且 要开 公司 抬头 的 专票 需要 提供 什么 资料 麻烦 尽快 处理
+__label__after_sale 在 吗 退款 金额 不 对 少退 了 运费
+__label__consult 客服 你好 笔记本电脑 的 保修期 是 多久 实在 是 没 办法 了
+__label__invalid 随便 点 几下 看看
+__label__invalid 亲 测试 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评 一直 没人管
+__label__invalid 啊 啊 别买 都 是 骗人 的 我 已经 举报 了
+__label__invoice 要开 公司 抬头 的 专票 需要 提供 什么 资料
+__label__logistics __label__service 快递 在 西安 停 了 一周 了 一直 没有 物流 更新 呀 顺便 说 下 客服 答应 给 我 补发 结果 一直 没动静 给 个 说法 吧
+__label__after_sale __label__payment_account 退货 的 快递 已经 签收 了 退款 什么 时候 能 退 而且 想 改绑 手机号 收不到 验证码
+__label__after_sale 想 取消 订单 还 没 发货 应该 可以 退 吧
+__label__quality __label__payment_account 收到 的 电动牙刷 上 有 污渍 看着 很 不 舒服 而且 莫名其妙 被扣 了 两次 款 重复 支付 了
+__label__invoice 请问 一下 发票 金额 和 订单 金额 对不上
+__label__consult __label__service 想 问下 电饭锅 的 尺寸 是 多少 适合 多大 的 房间 用 另外 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__invalid 测试 刷单 了解 一下 需要 的 私聊
+__label__quality __label__consult 在 吗 包装 里少 了 一件 订单 上 明明 写 的 是 两件 另外 买 两件 有没有 优惠 想先 咨询 一下 吧 麻烦 尽快 处理
+__label__after_sale __label__price_promo 请问 一下 售后 一直 卡 在 审核 中 能 不能 快点 还有 为什么 我 买 的 价格比 别人 的 贵 啊
+__label__service 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管
+__label__invalid 哈哈
+__label__service 亲 每个 客服 说 的 都 不 一样 到底 听 谁 的
+__label__logistics __label__price_promo 想 问问 我 的 手机 什么 时候 能 到 急用 另外 价格 保护 怎么 申请 规则 我 没 看 懂
+__label__logistics __label__payment_account 快递 在 西安 停 了 一周 了 一直 没有 物流 更新 另外 账号 被盗 了 有 一笔 不是 我下 的 单 实在 是 没 办法 了
+__label__logistics __label__quality 买 的 洗发水 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 还有 说 是 正品 收到 的 包装 和 专柜 完全 不 一样
+__label__invoice __label__consult 同一个 订单 开 两张 发票 可以 吗 另外 想 问下 台灯 的 尺寸 是 多少 适合 多大 的 房间 用
+__label__consult 客服 你好 奶粉 怎么 连接 手机 蓝牙 说明书 看不懂
+__label__quality __label__after_sale 面料 和 图片 完全 不 一样 做工 也 很 粗糙 另外 想 换成 大一码 的 怎么 走 换货 流程 急
+__label__payment_account 支付 完 订单 消失 了 钱 也 没 退回来 希望 能 解决
+__label__invalid 你好 在 吗
+__label__after_sale __label__service 请问 一下 我要 退款 台灯 我 不想 再要 了 客服 把 责任 推 给 快递 让 我 自己 去 找
+__label__logistics __label__after_sale 买 的 电饭锅 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 另外 退款 金额 不 对 少退 了 运费 呀
+__label__invalid 客服 你好 在 吗
+__label__invoice __label__payment_account 发票 金额 和 订单 金额 对不上 顺便 说 下 想 改绑 手机号 收不到 验证码
+__label__after_sale __label__invoice __label__service 你好 想 取消 订单 还 没 发货 应该 可以 退 吧 发票 金额 和 订单 金额 对不上 之前 承诺 [ 数字 ] 小时 回复 到 现在 也 没人 联系 我 一直 没人管
+__label__invoice 订单 已经 完成 了 但是 发票 一直 没收 到 希望 能 解决
+__label__payment_account 支付 完 订单 消失 了 钱 也 没 退回来
+__label__price_promo 麻烦 问 下 多扣 了 我 一笔 钱 订单 金额 对不上 麻烦 尽快 处理
+__label__invoice 你好 上个月 开 的 发票 现在 还 能 补开 吗
+__label__after_sale 售后 一直 卡 在 审核 中 能 不能 快点
+__label__logistics 物流 轨迹 一直 不 更新 问 客服 也 查不到
+__label__invalid 急 随便 点 几下 看看 呢 实在 是 没 办法 了
+__label__logistics __label__price_promo 充电 宝 显示 已 发出 但是 一直 没揽收 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了
+__label__logistics __label__quality __label__consult 亲 发货 太慢 了 等 得 我 都 没 耐心 了 收到 的 面膜 有 明显 划痕 像是 别人 退回来 的 参数 里 的 这个 功能 是 什么 意思 没看 懂 呢
+__label__logistics __label__consult 亲 包裹 一直 卡 在 成都 中转站 出不来 啊 而且 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 哦
+__label__service 麻烦 问 下 机器人 客服 绕来 绕 去 根本 转 不到 人工
+__label__invalid 随便 点 几下 看看 请 回复 我
+__label__invoice 发票 抬头 写错 了 能 重开 一张 吗 麻烦 尽快 处理
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__logistics 发货 太慢 了 等 得 我 都 没 耐心 了
+__label__price_promo __label__consult 请问 一下 为什么 我 买 的 价格比 别人 的 贵 而且 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买 一直 没人管
+__label__after_sale __label__consult 退款 金额 不 对 少退 了 运费 而且 买 两件 有没有 优惠 想先 咨询 一下 请 回复 我
+__label__consult 收到 空气 炸锅 以后 怎么 激活 需要 注册 吗
+__label__invalid 实在 是 没 办法 了
+__label__invalid 别买 都 是 骗人 的 我 已经 举报 了 一直 没人管
+__label__payment_account 支付 完 订单 消失 了 钱 也 没 退回来 呀 一直 没人管
+__label__logistics __label__price_promo 客服 你好 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 而且 会员 折扣 没有 生效 白开 会员 了
+__label__invalid 发错 了 吧 我 没 买 过 这个 东西 啊 给 个 说法 吧
+__label__consult 想 问 下面 膜 的 尺寸 是 多少 适合 多大 的 房间 用 急
+__label__logistics __label__service 地址 填错 了 想 改 一下 快递 还 没 派送 顺便 说 下 之前 承诺 [ 数字 ] 小时 回复 到 现在 也 没人 联系 我
+__label__logistics __label__quality __label__consult 发货 太慢 了 等 得 我 都 没 耐心 了 还有 买 的 运动鞋 已经 过期 了 生产日期 是 去年 的 还有 电饭锅 和 赠品 的 配件 是 一起 发 吗
+__label__invoice __label__consult 发票 税号 写错 了 要 作废 重开 还有 收到 面膜 以后 怎么 激活 需要 注册 吗
+__label__service 转接 了 四个 客服 问题 还是 没 解决
+__label__after_sale __label__service 在 吗 退款 金额 不 对 少退 了 运费 还有 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管 麻烦 尽快 处理
+__label__service 问个问题 被 客服 怼 了 态度 非常 不好
+__label__service 转接 了 四个 客服 问题 还是 没 解决 呀 一直 没人管
+__label__invoice 要开 公司 抬头 的 专票 需要 提供 什么 资料
+__label__after_sale 客服 你好 我要 退款 行李箱 我 不想 再要 了
+__label__invoice __label__consult __label__service 麻烦 问 下 上个月 开 的 发票 现在 还 能 补开 吗 顺便 说 下 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买 顺便 说 下 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管
+__label__quality __label__after_sale __label__consult 尺码 严重 偏小 标注 的 和 实际 差太多 还有 退货 的 快递 已经 签收 了 退款 什么 时候 能 退 还有 这个 保温杯 适合 三岁 小孩 用 吗
+__label__price_promo __label__consult 请问 一下 优惠券 显示 可以 使用 结算 的 时候 又 用 不了 另外 这 款 羽绒服 支持 无线 充电 吗
+__label__quality 客服 你好 刚 拆开 运动鞋 就 发现 屏幕 有 裂纹 急
+__label__invalid 别买 都 是 骗人 的 我 已经 举报 了 急
+__label__consult __label__service 收到 机械 键盘 以后 怎么 激活 需要 注册 吗 而且 客服 半天 不回 消息 问 了 三遍 都 没 人理
+__label__payment_account __label__consult 请问 一下 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下 这个 手机 能 带上 飞机 吗 麻烦 尽快 处理
+__label__invalid 麻烦 问 下 急 刷单 了解 一下 需要 的 私聊
+__label__after_sale __label__price_promo 想 换成 大一码 的 怎么 走 换货 流程 我领 的 券 怎么 突然 失效 了
+__label__invalid 麻烦 问 下 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉
+__label__logistics __label__after_sale __label__service 外包装 烂 得 不成 样子 里面 的 羽绒服 不 知道 有没有 事 售后 一直 卡 在 审核 中 能 不能 快点 客服 答应 给 我 补发 结果 一直 没动静 啊
+__label__after_sale __label__price_promo 你好 退货 的 快递 已经 签收 了 退款 什么 时候 能 退 还有 为什么 我 买 的 价格比 别人 的 贵
+__label__quality __label__price_promo 尺码 严重 偏小 标注 的 和 实际 差太多 哦 还有 活动 页面 写 的 是 买一送一 实际 只发 了 一件
+__label__logistics 快递 员 说 放 门口 就行 东西 到 现在 都 没 看到
+__label__invoice __label__consult __label__service 发票 内容 想 开成 办公用品 可以 改 吗 想 问下 笔记本电脑 的 尺寸 是 多少 适合 多大 的 房间 用 哦 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__consult 洗发水 和 赠品 的 配件 是 一起 发 吗
+__label__invalid 在 吗
+__label__consult 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__after_sale __label__service 麻烦 问 下 已经 寄回 一周 了 退款 还是 没有 动静 而且 客服 答应 给 我 补发 结果 一直 没动静
+__label__quality 蓝牙 耳机 收到 就是 坏 的 根本 用 不了
+__label__invalid 别买 都 是 骗人 的 我 已经 举报 了 给 个 说法 吧
+__label__service 转接 了 四个 客服 问题 还是 没 解决
+__label__logistics 在 吗 物流 信息 三天 没动 过 了 是 丢件 了 吗
+__label__logistics __label__consult 外包装 烂 得 不成 样子 里面 的 手机 不 知道 有没有 事 还有 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__service 问个问题 被 客服 怼 了 态度 非常 不好
+__label__consult 收到 面膜 以后 怎么 激活 需要 注册 吗
+__label__after_sale __label__service 在 吗 行李箱 坏 了 想 维修 保修期 内 怎么 处理 之前 承诺 [ 数字 ] 小时 回复 到 现在 也 没人 联系 我
+__label__invoice __label__service 上个月 开 的 发票 现在 还 能 补开 吗 另外 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__after_sale __label__consult 想 取消 订单 还 没 发货 应该 可以 退 吧 这个 台灯 现在 有货 吗 多久 能发 吧
+__label__quality __label__consult 客服 你好 奶粉 有 异味 洗 了 好 几次 都 散 不 掉 这个 猫 粮 现在 有货 吗 多久 能发 实在 是 没 办法 了
+__label__invalid 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评 一直 没人管
+__label__after_sale __label__consult 退款 金额 不 对 少退 了 运费 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__consult 这个 保温杯 适合 三岁 小孩 用 吗
+__label__price_promo __label__service 多扣 了 我 一笔 钱 订单 金额 对不上 而且 客服 把 责任 推 给 快递 让 我 自己 去 找 实在 是 没 办法 了
+__label__logistics __label__after_sale 东西 到 了 但是 没 送到 我家 显示 已 签收 哦 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货
+__label__invalid 啊 啊 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评
+__label__invalid 在 吗 麻烦 尽快 处理
+__label__invoice __label__service 客服 你好 能 不能 把 发票 寄过来 我 需要 纸质 版 顺便 说 下 客服 答应 给 我 补发 结果 一直 没动静
+__label__invalid 客服 在 吗 在 吗 在 吗 在 吗 在 吗
+__label__quality __label__consult 台灯 收到 就是 坏 的 根本 用 不了 顺便 说 下 参数 里 的 这个 功能 是 什么 意思 没看 懂 呀 谢谢
+__label__after_sale __label__payment_account __label__consult 售后 一直 卡 在 审核 中 能 不能 快点 顺便 说 下 付款 的 时候 一直 失败 换 了 好几张 卡 都 不行 顺便 说 下 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__payment_account __label__service 麻烦 问 下 支付 密码 忘 了 怎么 重置 另外 客服 半天 不回 消息 问 了 三遍 都 没 人理 实在 是 没 办法 了
+__label__after_sale 请问 一下 空气 炸锅 寄 回去 了 什么 时候 能 给 我 退钱
+__label__service 请问 一下 每个 客服 说 的 都 不 一样 到底 听 谁 的
+__label__logistics __label__price_promo 请问 一下 同城发 了 五天 走路 都 送到 了 顺便 说 下 刚 买 完 就 降价 了 能补 差价 吗
+__label__quality __label__consult __label__service 说 是 正品 收到 的 包装 和 专柜 完全 不 一样 买 两件 有没有 优惠 想先 咨询 一下 之前 承诺 [ 数字 ] 小时 回复 到 现在 也 没人 联系 我
+__label__logistics 快递 在 成都 停 了 一周 了 一直 没有 物流 更新
+__label__quality __label__payment_account 收到 的 羽绒服 有 明显 划痕 像是 别人 退回来 的 订单 一直 显示 待 支付 但是 我 明明 付过 了
+__label__logistics __label__quality 想 问问 我 的 羽绒服 什么 时候 能 到 急用 而且 电饭锅 用 了 两天 就 出 故障 了 质量 太差 啊
+__label__invalid 刷单 了解 一下 需要 的 私聊
+__label__invalid 刷单 了解 一下 需要 的 私聊 谢谢
+__label__payment_account __label__service 客服 你好 付款 的 时候 一直 失败 换 了 好几张 卡 都 不行 而且 客服 半天 不回 消息 问 了 三遍 都 没 人理 给 个 说法 吧
+__label__invalid 测试 测试 测试
+__label__logistics 快递 在 杭州 停 了 一周 了 一直 没有 物流 更新 一直 没人管
+__label__price_promo __label__consult 你好 跨店 满减 没 算进去 少减 了 三十块 另外 运动鞋 的 保修期 是 多久
+__label__after_sale __label__consult 客服 你好 退货 的 快递 已经 签收 了 退款 什么 时候 能 退 这个 台灯 能 带上 飞机 吗
+__label__payment_account 账号 被盗 了 有 一笔 不是 我下 的 单
+__label__invalid 测试 测试 测试
+__label__quality __label__service 包装 里少 了 一件 订单 上 明明 写 的 是 两件 还有 机器人 客服 绕来 绕 去 根本 转 不到 人工 麻烦 尽快 处理
+__label__quality 说 是 正品 收到 的 包装 和 专柜 完全 不 一样
+__label__after_sale __label__service 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 另外 机器人 客服 绕来 绕 去 根本 转 不到 人工
+__label__quality __label__after_sale __label__price_promo 电动牙刷 收到 就是 坏 的 根本 用 不了 我要 退款 电动牙刷 我 不想 再要 了 刚买 完 就 降价 了 能补 差价 吗
+__label__invalid 在 吗 麻烦 尽快 处理
+__label__invalid 发错 了 吧 我 没 买 过 这个 东西 啊
+__label__logistics __label__consult 快递 在 广州 停 了 一周 了 一直 没有 物流 更新 还有 这个 电动牙刷 现在 有货 吗 多久 能发
+__label__quality 面料 和 图片 完全 不 一样 做工 也 很 粗糙
+__label__quality 收到 的 洗发水 上 有 污渍 看着 很 不 舒服
+__label__quality 尺码 严重 偏小 标注 的 和 实际 差太多
+__label__after_sale 退货 的 快递 已经 签收 了 退款 什么 时候 能 退
+__label__invalid 在 吗 希望 能 解决
+__label__invalid 测试 测试 测试 测试 麻烦 尽快 处理
+__label__invoice __label__consult 发票 抬头 写错 了 能 重开 一张 吗 顺便 说 下 奶粉 的 保修期 是 多久 谢谢
+__label__consult 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__quality __label__price_promo 请问 一下 实物 和 详情页 描述 不 一致 颜色 差 很多 呀 另外 跨店 满减 没 算进去 少减 了 三十块 谢谢
+__label__invalid 啊 啊 随便 点 几下 看看 呢 一直 没人管
+__label__logistics __label__consult 在 吗 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 还有 收到 奶粉 以后 怎么 激活 需要 注册 吗
+__label__invalid 麻烦 问 下 测试 测试 测试 希望 能 解决
+__label__logistics __label__after_sale 快递 员 说 放 门口 就行 东西 到 现在 都 没 看到 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货
+__label__invalid 客服 你好 啊 啊 发错 了 吧 我 没 买 过 这个 东西 啊
+__label__price_promo 多扣 了 我 一笔 钱 订单 金额 对不上 吧 给 个 说法 吧
+__label__consult __label__service 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 还有 转接 了 四个 客服 问题 还是 没 解决
+__label__logistics __label__after_sale 东西 到 了 但是 没 送到 我家 显示 已 签收 另外 连衣裙 坏 了 想 维修 保修期 内 怎么 处理
+__label__invalid 急 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉 麻烦 尽快 处理
+__label__payment_account 支付 完 订单 消失 了 钱 也 没 退回来
+__label__logistics __label__after_sale __label__invoice 东西 到 了 但是 没 送到 我家 显示 已 签收 想 换成 大一码 的 怎么 走 换货 流程 报销 要 用 发票 麻烦 尽快 开 一下 一直 没人管
+__label__invalid 随便 点 几下 看看 啊
+__label__logistics __label__consult 外包装 烂 得 不成 样子 里面 的 笔记本电脑 不 知道 有没有 事 而且 这 款 蓝牙 耳机 支持 无线 充电 吗
+__label__consult 这个 床垫 适合 三岁 小孩 用 吗
+__label__invoice 在 吗 能 不能 把 发票 寄过来 我 需要 纸质 版
+__label__consult 怎么 安装 电饭锅 有 教程 吗 希望 能 解决
+__label__invoice 发票 税号 写错 了 要 作废 重开 急
+__label__logistics __label__consult 快递 在 沈阳 停 了 一周 了 一直 没有 物流 更新 这个 机械 键盘 现在 有货 吗 多久 能发
+__label__invoice __label__consult 买 完 想开 个 发票 在 哪里 申请 而且 这 款 手机 支持 无线 充电 吗 实在 是 没 办法 了
+__label__logistics __label__quality 洗发水 显示 已 发出 但是 一直 没揽收 刚 拆开 奶粉 就 发现 屏幕 有 裂纹
+__label__after_sale __label__consult 洗发水 坏 了 想 维修 保修期 内 怎么 处理 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__logistics __label__quality 请问 一下 同城发 了 五天 走路 都 送到 了 而且 收到 的 洗发水 上 有 污渍 看着 很 不 舒服
+__label__invalid 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评
+__label__logistics __label__after_sale 麻烦 问 下 包裹 一直 卡 在 北京 中转站 出不来 另外 申请 退货 好 几天 了 一直 没 人 处理 了
+__label__invalid 客服 你好 测试 测试 测试 麻烦 尽快 处理
+__label__after_sale 售后 电话 打 不通 只能 来 这里 申请 退款 呀
+__label__logistics __label__invoice __label__consult 发货 太慢 了 等 得 我 都 没 耐心 了 顺便 说 下 买 完 想开 个 发票 在 哪里 申请 顺便 说 下 这个 行李箱 能 带上 飞机 吗
+__label__consult 这个 运动鞋 能 带上 飞机 吗
+__label__payment_account 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下
+__label__consult 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__after_sale __label__service 你好 已经 寄回 一周 了 退款 还是 没有 动静 哦 而且 客服 答应 给 我 补发 结果 一直 没动静
+__label__after_sale __label__invoice __label__payment_account 在 吗 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货 上个月 开 的 发票 现在 还 能 补开 吗 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下
+__label__invalid 亲 测试 测试 测试
+__label__logistics __label__service 物流 轨迹 一直 不 更新 问 客服 也 查不到 客服 把 责任 推 给 快递 让 我 自己 去 找 啊
+__label__quality __label__invoice __label__price_promo 请问 一下 买 的 电动牙刷 已经 过期 了 生产日期 是 去年 的 还有 要开 公司 抬头 的 专票 需要 提供 什么 资料 还有 我领 的 券 怎么 突然 失效 了 一直 没人管
+__label__after_sale __label__invoice 想 换成 大一码 的 怎么 走 换货 流程 顺便 说 下 发票 抬头 写错 了 能 重开 一张 吗 请 回复 我
+__label__invoice __label__price_promo __label__consult 发票 内容 想 开成 办公用品 可以 改 吗 而且 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 而且 行李箱 和 赠品 的 配件 是 一起 发 吗
+__label__logistics 麻烦 问 下 物流 轨迹 一直 不 更新 问 客服 也 查不到 实在 是 没 办法 了
+__label__logistics __label__invoice 物流 信息 三天 没动 过 了 是 丢件 了 吗 另外 同一个 订单 开 两张 发票 可以 吗 希望 能 解决
+__label__price_promo __label__consult 说好 的 满减 活动 结算 没 给 我 减 啊 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__after_sale 你好 我要 退款 手机 我 不想 再要 了
+__label__invalid 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评
+__label__logistics 包裹 一直 卡 在 沈阳 中转站 出不来
+__label__consult 请问 一下 收到 羽绒服 以后 怎么 激活 需要 注册 吗
+__label__invalid 随便 点 几下 看看 给 个 说法 吧
+__label__after_sale __label__consult __label__service 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 顺便 说 下 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 顺便 说 下 每个 客服 说 的 都 不 一样 到底 听 谁 的
+__label__invalid 客服 在 吗 在 吗 在 吗 在 吗 在 吗 急
+__label__logistics 亲 物流 轨迹 一直 不 更新 问 客服 也 查不到 吧 实在 是 没 办法 了
+__label__after_sale __label__service 请问 一下 退款 金额 不 对 少退 了 运费 顺便 说 下 打 客服 电话 一直 占线 在线 客服 也 排不上 队 了
+__label__logistics __label__payment_account 你好 快递 员 说 放 门口 就行 东西 到 现在 都 没 看到 而且 账号 被盗 了 有 一笔 不是 我下 的 单 吧 请 回复 我
+__label__after_sale __label__consult 售后 电话 打 不通 只能 来 这里 申请 退款 还有 这个 洗发水 适合 三岁 小孩 用 吗
+__label__invoice __label__service 能 不能 把 发票 寄过来 我 需要 纸质 版 啊 打 客服 电话 一直 占线 在线 客服 也 排不上 队
+__label__after_sale __label__consult 请问 一下 我要 退货 运费 谁 承担 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__after_sale __label__invoice __label__service 蓝牙 耳机 寄 回去 了 什么 时候 能 给 我 退钱 顺便 说 下 发票 内容 想 开成 办公用品 可以 改 吗 顺便 说 下 每个 客服 说 的 都 不 一样 到底 听 谁 的
+__label__price_promo __label__consult 麻烦 问 下 刚买 完 就 降价 了 能补 差价 吗 还有 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__after_sale __label__consult 请问 一下 行李箱 寄 回去 了 什么 时候 能 给 我 退钱 了 顺便 说 下 这个 保温杯 适合 三岁 小孩 用 吗 实在 是 没 办法 了
+__label__invalid 客服 你好 测试 测试 测试
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__price_promo 活动 页面 写 的 是 买一送一 实际 只发 了 一件 麻烦 尽快 处理
+__label__invalid 哈哈 实在 是 没 办法 了
+__label__after_sale __label__price_promo 在 吗 换货 申请 通过 了 但是 一直 没 发货 还有 跨店 满减 没 算进去 少减 了 三十块 谢谢
+__label__service 客服 态度 特别 差 说话 很 不 客气
+__label__logistics __label__quality 在 吗 地址 填错 了 想 改 一下 快递 还 没 派送 还有 收到 的 洗发水 上 有 污渍 看着 很 不 舒服
+__label__invalid 在 吗 发错 了 吧 我 没 买 过 这个 东西 啊
+__label__quality 你好 收到 的 蓝牙 耳机 上 有 污渍 看着 很 不 舒服
+__label__quality __label__service 请问 一下 扫地 机器人 味道 特别 刺鼻 闻着 头疼 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__invoice __label__price_promo 亲 发票 税号 写错 了 要 作废 重开 还有 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 希望 能 解决
+__label__invalid [ 单 号 ]
+__label__after_sale __label__invoice __label__payment_account 想 换成 大一码 的 怎么 走 换货 流程 还有 同一个 订单 开 两张 发票 可以 吗 还有 订单 一直 显示 待 支付 但是 我 明明 付过 了
+__label__after_sale 我要 退款 保温杯 我 不想 再要 了
+__label__quality __label__invoice 买 的 运动鞋 已经 过期 了 生产日期 是 去年 的 订单 已经 完成 了 但是 发票 一直 没收 到 请 回复 我
+__label__after_sale __label__consult 亲 我要 退货 运费 谁 承担 呀 顺便 说 下 床垫 和 赠品 的 配件 是 一起 发 吗
+__label__price_promo 亲 优惠券 显示 可以 使用 结算 的 时候 又 用 不了
+__label__invalid 在 吗 急 客服 在 吗 在 吗 在 吗 在 吗 在 吗 希望 能 解决
+__label__logistics __label__quality __label__price_promo 蓝牙 耳机 显示 已 发出 但是 一直 没揽收 保温杯 味道 特别 刺鼻 闻着 头疼 我领 的 券 怎么 突然 失效 了
+__label__quality __label__price_promo __label__service 在 吗 说 是 正品 收到 的 包装 和 专柜 完全 不 一样 顺便 说 下 刚 买 完 就 降价 了 能补 差价 吗 顺便 说 下 转接 了 四个 客服 问题 还是 没 解决
+__label__invalid 发错 了 吧 我 没 买 过 这个 东西 啊
+__label__invalid 加 我 微信 可以 领 内部 优惠 急
+__label__quality __label__after_sale 羽绒服 电池 不 耐用 充 一次 电用 不到 两 小时 而且 申请 退货 好 几天 了 一直 没 人 处理 请 回复 我
+__label__payment_account __label__consult 付款 的 时候 一直 失败 换 了 好几张 卡 都 不行 顺便 说 下 这款 台灯 支持 无线 充电 吗 一直 没人管
+__label__invalid 客服 你好 测试 测试 测试
+__label__after_sale 售后 一直 卡 在 审核 中 能 不能 快点 请 回复 我
+__label__service 客服 半天 不回 消息 问 了 三遍 都 没 人理
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__invalid 刷单 了解 一下 需要 的 私聊
+__label__logistics __label__quality 想 问问 我 的 空气 炸锅 什么 时候 能 到 急用 电动牙刷 少发 了 一个 配件 包装 里 就 一个 主体 吧
+__label__after_sale 换货 申请 通过 了 但是 一直 没 发货 哦
+__label__invalid 在 吗 [ 单 号 ] 急
+__label__after_sale __label__invoice __label__service 售后 电话 打 不通 只能 来 这里 申请 退款 另外 发票 税号 写错 了 要 作废 重开 另外 问个问题 被 客服 怼 了 态度 非常 不好
+__label__quality __label__consult 说 是 正品 收到 的 包装 和 专柜 完全 不 一样 而且 这个 行李箱 适合 三岁 小孩 用 吗
+__label__invalid 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评
+__label__invalid 客服 你好 别买 都 是 骗人 的 我 已经 举报 了
+__label__quality 洗发水 收到 就是 坏 的 根本 用 不了 麻烦 尽快 处理
+__label__logistics __label__consult 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 呀 顺便 说 下 这个 连衣裙 现在 有货 吗 多久 能发 请 回复 我
+__label__after_sale __label__consult __label__service 想 换成 大一码 的 怎么 走 换货 流程 收到 洗发水 以后 怎么 激活 需要 注册 吗 客服 把 责任 推 给 快递 让 我 自己 去 找
+__label__logistics __label__consult 发货 太慢 了 等 得 我 都 没 耐心 了 另外 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__logistics __label__invoice __label__service 外包装 烂 得 不成 样子 里面 的 空气 炸锅 不 知道 有没有 事 另外 报销 要 用 发票 麻烦 尽快 开 一下 另外 客服 把 责任 推 给 快递 让 我 自己 去 找
+__label__consult 收到 奶粉 以后 怎么 激活 需要 注册 吗
+__label__after_sale 麻烦 问 下 申请 退货 好 几天 了 一直 没 人 处理
+__label__quality __label__price_promo 你好 包装 里少 了 一件 订单 上 明明 写 的 是 两件 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 给 个 说法 吧
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__logistics 亲 买 的 洗发水 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 谢谢
+__label__invalid 请问 一下 测试 发错 了 吧 我 没 买 过 这个 东西 啊
+__label__logistics __label__service 物流 信息 三天 没动 过 了 是 丢件 了 吗 顺便 说 下 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管 谢谢
+__label__quality __label__payment_account 请问 一下 买 的 保温杯 已经 过期 了 生产日期 是 去年 的 还有 账号 被盗 了 有 一笔 不是 我下 的 单 希望 能 解决
+__label__invalid 发错 了 吧 我 没 买 过 这个 东西 啊 一直 没人管
+__label__service 打 客服 电话 一直 占线 在线 客服 也 排不上 队
+__label__after_sale 售后 电话 打 不通 只能 来 这里 申请 退款 希望 能 解决
+__label__consult 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__invalid 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评
+__label__invalid 刷单 了解 一下 需要 的 私聊 希望 能 解决
+__label__after_sale __label__payment_account __label__service 退款 金额 不 对 少退 了 运费 还有 付款 的 时候 一直 失败 换 了 好几张 卡 都 不行 还有 机器人 客服 绕来 绕 去 根本 转 不到 人工
+__label__price_promo 请问 一下 多扣 了 我 一笔 钱 订单 金额 对不上 希望 能 解决
+__label__quality __label__invoice 电动牙刷 味道 特别 刺鼻 闻着 头疼 哦 顺便 说 下 上个月 开 的 发票 现在 还 能 补开 吗 给 个 说法 吧
+__label__invalid 哈哈 给 个 说法 吧
+__label__after_sale 电饭锅 寄 回去 了 什么 时候 能 给 我 退钱
+__label__invalid 你好 asdfghjkl 了
+__label__quality 刚 拆开 行李箱 就 发现 屏幕 有 裂纹
+__label__logistics __label__after_sale __label__consult 客服 你好 快递 员 不肯 送 上楼 让 我 自己 下来 搬 呀 还有 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 还有 参数 里 的 这个 功能 是 什么 意思 没看 懂 实在 是 没 办法 了
+__label__price_promo 请问 一下 会员 折扣 没有 生效 白开 会员 了
+__label__invalid 客服 你好 测试 测试 测试 测试
+__label__price_promo __label__consult 说好 的 满减 活动 结算 没 给 我 减 而且 怎么 安装 保温杯 有 教程 吗 麻烦 尽快 处理
+__label__invalid 急
+__label__price_promo __label__payment_account __label__consult 说好 的 满减 活动 结算 没 给 我 减 账号 被 冻结 了 里面 的 优惠券 还 能 用 吗 这 款 机械 键盘 支持 无线 充电 吗
+__label__invalid 客服 你好 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉 请 回复 我
+__label__quality __label__consult 猫 粮少发 了 一个 配件 包装 里 就 一个 主体 而且 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__quality __label__price_promo 实物 和 详情页 描述 不 一致 颜色 差 很多 活动 页面 写 的 是 买一送一 实际 只发 了 一件
+__label__quality __label__after_sale 保温杯 电池 不 耐用 充 一次 电用 不到 两 小时 啊 另外 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 麻烦 尽快 处理
+__label__after_sale __label__consult 退货 地址 给 一下 我 自己 寄 回去 还有 这个 床垫 能 带上 飞机 吗 实在 是 没 办法 了
+__label__invalid 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评 呀
+__label__quality __label__invoice 收到 的 运动鞋 有 明显 划痕 像是 别人 退回来 的 能 不能 把 发票 寄过来 我 需要 纸质 版 急
+__label__logistics __label__service 东西 到 了 但是 没 送到 我家 显示 已 签收 客服 答应 给 我 补发 结果 一直 没动静 呀 实在 是 没 办法 了
+__label__logistics 洗发水 显示 已 发出 但是 一直 没揽收
+__label__logistics __label__quality 东西 到 了 但是 没 送到 我家 显示 已 签收 收到 的 充电 宝上 有 污渍 看着 很 不 舒服
+__label__quality 亲 包装 里少 了 一件 订单 上 明明 写 的 是 两件 呢
+__label__logistics __label__quality __label__after_sale 买 的 手机 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 面料 和 图片 完全 不 一样 做工 也 很 粗糙 羽绒服 坏 了 想 维修 保修期 内 怎么 处理 给 个 说法 吧
+__label__logistics __label__consult 东西 到 了 但是 没 送到 我家 显示 已 签收 顺便 说 下 买 两件 有没有 优惠 想先 咨询 一下
+__label__invalid 随便 点 几下 看看
+__label__logistics __label__consult 包裹 一直 卡 在 成都 中转站 出不来 顺便 说 下 怎么 安装 空气 炸锅 有 教程 吗 请 回复 我
+__label__invoice __label__price_promo __label__service 能 不能 把 发票 寄过来 我 需要 纸质 版 呀 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管
+__label__quality __label__invoice 麻烦 问 下 奶粉 用 了 两天 就 出 故障 了 质量 太 差 买 完 想开 个 发票 在 哪里 申请
+__label__after_sale __label__payment_account 充电 宝坏 了 想 维修 保修期 内 怎么 处理 还有 订单 一直 显示 待 支付 但是 我 明明 付过 了
+__label__quality __label__after_sale 面料 和 图片 完全 不 一样 做工 也 很 粗糙 而且 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货 一直 没人管
+__label__invoice __label__consult 亲 要开 公司 抬头 的 专票 需要 提供 什么 资料 而且 这个 连衣裙 适合 三岁 小孩 用 吗 请 回复 我
+__label__after_sale 已经 寄回 一周 了 退款 还是 没有 动静
+__label__invoice __label__price_promo 能 不能 把 发票 寄过来 我 需要 纸质 版 跨店 满减 没 算进去 少减 了 三十块 请 回复 我
+__label__invalid 啊 啊 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评
+__label__invoice __label__service 电子 发票 下载 不了 链接 点开 是 空 的 另外 客服 一直 敷衍 我 让 我 自己 看 规则 请 回复 我
+__label__price_promo 请问 一下 价格 保护 怎么 申请 规则 我 没 看 懂 请 回复 我
+__label__invalid 麻烦 问 下 啊 啊 测试 测试 测试
+__label__logistics __label__service 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 哦 顺便 说 下 问个问题 被 客服 怼 了 态度 非常 不好 谢谢
+__label__quality 充电 宝 收到 就是 坏 的 根本 用 不了
+__label__invalid 你好 急 asdfghjkl 谢谢
+__label__quality __label__after_sale 在 吗 行李箱 用 了 两天 就 出 故障 了 质量 太 差 已经 寄回 一周 了 退款 还是 没有 动静
+__label__logistics __label__after_sale __label__price_promo 快递 放 驿站 也 不 通知 我 自己 去 翻 才 找到 还有 退货 地址 给 一下 我 自己 寄 回去 还有 优惠券 显示 可以 使用 结算 的 时候 又 用 不了
+__label__logistics 物流 信息 三天 没动 过 了 是 丢件 了 吗
+__label__invoice 要开 公司 抬头 的 专票 需要 提供 什么 资料
+__label__invalid 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评
+__label__invalid 加 我 微信 可以 领 内部 优惠 希望 能 解决
+__label__invoice __label__consult 上个月 开 的 发票 现在 还 能 补开 吗 另外 买 两件 有没有 优惠 想先 咨询 一下 实在 是 没 办法 了
+__label__service 转接 了 四个 客服 问题 还是 没 解决 急
+__label__quality __label__service 保温杯 味道 特别 刺鼻 闻着 头疼 另外 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__after_sale 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货 谢谢
+__label__after_sale __label__price_promo 麻烦 问 下 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 赠品 没有 发 订单 上 明明 写 着 有 赠品
+__label__quality __label__price_promo 尺码 严重 偏小 标注 的 和 实际 差太多 而且 活动 页面 写 的 是 买一送一 实际 只发 了 一件
+__label__logistics 包裹 一直 卡 在 郑州 中转站 出不来
+__label__consult 这个 洗发水 适合 三岁 小孩 用 吗
+__label__quality __label__invoice 尺码 严重 偏小 标注 的 和 实际 差太多 另外 发票 抬头 写错 了 能 重开 一张 吗
+__label__price_promo 说好 的 满减 活动 结算 没 给 我 减 急
+__label__after_sale 亲 奶粉 寄 回去 了 什么 时候 能 给 我 退钱 急
+__label__invalid 麻烦 问 下 在 吗
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__consult 买 两件 有没有 优惠 想先 咨询 一下 一直 没人管
+__label__quality 包装 里少 了 一件 订单 上 明明 写 的 是 两件 哦
+__label__logistics __label__service 买 的 电动牙刷 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 顺便 说 下 转接 了 四个 客服 问题 还是 没 解决
+__label__invalid 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉 呢
+__label__quality __label__price_promo 尺码 严重 偏小 标注 的 和 实际 差太多 而且 多扣 了 我 一笔 钱 订单 金额 对不上 一直 没人管
+__label__invalid 哈哈
+__label__invalid 麻烦 问 下 客服 在 吗 在 吗 在 吗 在 吗 在 吗 一直 没人管
+__label__quality __label__consult 请问 一下 洗发水 用 了 两天 就 出 故障 了 质量 太 差 这个 扫地 机器人 现在 有货 吗 多久 能发
+__label__logistics __label__quality __label__price_promo 麻烦 问 下 同城发 了 五天 走路 都 送到 了 笔记本电脑 用 一次 就 坏 了 这 质量 也 太差 了 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了
+__label__consult __label__service 想 问下 空气 炸锅 的 尺寸 是 多少 适合 多大 的 房间 用 而且 机器人 客服 绕来 绕 去 根本 转 不到 人工
+__label__invalid 啊 啊 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉 呢
+__label__logistics __label__after_sale 快递 放 驿站 也 不 通知 我 自己 去 翻 才 找到 售后 电话 打 不通 只能 来 这里 申请 退款
+__label__logistics __label__quality 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 而且 羽绒服 电池 不 耐用 充 一次 电用 不到 两 小时
+__label__quality __label__after_sale 包装 里少 了 一件 订单 上 明明 写 的 是 两件 顺便 说 下 退款 金额 不 对 少退 了 运费
+__label__after_sale 申请 退货 好 几天 了 一直 没 人 处理
+__label__invoice 发票 抬头 写错 了 能 重开 一张 吗
+__label__service 客服 你好 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管
+__label__consult 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__invalid 在 吗 [ 单 号 ]
+__label__consult __label__service 收到 洗发水 以后 怎么 激活 需要 注册 吗 顺便 说 下 打 客服 电话 一直 占线 在线 客服 也 排不上 队
+__label__logistics 麻烦 问 下 外包装 烂 得 不成 样子 里面 的 羽绒服 不 知道 有没有 事
+__label__after_sale __label__service 退款 金额 不 对 少退 了 运费 另外 机器人 客服 绕来 绕 去 根本 转 不到 人工
+__label__invalid [ 单 号 ]
+__label__invalid 刷单 了解 一下 需要 的 私聊 希望 能 解决
+__label__consult 这个 笔记本电脑 适合 三岁 小孩 用 吗
+__label__after_sale 售后 电话 打 不通 只能 来 这里 申请 退款
+__label__price_promo __label__consult 会员 折扣 没有 生效 白开 会员 了 还有 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__quality __label__after_sale __label__invoice 笔记本电脑 味道 特别 刺鼻 闻着 头疼 还有 想 取消 订单 还 没 发货 应该 可以 退 吧 还有 报销 要 用 发票 麻烦 尽快 开 一下
+__label__quality __label__price_promo 面料 和 图片 完全 不 一样 做工 也 很 粗糙 了 顺便 说 下 为什么 我 买 的 价格比 别人 的 贵
+__label__invoice __label__consult 买 完 想开 个 发票 在 哪里 申请 怎么 安装 行李箱 有 教程 吗
+__label__after_sale __label__price_promo 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 而且 刚买 完 就 降价 了 能补 差价 吗
+__label__invalid 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评
+__label__logistics __label__quality 包裹 一直 卡 在 沈阳 中转站 出不来 顺便 说 下 笔记本电脑 收到 就是 坏 的 根本 用 不了
+__label__logistics __label__invoice __label__payment_account 想 问问 我 的 运动鞋 什么 时候 能 到 急用 哦 还有 报销 要 用 发票 麻烦 尽快 开 一下 呀 还有 莫名其妙 被扣 了 两次 款 重复 支付 了
+__label__invalid 发错 了 吧 我 没 买 过 这个 东西 啊
+__label__invalid 亲 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评 了
+__label__invalid 请问 一下 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评
+__label__price_promo 优惠券 显示 可以 使用 结算 的 时候 又 用 不了 谢谢
+__label__quality __label__consult 尺码 严重 偏小 标注 的 和 实际 差太多 顺便 说 下 这个 笔记本电脑 适合 三岁 小孩 用 吗
+__label__after_sale __label__service 售后 电话 打 不通 只能 来 这里 申请 退款 吧 而且 问个问题 被 客服 怼 了 态度 非常 不好
+__label__quality __label__invoice 包装 里少 了 一件 订单 上 明明 写 的 是 两件 另外 发票 抬头 写错 了 能 重开 一张 吗 麻烦 尽快 处理
+__label__after_sale 申请 退货 好 几天 了 一直 没 人 处理
+__label__quality __label__price_promo 买 的 行李箱 已经 过期 了 生产日期 是 去年 的 另外 为什么 我 买 的 价格比 别人 的 贵
+__label__after_sale 我要 退货 运费 谁 承担
+__label__invoice 发票 税号 写错 了 要 作废 重开
+__label__after_sale 麻烦 问 下 我要 退款 保温杯 我 不想 再要 了 急
+__label__invoice __label__consult 订单 已经 完成 了 但是 发票 一直 没收 到 顺便 说 下 机械 键盘 的 保修期 是 多久
+__label__invalid 急 asdfghjkl 谢谢
+__label__quality 麻烦 问 下 面膜 用 了 两天 就 出 故障 了 质量 太 差
+__label__logistics __label__quality 包裹 一直 卡 在 武汉 中转站 出不来 另外 保温杯 收到 就是 坏 的 根本 用 不了
+__label__price_promo 价格 保护 怎么 申请 规则 我 没 看 懂
+__label__payment_account 我 的 账号 登 不 上去 了 提示 被 限制
+__label__consult 想 问下 床垫 的 尺寸 是 多少 适合 多大 的 房间 用 急
+__label__logistics __label__consult __label__service 客服 你好 物流 轨迹 一直 不 更新 问 客服 也 查不到 收到 洗发水 以后 怎么 激活 需要 注册 吗 客服 答应 给 我 补发 结果 一直 没动静
+__label__after_sale __label__consult 在 吗 我要 退货 运费 谁 承担 另外 买 两件 有没有 优惠 想先 咨询 一下
+__label__service 麻烦 问 下 客服 把 责任 推 给 快递 让 我 自己 去 找
+__label__service 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管
+__label__invalid 请问 一下 随便 点 几下 看看 呀 谢谢
+__label__after_sale 奶粉 坏 了 想 维修 保修期 内 怎么 处理
+__label__invoice 发票 税号 写错 了 要 作废 重开
+__label__logistics __label__after_sale __label__service 麻烦 问 下 物流 轨迹 一直 不 更新 问 客服 也 查不到 退货 的 快递 已经 签收 了 退款 什么 时候 能 退 客服 态度 特别 差 说话 很 不 客气
+__label__logistics __label__price_promo 买 的 机械 键盘 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 而且 说好 的 满减 活动 结算 没 给 我 减 哦
+__label__invalid 请问 一下 这家 店 的 东西 都 是 垃圾 大家 千万别 买 差评 差评 差评 谢谢
+__label__after_sale 客服 你好 已经 寄回 一周 了 退款 还是 没有 动静 急
+__label__logistics __label__service 请问 一下 物流 轨迹 一直 不 更新 问 客服 也 查不到 还有 客服 态度 特别 差 说话 很 不 客气
+__label__invalid 刷单 了解 一下 需要 的 私聊 希望 能 解决
+__label__invoice __label__service 发票 内容 想 开成 办公用品 可以 改 吗 打 客服 电话 一直 占线 在线 客服 也 排不上 队
+__label__consult 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__after_sale __label__consult 想 取消 订单 还 没 发货 应该 可以 退 吧 顺便 说 下 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 一直 没人管
+__label__invalid 客服 你好 别买 都 是 骗人 的 我 已经 举报 了
+__label__logistics __label__quality 快递 在 西安 停 了 一周 了 一直 没有 物流 更新 另外 电饭锅 有 异味 洗 了 好 几次 都 散 不 掉 希望 能 解决
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__invoice __label__consult 麻烦 问 下 报销 要 用 发票 麻烦 尽快 开 一下 还有 这个 空气 炸锅 能 带上 飞机 吗 希望 能 解决
+__label__consult 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 了 谢谢
+__label__price_promo __label__service 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 顺便 说 下 转接 了 四个 客服 问题 还是 没 解决
+__label__logistics __label__after_sale 想 问问 我 的 床垫 什么 时候 能 到 急用 另外 售后 电话 打 不通 只能 来 这里 申请 退款
+__label__after_sale __label__invoice 奶粉 坏 了 想 维修 保修期 内 怎么 处理 另外 上个月 开 的 发票 现在 还 能 补开 吗 一直 没人管
+__label__invalid 麻烦 问 下 啊 啊
+__label__payment_account __label__service 请问 一下 订单 一直 显示 待 支付 但是 我 明明 付过 了 转接 了 四个 客服 问题 还是 没 解决
+__label__price_promo 为什么 我 买 的 价格比 别人 的 贵 吧
+__label__service 你好 客服 态度 特别 差 说话 很 不 客气
+__label__quality __label__consult __label__service 面料 和 图片 完全 不 一样 做工 也 很 粗糙 收到 羽绒服 以后 怎么 激活 需要 注册 吗 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管
+__label__after_sale __label__consult __label__service 你好 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 怎么 安装 台灯 有 教程 吗 每个 客服 说 的 都 不 一样 到底 听 谁 的
+__label__payment_account __label__consult 亲 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下 呀 这个 笔记本电脑 适合 三岁 小孩 用 吗
+__label__after_sale __label__invoice __label__consult 申请 退货 好 几天 了 一直 没 人 处理 而且 发票 金额 和 订单 金额 对不上 而且 买 两件 有没有 优惠 想先 咨询 一下
+__label__invalid 测试
+__label__invalid asdfghjkl
+__label__quality __label__price_promo 你好 床垫 用 了 两天 就 出 故障 了 质量 太 差 还有 优惠券 显示 可以 使用 结算 的 时候 又 用 不了 给 个 说法 吧
+__label__after_sale __label__consult 售后 一直 卡 在 审核 中 能 不能 快点 另外 这个 奶粉 能 带上 飞机 吗 急
+__label__after_sale 亲 想 换成 大一码 的 怎么 走 换货 流程
+__label__price_promo 会员 折扣 没有 生效 白开 会员 了
+__label__consult 买 两件 有没有 优惠 想先 咨询 一下 吧 实在 是 没 办法 了
+__label__quality __label__after_sale 收到 的 猫 粮有 明显 划痕 像是 别人 退回来 的 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了
+__label__logistics 地址 填错 了 想 改 一下 快递 还 没 派送
+__label__service 请问 一下 问个问题 被 客服 怼 了 态度 非常 不好
+__label__after_sale 已经 寄回 一周 了 退款 还是 没有 动静
+__label__invoice __label__consult 要开 公司 抬头 的 专票 需要 提供 什么 资料 呀 顺便 说 下 这款 蓝牙 耳机 支持 无线 充电 吗 一直 没人管
+__label__quality __label__invoice __label__payment_account 在 吗 尺码 严重 偏小 标注 的 和 实际 差太多 另外 同一个 订单 开 两张 发票 可以 吗 另外 账号 被盗 了 有 一笔 不是 我下 的 单 了
+__label__price_promo __label__consult 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 笔记本电脑 怎么 连接 手机 蓝牙 说明书 看不懂 谢谢
+__label__quality 连衣裙 有 异味 洗 了 好 几次 都 散 不 掉
+__label__payment_account __label__service 你好 订单 一直 显示 待 支付 但是 我 明明 付过 了 另外 客服 半天 不回 消息 问 了 三遍 都 没 人理
+__label__invalid 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉
+__label__invalid 客服 在 吗 在 吗 在 吗 在 吗 在 吗
+__label__after_sale __label__price_promo __label__consult 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 还有 价格 保护 怎么 申请 规则 我 没 看 懂 还有 这个 扫地 机器人 适合 三岁 小孩 用 吗
+__label__invoice 发票 抬头 写错 了 能 重开 一张 吗
+__label__service 客服 答应 给 我 补发 结果 一直 没动静
+__label__logistics 外包装 烂 得 不成 样子 里面 的 电动牙刷 不 知道 有没有 事 麻烦 尽快 处理
+__label__quality __label__consult 麻烦 问 下 电动牙刷 味道 特别 刺鼻 闻着 头疼 顺便 说 下 买 两件 有没有 优惠 想先 咨询 一下 希望 能 解决
+__label__service 在 吗 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__quality 亲 床垫 味道 特别 刺鼻 闻着 头疼
+__label__consult 麻烦 问 下 收到 猫 粮 以后 怎么 激活 需要 注册 吗
+__label__logistics __label__consult __label__service 保温杯 显示 已 发出 但是 一直 没揽收 怎么 安装 手机 有 教程 吗 问个问题 被 客服 怼 了 态度 非常 不好 实在 是 没 办法 了
+__label__invalid 急 急
+__label__price_promo 活动 页面 写 的 是 买一送一 实际 只发 了 一件 麻烦 尽快 处理
+__label__service 客服 说 帮 我 登记 了 让 我 等 等 了 三天 没人管 请 回复 我
+__label__invoice 客服 你好 要开 公司 抬头 的 专票 需要 提供 什么 资料 实在 是 没 办法 了
+__label__invalid 加 我 微信 可以 领 内部 优惠
+__label__logistics __label__price_promo __label__consult 买 的 电饭锅 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 顺便 说 下 活动 页面 写 的 是 买一送一 实际 只发 了 一件 顺便 说 下 怎么 安装 保温杯 有 教程 吗
+__label__invalid 发错 了 吧 我 没 买 过 这个 东西 啊 谢谢
+__label__payment_account __label__consult 账号 被 冻结 了 里面 的 优惠券 还 能 用 吗 想 问下 电动牙刷 的 尺寸 是 多少 适合 多大 的 房间 用 一直 没人管
+__label__logistics 发货 太慢 了 等 得 我 都 没 耐心 了
+__label__payment_account __label__consult 订单 一直 显示 待 支付 但是 我 明明 付过 了 还有 蓝牙 耳机 的 保修期 是 多久
+__label__quality __label__payment_account 奶粉 少发 了 一个 配件 包装 里 就 一个 主体 顺便 说 下 账号 被 冻结 了 里面 的 优惠券 还 能 用 吗 一直 没人管
+__label__invalid asdfghjkl
+__label__quality __label__after_sale 亲 运动鞋 收到 就是 坏 的 根本 用 不了 另外 退款 金额 不 对 少退 了 运费 希望 能 解决
+__label__quality __label__after_sale 运动鞋 味道 特别 刺鼻 闻着 头疼 呀 而且 售后 电话 打 不通 只能 来 这里 申请 退款 给 个 说法 吧
+__label__logistics __label__quality 买 的 行李箱 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 顺便 说 下 收到 的 连衣裙 上 有 污渍 看着 很 不 舒服 谢谢
+__label__logistics __label__quality __label__invoice 亲 包裹 一直 卡 在 武汉 中转站 出不来 连衣裙 少发 了 一个 配件 包装 里 就 一个 主体 报销 要 用 发票 麻烦 尽快 开 一下
+__label__invalid 请问 一下 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评
+__label__price_promo __label__consult 活动 页面 写 的 是 买一送一 实际 只发 了 一件 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__logistics __label__after_sale 发货 太慢 了 等 得 我 都 没 耐心 了 退货 地址 给 一下 我 自己 寄 回去
+__label__after_sale 客服 你好 售后 一直 卡 在 审核 中 能 不能 快点
+__label__quality __label__price_promo 蓝牙 耳机 用 一次 就 坏 了 这 质量 也 太差 了 另外 跨店 满减 没 算进去 少减 了 三十块
+__label__invalid 你们 这个 系统 真烂 我要 投诉 到底 天天 投诉 吧
+__label__payment_account 想 改绑 手机号 收不到 验证码
+__label__invoice __label__consult 请问 一下 能 不能 把 发票 寄过来 我 需要 纸质 版 而且 这个 电动牙刷 能 带上 飞机 吗
+__label__payment_account 麻烦 问 下 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下 谢谢
+__label__payment_account __label__service 客服 你好 我 的 账号 登 不 上去 了 提示 被 限制 吧 而且 转接 了 四个 客服 问题 还是 没 解决 麻烦 尽快 处理
+__label__quality 收到 的 电饭锅 上 有 污渍 看着 很 不 舒服 呢
+__label__invalid 刷单 了解 一下 需要 的 私聊
+__label__invalid 测试 哈哈
+__label__invalid 哈哈 哦
+__label__invalid 啊 啊 刷单 了解 一下 需要 的 私聊
+__label__invoice 麻烦 问 下 订单 已经 完成 了 但是 发票 一直 没收 到 给 个 说法 吧
+__label__after_sale __label__consult 我要 退款 羽绒服 我 不想 再要 了 另外 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__after_sale __label__consult 售后 电话 打 不通 只能 来 这里 申请 退款 想 问下 机械 键盘 的 尺寸 是 多少 适合 多大 的 房间 用
+__label__invalid 测试 测试 测试 给 个 说法 吧
+__label__invalid 刷单 了解 一下 需要 的 私聊
+__label__invoice __label__price_promo __label__consult 在 吗 发票 抬头 写错 了 能 重开 一张 吗 活动 页面 写 的 是 买一送一 实际 只发 了 一件 哦 这个 机械 键盘 适合 三岁 小孩 用 吗
+__label__invalid 你好 随便 点 几下 看看
+__label__invalid 在 吗
+__label__logistics 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到
+__label__logistics 亲 发货 太慢 了 等 得 我 都 没 耐心 了
+__label__after_sale __label__payment_account __label__consult 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 顺便 说 下 想 改绑 手机号 收不到 验证码 顺便 说 下 运动鞋 和 赠品 的 配件 是 一起 发 吗
+__label__invoice __label__consult 电子 发票 下载 不了 链接 点开 是 空 的 还有 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__after_sale __label__service 你好 退货 的 快递 已经 签收 了 退款 什么 时候 能 退 了 客服 态度 特别 差 说话 很 不 客气
+__label__logistics 在 吗 想 问问 我 的 扫地 机器人 什么 时候 能 到 急用 实在 是 没 办法 了
+__label__after_sale 我要 退货 运费 谁 承担
+__label__after_sale __label__consult 亲 申请 退货 好 几天 了 一直 没 人 处理 还有 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__after_sale __label__invoice 售后 一直 卡 在 审核 中 能 不能 快点 而且 发票 金额 和 订单 金额 对不上 请 回复 我
+__label__payment_account __label__service 支付 完 订单 消失 了 钱 也 没 退回来 另外 转接 了 四个 客服 问题 还是 没 解决 给 个 说法 吧
+__label__price_promo 优惠券 显示 可以 使用 结算 的 时候 又 用 不了
+__label__payment_account __label__consult 我 的 账号 登 不 上去 了 提示 被 限制 还有 想 问问 这个 型号 和 另 一个 型号 有 什么 区别 吧
+__label__invalid 客服 在 吗 在 吗 在 吗 在 吗 在 吗
+__label__invalid 在 吗 希望 能 解决
+__label__payment_account 支付 密码 忘 了 怎么 重置
+__label__service 转接 了 四个 客服 问题 还是 没 解决 麻烦 尽快 处理
+__label__quality 行李箱 味道 特别 刺鼻 闻着 头疼
+__label__price_promo __label__consult 请问 一下 我领 的 券 怎么 突然 失效 了 另外 床垫 和 赠品 的 配件 是 一起 发 吗
+__label__logistics 台灯 显示 已 发出 但是 一直 没揽收
+__label__quality 刚 拆开 笔记本电脑 就 发现 屏幕 有 裂纹 呀
+__label__quality __label__after_sale 买 的 奶粉 已经 过期 了 生产日期 是 去年 的 还有 售后 电话 打 不通 只能 来 这里 申请 退款
+__label__after_sale __label__consult 亲 售后 电话 打 不通 只能 来 这里 申请 退款 顺便 说 下 猫 粮 怎么 连接 手机 蓝牙 说明书 看不懂 啊
+__label__after_sale __label__consult 在 吗 想 取消 订单 还 没 发货 应该 可以 退 吧 另外 这个 保温杯 现在 有货 吗 多久 能发
+__label__after_sale __label__consult __label__service 退货 地址 给 一下 我 自己 寄 回去 啊 参数 里 的 这个 功能 是 什么 意思 没看 懂 之前 承诺 [ 数字 ] 小时 回复 到 现在 也 没人 联系 我
+__label__logistics __label__after_sale 外包装 烂 得 不成 样子 里面 的 电动牙刷 不 知道 有没有 事 我要 退款 台灯 我 不想 再要 了
+__label__logistics __label__service 外包装 烂 得 不成 样子 里面 的 笔记本电脑 不 知道 有没有 事 另外 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__logistics __label__quality 快递 员 说 放 门口 就行 东西 到 现在 都 没 看到 另外 收到 的 扫地 机器人 上 有 污渍 看着 很 不 舒服 急
+__label__logistics 东西 到 了 但是 没 送到 我家 显示 已 签收 实在 是 没 办法 了
+__label__invalid 请问 一下 随便 点 几下 看看
+__label__invalid 哈哈
+__label__quality __label__after_sale 收到 的 电动牙刷 上 有 污渍 看着 很 不 舒服 顺便 说 下 保温杯 寄 回去 了 什么 时候 能 给 我 退钱 急
+__label__logistics __label__quality __label__after_sale 发货 太慢 了 等 得 我 都 没 耐心 了 另外 实物 和 详情页 描述 不 一致 颜色 差 很多 另外 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了
+__label__invalid 在 吗 在 吗 [ 单 号 ]
+__label__logistics __label__price_promo 外包装 烂 得 不成 样子 里面 的 蓝牙 耳机 不 知道 有没有 事 还有 优惠券 显示 可以 使用 结算 的 时候 又 用 不了
+__label__logistics __label__price_promo 同城发 了 五天 走路 都 送到 了 会员 折扣 没有 生效 白开 会员 了
+__label__after_sale __label__invoice __label__consult 你好 退款 都 一个 星期 了 还 没到 账 钱 去 哪 了 能 不能 把 发票 寄过来 我 需要 纸质 版 这个 运动鞋 能 带上 飞机 吗 急
+__label__invalid 刷单 了解 一下 需要 的 私聊 麻烦 尽快 处理
+__label__payment_account 我 的 账号 登 不 上去 了 提示 被 限制 了
+__label__payment_account __label__consult 客服 你好 我 的 账号 登 不 上去 了 提示 被 限制 想 问下 奶粉 的 尺寸 是 多少 适合 多大 的 房间 用 实在 是 没 办法 了
+__label__logistics 包裹 一直 卡 在 成都 中转站 出不来 呀
+__label__quality __label__after_sale __label__service 扫地 机器人 用 一次 就 坏 了 这 质量 也 太差 了 顺便 说 下 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货 顺便 说 下 转接 了 四个 客服 问题 还是 没 解决 呀 实在 是 没 办法 了
+__label__invoice __label__payment_account 上个月 开 的 发票 现在 还 能 补开 吗 支付 完 订单 消失 了 钱 也 没 退回来
+__label__after_sale __label__price_promo 我要 退款 扫地 机器人 我 不想 再要 了 另外 为什么 我 买 的 价格比 别人 的 贵
+__label__logistics __label__after_sale __label__service 请问 一下 发货 太慢 了 等 得 我 都 没 耐心 了 笔记本电脑 坏 了 想 维修 保修期 内 怎么 处理 了 客服 态度 特别 差 说话 很 不 客气
+__label__logistics __label__payment_account 地址 填错 了 想 改 一下 快递 还 没 派送 顺便 说 下 账号 被 冻结 了 里面 的 优惠券 还 能 用 吗
+__label__after_sale __label__price_promo 申请 退货 好 几天 了 一直 没 人 处理 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了
+__label__payment_account __label__consult __label__service 请问 一下 订单 一直 显示 待 支付 但是 我 明明 付过 了 而且 这个 手机 能 带上 飞机 吗 而且 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__invalid 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评 呢
+__label__invalid 客服 你好 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评 呀 谢谢
+__label__logistics __label__consult __label__service 请问 一下 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 另外 台灯 和 赠品 的 配件 是 一起 发 吗 另外 客服 答应 给 我 补发 结果 一直 没动静
+__label__invalid 客服 你好 测试 测试 测试 呢
+__label__service 亲 客服 半天 不回 消息 问 了 三遍 都 没 人理
+__label__quality __label__after_sale 亲 实物 和 详情页 描述 不 一致 颜色 差 很多 笔记本电脑 寄 回去 了 什么 时候 能 给 我 退钱
+__label__consult 请问 一下 买 两件 有没有 优惠 想先 咨询 一下 吧 麻烦 尽快 处理
+__label__quality __label__consult 充电 宝 味道 特别 刺鼻 闻着 头疼 而且 这个 机械 键盘 适合 三岁 小孩 用 吗
+__label__after_sale __label__invoice 你好 售后 一直 卡 在 审核 中 能 不能 快点 能 不能 把 发票 寄过来 我 需要 纸质 版
+__label__payment_account __label__consult 莫名其妙 被扣 了 两次 款 重复 支付 了 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__quality __label__consult 奶粉 收到 就是 坏 的 根本 用 不了 还有 这个 手机 适合 三岁 小孩 用 吗
+__label__logistics __label__quality 外包装 烂 得 不成 样子 里面 的 保温杯 不 知道 有没有 事 顺便 说 下 说 是 正品 收到 的 包装 和 专柜 完全 不 一样
+__label__after_sale __label__price_promo 你好 我要 退货 运费 谁 承担 顺便 说 下 我 领 的 券 怎么 突然 失效 了
+__label__consult __label__service 亲 电动牙刷 怎么 连接 手机 蓝牙 说明书 看不懂 呢 还有 客服 把 责任 推 给 快递 让 我 自己 去 找 哦
+__label__quality __label__after_sale __label__consult 面料 和 图片 完全 不 一样 做工 也 很 粗糙 蓝牙 耳机 寄 回去 了 什么 时候 能 给 我 退钱 台灯 和 赠品 的 配件 是 一起 发 吗
+__label__consult 在 吗 收到 运动鞋 以后 怎么 激活 需要 注册 吗
+__label__invalid 请问 一下 别买 都 是 骗人 的 我 已经 举报 了
+__label__consult 这个 扫地 机器人 适合 三岁 小孩 用 吗
+__label__service 麻烦 问 下 客服 答应 给 我 补发 结果 一直 没动静
+__label__after_sale __label__price_promo 猫 粮 寄 回去 了 什么 时候 能 给 我 退钱 我领 的 券 怎么 突然 失效 了
+__label__logistics 地址 填错 了 想 改 一下 快递 还 没 派送 希望 能 解决
+__label__service 客服 把 责任 推 给 快递 让 我 自己 去 找
+__label__invoice __label__payment_account 发票 税号 写错 了 要 作废 重开 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下 麻烦 尽快 处理
+__label__consult 客服 你好 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__quality 手机 少发 了 一个 配件 包装 里 就 一个 主体 哦
+__label__logistics 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 给 个 说法 吧
+__label__logistics __label__consult __label__service 亲 买 的 电饭锅 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 还有 参数 里 的 这个 功能 是 什么 意思 没看 懂 还有 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__consult 充电 宝 怎么 连接 手机 蓝牙 说明书 看不懂 呢 请 回复 我
+__label__logistics __label__payment_account 包裹 一直 卡 在 沈阳 中转站 出不来 顺便 说 下 支付 密码 忘 了 怎么 重置 一直 没人管
+__label__quality __label__consult 实物 和 详情页 描述 不 一致 颜色 差 很多 呢 还有 想 问下 蓝牙 耳机 的 尺寸 是 多少 适合 多大 的 房间 用
+__label__consult __label__service 客服 你好 奶粉 的 保修期 是 多久 还有 转接 了 四个 客服 问题 还是 没 解决
+__label__invalid 客服 在 吗 在 吗 在 吗 在 吗 在 吗 请 回复 我
+__label__logistics __label__quality 请问 一下 快递 员 说 放 门口 就行 东西 到 现在 都 没 看到 另外 保温杯 电池 不 耐用 充 一次 电用 不到 两 小时
+__label__logistics __label__consult 在 吗 外包装 烂 得 不成 样子 里面 的 台灯 不 知道 有没有 事 吧 而且 台灯 怎么 连接 手机 蓝牙 说明书 看不懂
+__label__invoice __label__consult 发票 金额 和 订单 金额 对不上 收到 空气 炸锅 以后 怎么 激活 需要 注册 吗 实在 是 没 办法 了
+__label__invalid 客服 你好 客服 在 吗 在 吗 在 吗 在 吗 在 吗
+__label__consult 参数 里 的 这个 功能 是 什么 意思 没看 懂
+__label__invoice __label__consult 请问 一下 上个月 开 的 发票 现在 还 能 补开 吗 这 款 保温杯 支持 无线 充电 吗
+__label__logistics __label__service 请问 一下 外包装 烂 得 不成 样子 里面 的 奶粉 不 知道 有没有 事 之前 承诺 [ 数字 ] 小时 回复 到 现在 也 没人 联系 我
+__label__logistics __label__after_sale 买 的 机械 键盘 都 [ 数字 ] 天 了 还 没 发货 到底 什么 时候 能发 顺便 说 下 退货 的 快递 已经 签收 了 退款 什么 时候 能 退
+__label__logistics __label__invoice __label__service 快递 放 驿站 也 不 通知 我 自己 去 翻 才 找到 而且 报销 要 用 发票 麻烦 尽快 开 一下 而且 客服 一直 敷衍 我 让 我 自己 看 规则
+__label__consult 怎么 安装 奶粉 有 教程 吗
+__label__consult 想 问问 这个 型号 和 另 一个 型号 有 什么 区别
+__label__quality __label__consult 包装 里少 了 一件 订单 上 明明 写 的 是 两件 另外 这 款 笔记本电脑 支持 无线 充电 吗
+__label__price_promo 刚买 完 就 降价 了 能补 差价 吗
+__label__after_sale 你好 换货 申请 通过 了 但是 一直 没 发货
+__label__invoice 同一个 订单 开 两张 发票 可以 吗 急
+__label__consult 买 两件 有没有 优惠 想先 咨询 一下 请 回复 我
+__label__invoice __label__consult 上个月 开 的 发票 现在 还 能 补开 吗 另外 想 问下 退货 规则 先 了解 一下 再 决定 买 不 买
+__label__invalid 麻烦 尽快 处理
+__label__logistics __label__invoice __label__payment_account 想 问问 我 的 手机 什么 时候 能 到 急用 而且 能 不能 把 发票 寄过来 我 需要 纸质 版 而且 钱扣 了 但是 订单 显示 未 支付 麻烦 查 一下
+__label__quality __label__consult 你好 连衣裙 少发 了 一个 配件 包装 里 就 一个 主体 哦 而且 这 款 羽绒服 支持 无线 充电 吗
+__label__quality __label__consult 笔记本电脑 用 一次 就 坏 了 这 质量 也 太差 了 还有 想 问下 蓝牙 耳机 的 尺寸 是 多少 适合 多大 的 房间 用
+__label__invalid [空]
+__label__after_sale 申请 退款 被 拒绝 了 说 我 超时 可 我 一直 没收 到货 谢谢
+__label__quality 在 吗 刚 拆开 猫 粮 就 发现 屏幕 有 裂纹
+__label__after_sale 麻烦 问 下 换货 申请 通过 了 但是 一直 没 发货
+__label__invalid 在 吗
+__label__invoice 同一个 订单 开 两张 发票 可以 吗
+__label__logistics __label__quality 在 吗 说好 次日 达 的 结果 [ 数字 ] 天 还 没 送到 另外 收到 的 床垫 上 有 污渍 看着 很 不 舒服
+__label__quality 在 吗 收到 的 充电 宝上 有 污渍 看着 很 不 舒服 给 个 说法 吧
+__label__invalid 买 它 买 它 买 它 这个 价格 太 划算 了 五星 好评 好评 好评
+__label__invalid 麻烦 问 下 加 我 微信 可以 领 内部 优惠
+__label__price_promo __label__consult 秒 杀价 买 的 东西 付款 的 时候 变 回 原价 了 另外 收到 面膜 以后 怎么 激活 需要 注册 吗
