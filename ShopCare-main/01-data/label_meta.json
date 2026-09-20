@@ -1,0 +1,78 @@
+{
+  "_comment": "ShopCare 标签元数据 —— 全项目唯一事实来源: 04-bert 推理、09-priority 优先级引擎、backend/common/shop_utils.py 都读这一份, 避免多处硬编码不一致",
+  "labels": {
+    "logistics": {
+      "cn": "物流配送",
+      "dept": "物流仓储部",
+      "base_priority": "P2",
+      "sla_hours": 24,
+      "desc": "未发货、揽收慢、运输停滞、派送延迟、丢件、地址修改、快递员未送上门"
+    },
+    "quality": {
+      "cn": "商品质量",
+      "dept": "品控/供应商",
+      "base_priority": "P1",
+      "sla_hours": 8,
+      "desc": "破损、瑕疵、功能故障、材质做工不符、过期变质、少件漏发"
+    },
+    "after_sale": {
+      "cn": "退款退货",
+      "dept": "售后部",
+      "base_priority": "P1",
+      "sla_hours": 8,
+      "desc": "退款、退货、换货、退款未到账、维修换新、售后维权"
+    },
+    "invoice": {
+      "cn": "发票问题",
+      "dept": "财务部",
+      "base_priority": "P2",
+      "sla_hours": 24,
+      "desc": "开票申请、电子发票、发票信息错误、重开、发票未收到"
+    },
+    "price_promo": {
+      "cn": "价格与优惠",
+      "dept": "运营部",
+      "base_priority": "P2",
+      "sla_hours": 24,
+      "desc": "价保补差、优惠券失效、活动规则、多扣款、赠品未发"
+    },
+    "payment_account": {
+      "cn": "支付与账号",
+      "dept": "技术/风控",
+      "base_priority": "P1",
+      "sla_hours": 4,
+      "desc": "支付失败、重复扣款、订单异常、账号封禁或登录异常"
+    },
+    "consult": {
+      "cn": "售前与使用咨询",
+      "dept": "客服中心",
+      "base_priority": "P2",
+      "sla_hours": 24,
+      "desc": "使用方法、参数规格、适配性、库存与时效咨询、安装教程"
+    },
+    "service": {
+      "cn": "服务态度",
+      "dept": "客服质检",
+      "base_priority": "P1",
+      "sla_hours": 4,
+      "desc": "回复慢、态度差、敷衍、承诺未兑现、推诿扯皮"
+    },
+    "invalid": {
+      "cn": "无效与恶意",
+      "dept": "风控/归档",
+      "base_priority": "P2",
+      "sla_hours": 72,
+      "desc": "灌水、广告、辱骂、与商品无关、恶意差评威胁、刷单"
+    }
+  },
+  "sentiment": {
+    "positive": {"cn": "正面", "weight": 0.5},
+    "neutral": {"cn": "中性", "weight": 1.0},
+    "negative": {"cn": "负面", "weight": 2.0}
+  },
+  "priority": {
+    "P0": {"cn": "紧急", "sla_hours": 1},
+    "P1": {"cn": "高", "sla_hours": 4},
+    "P2": {"cn": "常规", "sla_hours": 24}
+  }
+}
