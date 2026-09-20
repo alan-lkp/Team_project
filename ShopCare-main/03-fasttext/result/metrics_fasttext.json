@@ -1,0 +1,93 @@
+{
+  "stage": "03-fasttext",
+  "feature_mode": "word",
+  "thresholds": {
+    "label": 0.3,
+    "global": 0.6
+  },
+  "metrics": {
+    "micro_f1": 1.0,
+    "micro_precision": 1.0,
+    "micro_recall": 1.0,
+    "macro_f1": 1.0,
+    "subset_accuracy": 1.0,
+    "hamming_loss": 0.0,
+    "jaccard_mean": 1.0,
+    "avg_pred_labels": 1.552,
+    "avg_true_labels": 1.552,
+    "threshold": 0.3,
+    "num_samples": 600,
+    "per_label": [
+      {
+        "label": "logistics",
+        "support": 131,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "quality",
+        "support": 113,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "after_sale",
+        "support": 120,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "invoice",
+        "support": 68,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "price_promo",
+        "support": 65,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "payment_account",
+        "support": 57,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "consult",
+        "support": 170,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "service",
+        "support": 84,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      {
+        "label": "invalid",
+        "support": 123,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    ],
+    "auto_rate": 1.0,
+    "reject_rate": 0.0,
+    "avg_confidence": 0.999,
+    "avg_activated_labels": 1.552,
+    "reject_reason_dist": {},
+    "auto_micro_f1": 1.0,
+    "auto_macro_f1": 1.0
+  }
+}
