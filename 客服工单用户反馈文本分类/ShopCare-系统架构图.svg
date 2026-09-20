@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1050" width="1280" height="1050" font-family="Microsoft YaHei, PingFang SC, Hiragino Sans GB, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#607D8B"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="1050" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="60" y="42" font-size="24" font-weight="bold" fill="#263238">ShopCare 电商客服工单智能处理平台 · 系统架构图</text>
+  <text x="60" y="70" font-size="13" fill="#607D8B">9 类多标签工单分类 + BERT/LoRA + 难例动态采样 + 双阈值拒识 + LLM 兜底 ｜ FastAPI + MySQL + Redis + 原生前端</text>
+
+  <!-- ========== ① 前端层 ========== -->
+  <rect x="60" y="100" width="1160" height="90" rx="10" fill="#FAFAFA" stroke="#B0BEC5" stroke-dasharray="5 4"/>
+  <text x="78" y="150" font-size="13" font-weight="bold" fill="#37474F">① 前端层</text>
+  <text x="78" y="168" font-size="10" fill="#78909C">frontend/web</text>
+  <rect x="235" y="136" width="236" height="42" rx="8" fill="#E3F2FD" stroke="#1565C0"/>
+  <text x="353" y="162" font-size="13" fill="#0D47A1" text-anchor="middle">登录 / 注册</text>
+  <rect x="483" y="136" width="236" height="42" rx="8" fill="#E3F2FD" stroke="#1565C0"/>
+  <text x="601" y="162" font-size="13" fill="#0D47A1" text-anchor="middle">工单工作台｜模型切换·兜底开关</text>
+  <rect x="731" y="136" width="236" height="42" rx="8" fill="#E3F2FD" stroke="#1565C0"/>
+  <text x="849" y="162" font-size="13" fill="#0D47A1" text-anchor="middle">人工复核队列｜标签修正回写</text>
+  <rect x="979" y="136" width="236" height="42" rx="8" fill="#E3F2FD" stroke="#1565C0"/>
+  <text x="1097" y="162" font-size="13" fill="#0D47A1" text-anchor="middle">数据看板｜标签·拒识率·耗时</text>
+
+  <line x1="640" y1="190" x2="640" y2="213" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="652" y="207" font-size="10" fill="#607D8B">HTTP / JSON + Bearer JWT</text>
+
+  <!-- ========== ② 接入治理层 ========== -->
+  <rect x="60" y="215" width="1160" height="75" rx="10" fill="#FAFAFA" stroke="#B0BEC5" stroke-dasharray="5 4"/>
+  <text x="78" y="248" font-size="13" font-weight="bold" fill="#37474F">② 接入治理层</text>
+  <text x="78" y="266" font-size="10" fill="#78909C">backend/middleware</text>
+  <rect x="235" y="246" width="236" height="34" rx="8" fill="#FFF3E0" stroke="#EF6C00"/>
+  <text x="353" y="268" font-size="12" fill="#E65100" text-anchor="middle">JWT 鉴权 auth.py</text>
+  <rect x="483" y="246" width="236" height="34" rx="8" fill="#FFF3E0" stroke="#EF6C00"/>
+  <text x="601" y="268" font-size="12" fill="#E65100" text-anchor="middle">限流（Redis 滑动窗口）</text>
+  <rect x="731" y="246" width="236" height="34" rx="8" fill="#FFF3E0" stroke="#EF6C00"/>
+  <text x="849" y="268" font-size="12" fill="#E65100" text-anchor="middle">审计日志 audit_log.py</text>
+  <rect x="979" y="246" width="236" height="34" rx="8" fill="#FFF3E0" stroke="#EF6C00"/>
+  <text x="1097" y="268" font-size="12" fill="#E65100" text-anchor="middle">结果缓存（Redis 60s）</text>
+
+  <line x1="640" y1="290" x2="640" y2="313" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="652" y="307" font-size="10" fill="#607D8B">鉴权 · 限流 · 审计 · 缓存</text>
+
+  <!-- ========== ③ 业务接口层 ========== -->
+  <rect x="60" y="315" width="1160" height="75" rx="10" fill="#FAFAFA" stroke="#B0BEC5" stroke-dasharray="5 4"/>
+  <text x="78" y="348" font-size="13" font-weight="bold" fill="#37474F">③ 业务接口层</text>
+  <text x="78" y="366" font-size="10" fill="#78909C">backend/api</text>
+  <rect x="235" y="346" width="236" height="34" rx="8" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="353" y="368" font-size="12" fill="#1B5E20" text-anchor="middle">/user/* 注册 · 登录 · 资料</text>
+  <rect x="483" y="346" width="236" height="34" rx="8" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="601" y="368" font-size="12" fill="#1B5E20" text-anchor="middle">/classify ★ 工单核心接口</text>
+  <rect x="731" y="346" width="236" height="34" rx="8" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="849" y="368" font-size="12" fill="#1B5E20" text-anchor="middle">/sentiment · /priority</text>
+  <rect x="979" y="346" width="236" height="34" rx="8" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="1097" y="368" font-size="12" fill="#1B5E20" text-anchor="middle">/feedback · /dashboard/*</text>
+
+  <line x1="640" y1="390" x2="640" y2="413" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="652" y="407" font-size="10" fill="#607D8B">编排调用</text>
+
+  <!-- ========== ④ 智能推理层 ========== -->
+  <rect x="60" y="415" width="1160" height="225" rx="10" fill="#FAFAFA" stroke="#B0BEC5" stroke-dasharray="5 4"/>
+  <text x="78" y="518" font-size="13" font-weight="bold" fill="#37474F">④ 智能推理层</text>
+  <text x="78" y="536" font-size="10" fill="#78909C">模型路由 + 决策兜底</text>
+
+  <rect x="235" y="452" width="210" height="44" rx="8" fill="#F3E5F5" stroke="#6A1B9A"/>
+  <text x="340" y="470" font-size="12" fill="#4A148C" text-anchor="middle">模型注册表</text>
+  <text x="340" y="487" font-size="10" fill="#7E57C2" text-anchor="middle">懒加载·单例·可用性探测</text>
+
+  <rect x="460" y="452" width="180" height="44" rx="8" fill="#F3E5F5" stroke="#6A1B9A"/>
+  <text x="550" y="470" font-size="12" fill="#4A148C" text-anchor="middle">02-rf</text>
+  <text x="550" y="487" font-size="10" fill="#7E57C2" text-anchor="middle">TF-IDF + OneVsRest</text>
+
+  <rect x="655" y="452" width="180" height="44" rx="8" fill="#F3E5F5" stroke="#6A1B9A"/>
+  <text x="745" y="470" font-size="12" fill="#4A148C" text-anchor="middle">03-fasttext</text>
+  <text x="745" y="487" font-size="10" fill="#7E57C2" text-anchor="middle">多标签 FastText</text>
+
+  <rect x="850" y="452" width="180" height="44" rx="8" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+  <text x="940" y="470" font-size="12" font-weight="bold" fill="#311B92" text-anchor="middle">04-bert ★</text>
+  <text x="940" y="487" font-size="10" fill="#5E35B1" text-anchor="middle">BERT + LoRA 多标签</text>
+
+  <rect x="1045" y="452" width="170" height="44" rx="8" fill="#FFF8E1" stroke="#F9A825"/>
+  <text x="1130" y="470" font-size="12" font-weight="bold" fill="#F57F17" text-anchor="middle">双阈值拒识 ★</text>
+  <text x="1130" y="487" font-size="10" fill="#F9A825" text-anchor="middle">标签 0.5 / 全局 0.8</text>
+
+  <rect x="460" y="512" width="570" height="100" rx="8" fill="none" stroke="#7E57C2" stroke-dasharray="6 4"/>
+  <text x="472" y="532" font-size="11" fill="#5E35B1">BERT + LoRA 内部机制（创新点 1 的落点）</text>
+  <rect x="472" y="540" width="174" height="34" rx="6" fill="#F3E5F5" stroke="#9575CD"/>
+  <text x="559" y="562" font-size="11" fill="#4A148C" text-anchor="middle">LoRA 低秩适配（手写）</text>
+  <rect x="658" y="540" width="174" height="34" rx="6" fill="#F3E5F5" stroke="#9575CD"/>
+  <text x="745" y="562" font-size="11" fill="#4A148C" text-anchor="middle">难例动态加权采样 ★</text>
+  <rect x="844" y="540" width="174" height="34" rx="6" fill="#F3E5F5" stroke="#9575CD"/>
+  <text x="931" y="562" font-size="11" fill="#4A148C" text-anchor="middle">多标签 BCE + 类别权重</text>
+  <text x="472" y="598" font-size="10" fill="#9575CD">冻结主干，仅训低秩矩阵；每轮按难例权重重建采样器</text>
+
+  <rect x="1045" y="512" width="170" height="44" rx="8" fill="#FFF8E1" stroke="#F9A825"/>
+  <text x="1130" y="530" font-size="12" fill="#F57F17" text-anchor="middle">LLM 兜底</text>
+  <text x="1130" y="547" font-size="10" fill="#F9A825" text-anchor="middle">DeepSeek · 可开关</text>
+
+  <rect x="1045" y="572" width="170" height="44" rx="8" fill="#E0F7FA" stroke="#00838F"/>
+  <text x="1130" y="590" font-size="12" fill="#006064" text-anchor="middle">情感 + 优先级</text>
+  <text x="1130" y="607" font-size="10" fill="#00838F" text-anchor="middle">08 / 09 模块</text>
+
+  <line x1="640" y1="640" x2="640" y2="663" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="652" y="657" font-size="10" fill="#607D8B">读写 · 模型资产加载</text>
+
+  <!-- ========== ⑤ 数据与资产层 ========== -->
+  <rect x="60" y="665" width="1160" height="100" rx="10" fill="#FAFAFA" stroke="#B0BEC5" stroke-dasharray="5 4"/>
+  <text x="78" y="710" font-size="13" font-weight="bold" fill="#37474F">⑤ 数据与资产层</text>
+  <text x="78" y="728" font-size="10" fill="#78909C">database / assets</text>
+  <rect x="235" y="698" width="236" height="46" rx="8" fill="#ECEFF1" stroke="#455A64"/>
+  <text x="353" y="717" font-size="12" fill="#263238" text-anchor="middle">MySQL</text>
+  <text x="353" y="734" font-size="10" fill="#546E7A" text-anchor="middle">工单·用户·复核队列·审计日志</text>
+  <rect x="483" y="698" width="236" height="46" rx="8" fill="#ECEFF1" stroke="#455A64"/>
+  <text x="601" y="717" font-size="12" fill="#263238" text-anchor="middle">Redis</text>
+  <text x="601" y="734" font-size="10" fill="#546E7A" text-anchor="middle">限流·缓存·黑名单·统计</text>
+  <rect x="731" y="698" width="236" height="46" rx="8" fill="#ECEFF1" stroke="#455A64"/>
+  <text x="849" y="717" font-size="12" fill="#263238" text-anchor="middle">模型资产</text>
+  <text x="849" y="734" font-size="10" fill="#546E7A" text-anchor="middle">bert-base-chinese / *.pt / *.pkl</text>
+  <rect x="979" y="698" width="236" height="46" rx="8" fill="#ECEFF1" stroke="#455A64"/>
+  <text x="1097" y="717" font-size="12" fill="#263238" text-anchor="middle">数据资产</text>
+  <text x="1097" y="734" font-size="10" fill="#546E7A" text-anchor="middle">train/dev/test.txt · class.txt</text>
+
+  <!-- ========== 离线训练流水线 ========== -->
+  <line x1="60" y1="790" x2="1220" y2="790" stroke="#CFD8DC" stroke-width="1"/>
+  <text x="60" y="816" font-size="15" font-weight="bold" fill="#263238">离线训练流水线（与在线服务共用同一套数据与评估口径）</text>
+
+  <rect x="90" y="832" width="200" height="72" rx="8" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="190" y="860" font-size="12" fill="#1B5E20" text-anchor="middle">01-data</text>
+  <text x="190" y="878" font-size="10" fill="#388E3C" text-anchor="middle">9 类标签 · train/dev/test</text>
+
+  <line x1="290" y1="868" x2="308" y2="868" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="310" y="832" width="240" height="72" rx="8" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+  <text x="430" y="860" font-size="12" font-weight="bold" fill="#311B92" text-anchor="middle">02-rf · 03-fasttext · 04-bert ★</text>
+  <text x="430" y="878" font-size="10" fill="#5E35B1" text-anchor="middle">TF-IDF+RF · FastText · BERT+LoRA</text>
+
+  <line x1="550" y1="868" x2="568" y2="868" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="570" y="832" width="200" height="72" rx="8" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="670" y="860" font-size="12" fill="#1B5E20" text-anchor="middle">统一评估</text>
+  <text x="670" y="878" font-size="10" fill="#388E3C" text-anchor="middle">Micro/Macro-F1 · 业务指标</text>
+
+  <line x1="770" y1="868" x2="788" y2="868" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="790" y="832" width="200" height="72" rx="8" fill="#F3E5F5" stroke="#6A1B9A"/>
+  <text x="890" y="860" font-size="12" fill="#4A148C" text-anchor="middle">模型注册表</text>
+  <text x="890" y="878" font-size="10" fill="#7E57C2" text-anchor="middle">懒加载 · 可用性探测</text>
+
+  <line x1="990" y1="868" x2="1008" y2="868" stroke="#607D8B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="1010" y="832" width="200" height="72" rx="8" fill="#E3F2FD" stroke="#1565C0"/>
+  <text x="1110" y="860" font-size="12" fill="#0D47A1" text-anchor="middle">FastAPI 在线服务</text>
+  <text x="1110" y="878" font-size="10" fill="#1976D2" text-anchor="middle">uvicorn :8000</text>
+
+  <text x="90" y="940" font-size="11" fill="#757575">05-量化 / 06-蒸馏 / 07-剪枝：本轮只保留目录与接口，第二轮实现（复用 04-bert 模块，不复制代码）</text>
+
+  <!-- 图例 -->
+  <rect x="90" y="985" width="14" height="14" rx="3" fill="#E3F2FD" stroke="#1565C0"/>
+  <text x="110" y="997" font-size="11" fill="#546E7A">前端层</text>
+  <rect x="250" y="985" width="14" height="14" rx="3" fill="#FFF3E0" stroke="#EF6C00"/>
+  <text x="270" y="997" font-size="11" fill="#546E7A">接入治理层</text>
+  <rect x="410" y="985" width="14" height="14" rx="3" fill="#E8F5E9" stroke="#2E7D32"/>
+  <text x="430" y="997" font-size="11" fill="#546E7A">业务接口层</text>
+  <rect x="570" y="985" width="14" height="14" rx="3" fill="#F3E5F5" stroke="#6A1B9A"/>
+  <text x="590" y="997" font-size="11" fill="#546E7A">智能推理层</text>
+  <rect x="730" y="985" width="14" height="14" rx="3" fill="#ECEFF1" stroke="#455A64"/>
+  <text x="750" y="997" font-size="11" fill="#546E7A">数据与资产层</text>
+  <rect x="890" y="985" width="14" height="14" rx="3" fill="#FFF8E1" stroke="#F9A825"/>
+  <text x="910" y="997" font-size="11" fill="#546E7A">创新模块 ★</text>
+</svg>
