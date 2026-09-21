@@ -68,8 +68,8 @@ class FTConfig:
 
         # ==================== todo 4. 模型超参数 ====================
         self.dim = 100                 # 词向量维度(小数据 50~100 足够)
-        self.epoch = 25                # 轮数; fasttext 迭代很快, 可以多跑几轮
-        self.lr = 0.5                  # 学习率(ova 下的常用起点)
+        self.epoch = 3               # 轮数; fasttext 迭代很快, 可以多跑几轮
+        self.lr = 0.005                # 学习率(ova 下的常用起点)
         self.word_ngrams = 2           # 用到 2-gram("快递 没" 这种搭配)
         self.bucket = 50000            # ngram/subword 哈希桶数; 模型体积 ≈ bucket × dim × 4 字节
         self.min_count = 1             # 词最少出现次数; 设 1 是因为工单里有大量低频专有词

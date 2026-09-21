@@ -76,8 +76,8 @@ class RFConfig:
 
         # ==================== todo 4. 随机森林超参数 ====================
         self.n_estimators = 300
-        self.max_depth = None                 # 不限制深度, 用 min_samples_leaf 控制复杂度
-        self.min_samples_leaf = 1
+        self.max_depth = 25                 # 不限制深度, 用 min_samples_leaf 控制复杂度
+        self.min_samples_leaf = 3
         self.rf_max_features = 'sqrt'         # 每次分裂只看 sqrt(特征数) 个特征
         self.class_weight = 'balanced_subsample'   # 应对标签长尾
         self.n_jobs = -1                      # 用满所有 CPU 核
