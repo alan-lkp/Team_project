@@ -1,9 +1,9 @@
-logistics
-quality
-after_sale
-invoice
-price_promo
-payment_account
-consult
-service
-invalid
+logistics # 物流
+quality   # 质检
+after_sale# 售后
+invoice # 发票
+price_promo # 价格优惠
+payment_account # 账户
+consult # 咨询
+service # 服务
+invalid # 无效
