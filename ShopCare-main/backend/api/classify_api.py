@@ -88,8 +88,10 @@ def classify(body: ClassifyBody, user=Depends(current_user)):
     pipe = get_pipeline()
 
     # 只对"预览"(不落库)走缓存: 落库要生成新的工单号与时间戳, 命中缓存反而不合理
-    cache_key = TicketPipeline.cache_key(body.text, body.model or cfg.default_model,
-                                         cfg.label_threshold, cfg.global_threshold, body.top_k)
+    model_arg = body.model or cfg.default_model
+    cache_key = TicketPipeline.cache_key(body.text, model_arg,
+                                         cfg.label_threshold, cfg.global_threshold, body.top_k,
+                                         model_version=pipe.cache_version(model_arg))
     kv = store.kv()
     if not body.save:
         cached = kv.get_json(cache_key)

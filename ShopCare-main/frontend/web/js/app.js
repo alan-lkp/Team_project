@@ -29,20 +29,20 @@ const state = {
   lastOverview: null,
 };
 
-/* 示例工单: 前三条是同分布语料, 后面几条覆盖"语料外新说法"与边界情况.
-   最后一条用来演示拒识(模型应当不给任何标签). */
+/* 示例工单(按当前语料重写过, 与 train/dev/test 同分布):
+   标点一律用全角, 长度贴合真实工单 —— 语料重建时发现过一个坑:
+   模型会学出"短文本 -> 无效与恶意"的长度先验(因为只有 invalid 有超短样本),
+   所以现在 9 个标签都有了短句模板, 下面特意留了一条短句示例来体现这一点.
+   最后两条用来演示 invalid 与拒识, 不要搞反语义. */
 const SAMPLES = [
-  { text: '快递到广州十天了还没动静, 客服也不回复, 我要退款', note: '物流+售后+服务(负面)' },
-  { text: '快递一直没到, 客服也不回复', note: '对照组差异用例' },
-  { text: '收到货就是坏的, 屏幕有裂纹, 申请换货', note: '质量问题' },
-  { text: '发票开错了, 抬头写成公司旧名字, 能重开吗', note: '发票' },
-  { text: '支付时扣了两次钱, 订单只显示一笔, 赶紧退回', note: '支付(高优先级)' },
-  // 下面两条是给"拒识"演示准备的, 注意别把语义搞反(实测结论):
-  //   '随便逛逛' 的措辞与 invalid 模板高度重合 -> 模型会**明确判为 无效与恶意**, 不拒识;
-  //   '在的吗'   9 个标签全都不过阈值        -> 拒识(双阈值链路的正例:
-  //              rf 走 low_confidence, fasttext 走 no_label_activated).
+  { text: '快递到广州十天了还没动静，客服也不回复，我要退款', note: '物流+售后+服务(多标签)' },
+  { text: '我的包裹在武汉中转站停了五天一直没动过，到底什么时候能派送', note: '物流(单标签)' },
+  { text: '收到的电饭锅内胆有明显划痕，用了两天就开始粘锅，这质量也太差了', note: '商品质量' },
+  { text: '公司抬头写错了，发票税号也不对，麻烦作废重开一张纸质的可以吗', note: '发票问题' },
+  { text: '支付的时候钱扣了两次，订单只显示一笔，多扣的钱赶紧退回来', note: '支付与账号(高优先级)' },
+  { text: '快递没到', note: '短句也能认(长度先验已修, 两个模型都判物流)' },
   { text: '随便逛逛', note: '命中 invalid 标签(不是拒识)' },
-  { text: '在的吗', note: '无有效诉求(演示拒识: 双阈值都没过)' },
+  { text: '1234', note: '无有效诉求 -> 拒识(双阈值都没过)' },
 ];
 
 /* ------------------------------ 小工具 ------------------------------ */
@@ -71,6 +71,17 @@ function escapeHtml(value) {
 
 function pct(value) {
   return (Number(value || 0) * 100).toFixed(1) + '%';
+}
+
+/* 模型置信度的展示口径(和 pct() 分开 —— pct 还用于分流率/拒识率这类业务比率)。
+   这里显示的是**模型概率**, 不是"准确率"; 而且它的统计精度是有限的:
+   概率校准器是在几百到上千条样本上拟合的, 统计上根本分辨不出 99% 和 100%。
+   所以 >=99% 一律写成 "≥99%", 不写死 "100.0%" —— 那是在声称一个测不出来的精度。
+   底层数值不受影响, 只是不显示出来。 */
+function conf(value) {
+  const v = Number(value || 0);
+  if (v >= 0.99) return '≥99%';
+  return (v * 100).toFixed(1) + '%';
 }
 
 let toastTimer = null;
@@ -273,7 +284,7 @@ function renderResult(result) {
   /* --- 标签胶囊 --- */
   const pills = (result.labels || []).map((item) =>
     '<span class="pill"><strong>' + escapeHtml(item.cn) + '</strong>' +
-    '<span class="pct">' + pct(item.score) + '</span>' +
+    '<span class="pct">' + conf(item.score) + '</span>' +
     '<span class="dept">' + escapeHtml(item.dept || '') + '</span></span>');
   setHtml('wb-labels', pills.length ? pills.join('')
     : '<span class="muted small">未激活任何标签(已按拒识处理)</span>');
@@ -296,7 +307,7 @@ function renderResult(result) {
     return '<div class="bar-row' + (on ? ' on' : '') + '">' +
       '<span class="bar-name" title="' + escapeHtml(meta.cn) + '">' + escapeHtml(meta.cn) + '</span>' +
       '<span class="bar-track"><span class="bar-fill" style="width:' + (score * 100).toFixed(1) + '%"></span></span>' +
-      '<span class="bar-val">' + pct(score) + '</span></div>';
+      '<span class="bar-val">' + conf(score) + '</span></div>';
   }).join(''));
 
   /* --- 关键字段 --- */
@@ -307,7 +318,7 @@ function renderResult(result) {
     ['优先级', (priority.cn || '-') + ' / ' + (priority.priority || '-')],
     ['要求响应', (result.sla_hours || '-') + ' 小时内首次响应'],
     ['建议部门', result.dept || '未分配'],
-    ['平均置信度', pct(result.avg_confidence)],
+    ['平均置信度', conf(result.avg_confidence)],
     ['处理方', result.resolved_by || '-'],
     ['模型耗时', (result.model_latency_ms || 0).toFixed(1) + ' ms'],
     ['全链路耗时', (result.latency_ms || 0).toFixed(1) + ' ms'],
@@ -396,7 +407,7 @@ function renderCompare(rows) {
     const result = row.result;
     const labels = (result.labels || []).length
       ? result.labels.map((item) => escapeHtml(item.cn) + ' <span class="muted">' +
-          pct(item.score) + '</span>').join('<br>')
+          conf(item.score) + '</span>').join('<br>')
       : '<span class="muted">无(拒识)</span>';
     const reject = result.rejected
       ? '<span class="badge badge-danger">是</span>'
@@ -431,7 +442,7 @@ async function loadReviewQueue() {
         '<td>' + labels + flag + '</td>' +
         '<td>' + (item.priority ? '<span class="badge badge-p' + item.priority.slice(1) + '">' +
           escapeHtml(item.priority) + '</span>' : '-') + '</td>' +
-        '<td class="mono">' + pct(item.avg_confidence) + '</td>' +
+        '<td class="mono">' + conf(item.avg_confidence) + '</td>' +
         '<td>' + escapeHtml(item.resolved_by || '-') + '</td>' +
         '<td class="muted small">' + escapeHtml(item.created_at || '-') + '</td>' +
         '<td><button class="btn btn-xs" data-review="' + escapeHtml(item.ticket_id) + '">复核</button></td></tr>';

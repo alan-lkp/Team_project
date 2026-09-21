@@ -3,175 +3,175 @@
   "model": "rf-tfidf",
   "feature_mode": "word",
   "thresholds": {
-    "label": 0.25,
-    "global": 0.443
+    "label": 0.4,
+    "global": 0.455
   },
-  "dev_micro_f1_before_tuning": 0.3195,
+  "dev_micro_f1_before_tuning": 0.3701,
   "calibration": {
     "method": "platt",
-    "ece_raw": 0.0806,
-    "ece_calibrated": 0.027,
+    "ece_raw": 0.1231,
+    "ece_calibrated": 0.014,
     "per_label": [
       {
         "label": "logistics",
         "kind": "platt",
         "raw_range": [
-          0.0409,
-          0.6323
+          0.0779,
+          0.6622
         ]
       },
       {
         "label": "quality",
         "kind": "platt",
         "raw_range": [
-          0.0367,
-          0.4812
+          0.0572,
+          0.6772
         ]
       },
       {
         "label": "after_sale",
         "kind": "platt",
         "raw_range": [
-          0.0725,
-          0.6418
+          0.1012,
+          0.6973
         ]
       },
       {
         "label": "invoice",
         "kind": "platt",
         "raw_range": [
-          0.0732,
-          0.6634
+          0.077,
+          0.7063
         ]
       },
       {
         "label": "price_promo",
         "kind": "platt",
         "raw_range": [
-          0.0609,
-          0.5502
+          0.0933,
+          0.5008
         ]
       },
       {
         "label": "payment_account",
         "kind": "platt",
         "raw_range": [
-          0.032,
-          0.7718
+          0.053,
+          0.7121
         ]
       },
       {
         "label": "consult",
         "kind": "platt",
         "raw_range": [
-          0.0365,
-          0.7102
+          0.0469,
+          0.7213
         ]
       },
       {
         "label": "service",
         "kind": "platt",
         "raw_range": [
-          0.0378,
-          0.627
+          0.0682,
+          0.6282
         ]
       },
       {
         "label": "invalid",
         "kind": "platt",
         "raw_range": [
-          0.0021,
-          0.8022
+          0.001,
+          0.7683
         ]
       }
     ]
   },
   "metrics": {
-    "micro_f1": 0.6722,
-    "micro_precision": 0.6307,
-    "micro_recall": 0.7196,
-    "macro_f1": 0.6787,
-    "subset_accuracy": 0.358,
-    "hamming_loss": 0.1208,
-    "jaccard_mean": 0.5724,
-    "avg_pred_labels": 1.767,
-    "avg_true_labels": 1.549,
-    "threshold": 0.25,
+    "micro_f1": 0.6701,
+    "micro_precision": 0.7164,
+    "micro_recall": 0.6294,
+    "macro_f1": 0.6669,
+    "subset_accuracy": 0.4014,
+    "hamming_loss": 0.1011,
+    "jaccard_mean": 0.5581,
+    "avg_pred_labels": 1.29,
+    "avg_true_labels": 1.468,
+    "threshold": 0.4,
     "num_samples": 8000,
     "per_label": [
       {
         "label": "logistics",
-        "support": 1743,
-        "precision": 0.5272,
-        "recall": 0.4389,
-        "f1": 0.479
+        "support": 1674,
+        "precision": 0.6905,
+        "recall": 0.3172,
+        "f1": 0.4347
       },
       {
         "label": "quality",
-        "support": 1459,
-        "precision": 0.5596,
-        "recall": 0.5565,
-        "f1": 0.5581
+        "support": 1387,
+        "precision": 0.6326,
+        "recall": 0.4816,
+        "f1": 0.5469
       },
       {
         "label": "after_sale",
-        "support": 1624,
-        "precision": 0.5405,
-        "recall": 0.9169,
-        "f1": 0.6801
+        "support": 1474,
+        "precision": 0.6551,
+        "recall": 0.8209,
+        "f1": 0.7287
       },
       {
         "label": "invoice",
-        "support": 888,
-        "precision": 0.899,
-        "recall": 0.8919,
-        "f1": 0.8954
+        "support": 835,
+        "precision": 0.9761,
+        "recall": 0.8323,
+        "f1": 0.8985
       },
       {
         "label": "price_promo",
-        "support": 1020,
-        "precision": 0.6166,
-        "recall": 0.7882,
-        "f1": 0.6919
+        "support": 997,
+        "precision": 0.6512,
+        "recall": 0.5787,
+        "f1": 0.6129
       },
       {
         "label": "payment_account",
-        "support": 769,
-        "precision": 0.8413,
-        "recall": 0.5033,
-        "f1": 0.6298
+        "support": 730,
+        "precision": 0.9212,
+        "recall": 0.4644,
+        "f1": 0.6175
       },
       {
         "label": "consult",
-        "support": 1873,
-        "precision": 0.5623,
-        "recall": 0.9466,
-        "f1": 0.7055
+        "support": 1866,
+        "precision": 0.6987,
+        "recall": 0.8339,
+        "f1": 0.7603
       },
       {
         "label": "service",
-        "support": 1223,
-        "precision": 0.7308,
-        "recall": 0.7236,
-        "f1": 0.7272
+        "support": 1144,
+        "precision": 0.8141,
+        "recall": 0.6774,
+        "f1": 0.7395
       },
       {
         "label": "invalid",
-        "support": 1792,
-        "precision": 0.8224,
-        "recall": 0.6747,
-        "f1": 0.7413
+        "support": 1639,
+        "precision": 0.6933,
+        "recall": 0.6358,
+        "f1": 0.6633
       }
     ],
-    "auto_rate": 0.7764,
-    "reject_rate": 0.2236,
-    "avg_confidence": 0.5977,
-    "avg_activated_labels": 1.767,
+    "auto_rate": 0.812,
+    "reject_rate": 0.188,
+    "avg_confidence": 0.6206,
+    "avg_activated_labels": 1.29,
     "reject_reason_dist": {
-      "low_confidence": 1097,
-      "no_label_activated": 692
+      "no_label_activated": 1207,
+      "low_confidence": 297
     },
-    "auto_micro_f1": 0.7011,
-    "auto_macro_f1": 0.7118
+    "auto_micro_f1": 0.7194,
+    "auto_macro_f1": 0.7143
   }
 }

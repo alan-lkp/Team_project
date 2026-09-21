@@ -357,12 +357,44 @@ class TicketPipeline:
         }
 
     @staticmethod
-    def cache_key(text, model=None, label_threshold=None, global_threshold=None, top_k=3):
-        """分类结果的缓存键: 文本 + 影响结果的全部参数都要进 key, 否则会串味"""
+    def cache_key(text, model=None, label_threshold=None, global_threshold=None, top_k=3,
+                  model_version=''):
+        """分类结果的缓存键: 文本 + 影响结果的全部参数都要进 key, 否则会串味
+
+        model_version 是**模型指纹**(见 cache_version)。少了它会踩一个很隐蔽的坑:
+        重训模型之后, 如果标定出来的阈值恰好没变, 缓存键就不变 —— 于是页面继续返回
+        旧模型算出来的结果, 看起来就像"新模型没生效"。
+        """
         import hashlib
         raw = '|'.join([str(text), str(model), str(label_threshold),
-                        str(global_threshold), str(top_k)])
+                        str(global_threshold), str(top_k), str(model_version)])
         return 'shopcare:cache:classify:' + hashlib.md5(raw.encode('utf-8')).hexdigest()
+
+    def cache_version(self, model_key):
+        """取指定模型的指纹: 训练时间 + 模型文件的 mtime/大小。
+
+        模型文件一被覆盖(重训)指纹就变, 旧缓存自然失效, 不需要手动清缓存。
+        拿不到状态时返回空串 —— 退化成原来的行为, 不因为缓存问题让接口报错。
+        """
+        try:
+            # 用 get() 而不是 status(): status() 只覆盖"已经建过"的预测器, 懒加载的
+            # 模型会拿到空字典 -> 指纹退化成空串 -> 又回到"重训后缓存不失效"的老问题。
+            # get() 会建好并加载模型(反正这次请求紧接着就要用它)。
+            predictor, _err = self.registry.get(model_key)
+            info = predictor.status if predictor is not None else {}
+        except Exception:                       # noqa: BLE001
+            return ''
+        if not isinstance(info, dict):
+            return ''
+        path = info.get('model_path')
+        stamp = ''
+        if path:
+            try:
+                st = os.stat(path)
+                stamp = '%d-%d' % (int(st.st_mtime), int(st.st_size))
+            except OSError:
+                stamp = 'missing'
+        return '%s-%s' % (info.get('trained_at') or '', stamp)
 
     @staticmethod
     def _empty_result(text):
