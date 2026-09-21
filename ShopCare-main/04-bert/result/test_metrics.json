@@ -1,0 +1,108 @@
+{
+  "micro_f1": 0.9175,
+  "macro_f1": 0.9275,
+  "subset_accuracy": 0.8365,
+  "hamming_loss": 0.0276,
+  "label_match_accuracy": 0.8922,
+  "avg_true_labels": 1.468,
+  "avg_pred_labels": 1.542,
+  "per_label": {
+    "logistics": {
+      "support": 1674,
+      "pred": 1592,
+      "tp": 1459,
+      "fp": 133,
+      "fn": 215,
+      "precision": 0.9165,
+      "recall": 0.8716,
+      "f1": 0.8934
+    },
+    "quality": {
+      "support": 1387,
+      "pred": 1556,
+      "tp": 1382,
+      "fp": 174,
+      "fn": 5,
+      "precision": 0.8882,
+      "recall": 0.9964,
+      "f1": 0.9392
+    },
+    "after_sale": {
+      "support": 1474,
+      "pred": 1527,
+      "tp": 1342,
+      "fp": 185,
+      "fn": 132,
+      "precision": 0.8788,
+      "recall": 0.9104,
+      "f1": 0.8944
+    },
+    "invoice": {
+      "support": 835,
+      "pred": 826,
+      "tp": 826,
+      "fp": 0,
+      "fn": 9,
+      "precision": 1.0,
+      "recall": 0.9892,
+      "f1": 0.9946
+    },
+    "price_promo": {
+      "support": 997,
+      "pred": 998,
+      "tp": 997,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.999,
+      "recall": 1.0,
+      "f1": 0.9995
+    },
+    "payment_account": {
+      "support": 730,
+      "pred": 739,
+      "tp": 719,
+      "fp": 20,
+      "fn": 11,
+      "precision": 0.9729,
+      "recall": 0.9849,
+      "f1": 0.9789
+    },
+    "consult": {
+      "support": 1866,
+      "pred": 2006,
+      "tp": 1769,
+      "fp": 237,
+      "fn": 97,
+      "precision": 0.8819,
+      "recall": 0.948,
+      "f1": 0.9137
+    },
+    "service": {
+      "support": 1144,
+      "pred": 1661,
+      "tp": 1138,
+      "fp": 523,
+      "fn": 6,
+      "precision": 0.6851,
+      "recall": 0.9948,
+      "f1": 0.8114
+    },
+    "invalid": {
+      "support": 1639,
+      "pred": 1427,
+      "tp": 1414,
+      "fp": 13,
+      "fn": 225,
+      "precision": 0.9909,
+      "recall": 0.8627,
+      "f1": 0.9224
+    }
+  },
+  "samples": 8000,
+  "threshold": 0.2,
+  "auto_dispatch_rate": 0.8988,
+  "reject_rate": 0.1013,
+  "avg_confidence": 0.9358,
+  "avg_labels_per_ticket": 1.542,
+  "rejected_micro_f1": 0.7303
+}

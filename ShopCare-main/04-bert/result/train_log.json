@@ -1,0 +1,55 @@
+{
+  "config": [
+    "  项目根目录   : /root/ShopCare-main/",
+    "  标签体系     : 9 类 -> logistics, quality, after_sale, invoice, price_promo, payment_account, consult, service, invalid",
+    "  预训练模型   : /root/ShopCare-main/04-bert/bert-base-chinese",
+    "  最大长度     : 64",
+    "  LoRA         : r=8, alpha=16, dropout=0.1, target=['query', 'value']",
+    "  训练         : epochs=5, batch=16, lr=0.0002, patience=2",
+    "  难例动态采样 : True (α=0.5, β=1.0, γ=0.8)",
+    "  拒识阈值     : 单标签 0.5 / 全局 0.8",
+    "  设备         : cuda"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.2504,
+      "dev_micro_f1": 0.901,
+      "dev_macro_f1": 0.9023,
+      "dev_subset_accuracy": 0.8115,
+      "seconds": 707.0
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0023,
+      "dev_micro_f1": 0.8655,
+      "dev_macro_f1": 0.8722,
+      "dev_subset_accuracy": 0.7728,
+      "seconds": 703.2
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0008,
+      "dev_micro_f1": 0.918,
+      "dev_macro_f1": 0.917,
+      "dev_subset_accuracy": 0.8612,
+      "seconds": 703.3
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0003,
+      "dev_micro_f1": 0.9232,
+      "dev_macro_f1": 0.9239,
+      "dev_subset_accuracy": 0.8571,
+      "seconds": 703.3
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0001,
+      "dev_micro_f1": 0.9191,
+      "dev_macro_f1": 0.9212,
+      "dev_subset_accuracy": 0.8469,
+      "seconds": 703.3
+    }
+  ]
+}

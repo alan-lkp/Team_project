@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(PYTHONIOENCODING=utf-8 /c/Users/zx050/.conda/envs/TMF/python.exe -c ' *)"
+    ]
+  }
+}
