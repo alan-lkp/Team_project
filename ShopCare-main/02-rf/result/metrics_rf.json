@@ -3,93 +3,175 @@
   "model": "rf-tfidf",
   "feature_mode": "word",
   "thresholds": {
-    "label": 0.3,
-    "global": 0.6
+    "label": 0.25,
+    "global": 0.443
   },
-  "dev_micro_f1_before_tuning": 1.0,
-  "metrics": {
-    "micro_f1": 1.0,
-    "micro_precision": 1.0,
-    "micro_recall": 1.0,
-    "macro_f1": 1.0,
-    "subset_accuracy": 1.0,
-    "hamming_loss": 0.0,
-    "jaccard_mean": 1.0,
-    "avg_pred_labels": 1.552,
-    "avg_true_labels": 1.552,
-    "threshold": 0.3,
-    "num_samples": 600,
+  "dev_micro_f1_before_tuning": 0.3195,
+  "calibration": {
+    "method": "platt",
+    "ece_raw": 0.0806,
+    "ece_calibrated": 0.027,
     "per_label": [
       {
         "label": "logistics",
-        "support": 131,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0409,
+          0.6323
+        ]
       },
       {
         "label": "quality",
-        "support": 113,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0367,
+          0.4812
+        ]
       },
       {
         "label": "after_sale",
-        "support": 120,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0725,
+          0.6418
+        ]
       },
       {
         "label": "invoice",
-        "support": 68,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0732,
+          0.6634
+        ]
       },
       {
         "label": "price_promo",
-        "support": 65,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0609,
+          0.5502
+        ]
       },
       {
         "label": "payment_account",
-        "support": 57,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.032,
+          0.7718
+        ]
       },
       {
         "label": "consult",
-        "support": 170,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0365,
+          0.7102
+        ]
       },
       {
         "label": "service",
-        "support": 84,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0378,
+          0.627
+        ]
       },
       {
         "label": "invalid",
-        "support": 123,
-        "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "kind": "platt",
+        "raw_range": [
+          0.0021,
+          0.8022
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "micro_f1": 0.6722,
+    "micro_precision": 0.6307,
+    "micro_recall": 0.7196,
+    "macro_f1": 0.6787,
+    "subset_accuracy": 0.358,
+    "hamming_loss": 0.1208,
+    "jaccard_mean": 0.5724,
+    "avg_pred_labels": 1.767,
+    "avg_true_labels": 1.549,
+    "threshold": 0.25,
+    "num_samples": 8000,
+    "per_label": [
+      {
+        "label": "logistics",
+        "support": 1743,
+        "precision": 0.5272,
+        "recall": 0.4389,
+        "f1": 0.479
+      },
+      {
+        "label": "quality",
+        "support": 1459,
+        "precision": 0.5596,
+        "recall": 0.5565,
+        "f1": 0.5581
+      },
+      {
+        "label": "after_sale",
+        "support": 1624,
+        "precision": 0.5405,
+        "recall": 0.9169,
+        "f1": 0.6801
+      },
+      {
+        "label": "invoice",
+        "support": 888,
+        "precision": 0.899,
+        "recall": 0.8919,
+        "f1": 0.8954
+      },
+      {
+        "label": "price_promo",
+        "support": 1020,
+        "precision": 0.6166,
+        "recall": 0.7882,
+        "f1": 0.6919
+      },
+      {
+        "label": "payment_account",
+        "support": 769,
+        "precision": 0.8413,
+        "recall": 0.5033,
+        "f1": 0.6298
+      },
+      {
+        "label": "consult",
+        "support": 1873,
+        "precision": 0.5623,
+        "recall": 0.9466,
+        "f1": 0.7055
+      },
+      {
+        "label": "service",
+        "support": 1223,
+        "precision": 0.7308,
+        "recall": 0.7236,
+        "f1": 0.7272
+      },
+      {
+        "label": "invalid",
+        "support": 1792,
+        "precision": 0.8224,
+        "recall": 0.6747,
+        "f1": 0.7413
       }
     ],
-    "auto_rate": 1.0,
-    "reject_rate": 0.0,
-    "avg_confidence": 0.9685,
-    "avg_activated_labels": 1.552,
-    "reject_reason_dist": {},
-    "auto_micro_f1": 1.0,
-    "auto_macro_f1": 1.0
+    "auto_rate": 0.7764,
+    "reject_rate": 0.2236,
+    "avg_confidence": 0.5977,
+    "avg_activated_labels": 1.767,
+    "reject_reason_dist": {
+      "low_confidence": 1097,
+      "no_label_activated": 692
+    },
+    "auto_micro_f1": 0.7011,
+    "auto_macro_f1": 0.7118
   }
 }

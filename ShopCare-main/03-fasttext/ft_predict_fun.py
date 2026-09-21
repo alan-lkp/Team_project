@@ -48,6 +48,7 @@ class FTPredictor(BaseTicketPredictor):
         self.model = None
         self.meta = {}
         self.tokenizer = None
+        self.calibration = None
 
     # ---------------- 模型加载 ----------------
     def load(self, force=False):
@@ -80,6 +81,9 @@ class FTPredictor(BaseTicketPredictor):
             self.model = fasttext.load_model(self.cfg.model_save_path)
             # 用训练时存档的分词模式, 而不是当前环境碰巧能用的模式
             _, self.tokenizer = get_tokenizer(self.meta.get('feature_mode', 'auto'))
+            # 概率校准器(训练时在 dev 上拟合)。老产物没有这个字段 —— 退化成原始概率,
+            # 不报错; 但 sigmoid 饱和会让置信度显示成 100%, 重训一次即可。
+            self.calibration = self.meta.get('calibration')
             self.cfg.label_threshold = self.meta.get('label_threshold', self.cfg.label_threshold)
             self.cfg.global_threshold = self.meta.get('global_threshold', self.cfg.global_threshold)
             self._loaded = True
@@ -103,11 +107,27 @@ class FTPredictor(BaseTicketPredictor):
             'feature_mode': self.meta.get('feature_mode'),
             'trained_at': self.meta.get('trained_at'),
             'num_labels': len(self.cfg.class_list) if self.cfg else None,
+            'calibrated': bool(self.calibration),
         }
 
     # ---------------- 核心推理 ----------------
+    def _calibrate(self, probs):
+        """把原始 sigmoid 输出过一遍校准器。
+
+        不做这一步的话, FastText 在 10 万条语料上训练后会饱和 —— 实测 5.9% 的标签
+        概率正好是 1.000(那一档实际命中率只有 88%), 前端显示成 "100.0%" 不可信,
+        而且和 RF 的概率尺度不可比。
+        """
+        import numpy as np
+        if not self.calibration:
+            return np.asarray(probs, dtype=float)
+        from tools.prob_calibration import apply_calibrators
+        return apply_calibrators(np.asarray(probs, dtype=float), self.calibration)
+
     def _infer_proba(self, text):
         tokens = tokenize_for_fasttext(text, self.tokenizer)
+        # 注意: 这里必须**逐条**传字符串。fasttext 的 Python 绑定在传列表且 k>1 时
+        # 有 bug —— 会把 top-1 的概率广播给 k 个标签, 导致 9 个标签拿到同一个值。
         labels, scores = self.model.predict(' '.join(tokens), k=len(self.cfg.class_list))
         index = {c: i for i, c in enumerate(self.cfg.class_list)}
         probs = [0.0] * len(self.cfg.class_list)
@@ -115,7 +135,7 @@ class FTPredictor(BaseTicketPredictor):
             name = lb[len(self.cfg.label_prefix):] if lb.startswith(self.cfg.label_prefix) else lb
             if name in index:
                 probs[index[name]] = float(sc)
-        return probs
+        return self._calibrate([probs])[0].tolist()
 
     def _infer_proba_batch(self, texts):
         return [self._infer_proba(t) for t in texts]

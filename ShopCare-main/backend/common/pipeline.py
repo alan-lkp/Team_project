@@ -49,7 +49,7 @@ NO_SYSPATH_STAGES = ('llm',)
 # 结果字典的固定字段(便于 tools/verify_all_phases.py 做一致性校验, 也方便前端写死解析逻辑)
 RESULT_KEYS = (
     'text', 'text_masked', 'model_key', 'model_used', 'model_cn', 'model_display',
-    'fallback_from', 'labels', 'confidences', 'top_k_scores', 'avg_confidence',
+    'fallback_from', 'labels', 'confidences', 'all_scores', 'top_k_scores', 'avg_confidence',
     'rejected', 'reject_reason', 'reject_reason_cn', 'llm_fallback', 'llm_reason',
     'need_human_review', 'resolved_by', 'sentiment', 'priority', 'dept', 'sla_hours',
     'suggested_reply', 'kg', 'model_latency_ms', 'latency_ms', 'trace',
@@ -204,13 +204,14 @@ class TicketPipeline:
                     'avg_confidence': 0.0, 'rejected': True, 'reject_reason': 'llm_parse_failed',
                     'reject_reason_cn': 'LLM 未返回合法标签, 已转人工复核', 'llm_fallback': True,
                     'llm_reason': 'LLM 直连结果无法解析或标签非法', 'need_human_review': True,
-                    'resolved_by': 'human', 'top_k_scores': [], 'latency_ms': latency}
+                    'resolved_by': 'human', 'all_scores': {}, 'top_k_scores': [], 'latency_ms': latency}
         confidences = {name: parsed['confidence'] for name in parsed['labels']}
         enriched = self._enrich_labels(parsed['labels'], confidences)
         return {'text': text, 'model_used': 'llm', 'labels': enriched, 'confidences': confidences,
                 'avg_confidence': round(float(parsed['confidence']), 4), 'rejected': False,
                 'reject_reason': None, 'reject_reason_cn': None, 'llm_fallback': True,
                 'llm_reason': parsed.get('reason'), 'need_human_review': False, 'resolved_by': 'llm',
+                'all_scores': {},
                 'top_k_scores': [{'label': item['label'], 'score': item['score']}
                                  for item in enriched[:top_k]],
                 'latency_ms': latency}
@@ -369,7 +370,7 @@ class TicketPipeline:
         return {
             'text': text, 'text_masked': text, 'model_key': None, 'model_used': None,
             'model_cn': None, 'model_display': None, 'fallback_from': None,
-            'labels': [], 'confidences': {}, 'top_k_scores': [], 'avg_confidence': 0.0,
+            'labels': [], 'confidences': {}, 'all_scores': {}, 'top_k_scores': [], 'avg_confidence': 0.0,
             'rejected': True, 'reject_reason': 'empty_text', 'reject_reason_cn': '文本为空',
             'llm_fallback': False, 'llm_reason': None, 'need_human_review': False,
             'resolved_by': 'none',

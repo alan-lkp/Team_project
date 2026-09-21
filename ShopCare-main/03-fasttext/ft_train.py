@@ -37,6 +37,9 @@ for _p in (_STAGE_DIR, _PROJECT_ROOT):
 from config import FTConfig                                              # noqa: E402
 from tools.ml_metrics import (compute_business_metrics, compute_metrics,  # noqa: E402
                               grid_search_thresholds, print_metrics)
+from tools.prob_calibration import (apply_calibrators,                     # noqa: E402
+                                    expected_calibration_error, fit_calibrators,
+                                    summary as calibration_summary)
 from tools.text_tokenize import clean_text, get_tokenizer                 # noqa: E402
 from tools.ticket_data import label_statistics, load_splits, to_xy        # noqa: E402
 
@@ -149,7 +152,7 @@ def run(cfg, args):
         return None
 
     # ---------- 1. 读数据 ----------
-    print('\n[1/6] 读取数据 ...')
+    print('\n[1/7] 读取数据 ...')
     train_pairs, dev_pairs, test_pairs, class_list = load_splits()
     print(f'  训练集 {len(train_pairs)} 条 / 验证集 {len(dev_pairs)} 条 / 测试集 {len(test_pairs)} 条')
     st = label_statistics(train_pairs, class_list)
@@ -167,7 +170,7 @@ def run(cfg, args):
     # get_tokenizer 会把 'auto' 解析成实际使用的模式; 存进元数据的必须是**已解析**的值,
     # 否则推理端拿到 'auto' 只能靠猜, 换台机器(装了/没装 jieba)就会静默地换分词方式
     mode, tokenizer = get_tokenizer(args.feature_mode or cfg.feature_mode)
-    print(f'\n[2/6] 转换 fasttext 语料(feature_mode={mode}) ...')
+    print(f'\n[2/7] 转换 fasttext 语料(feature_mode={mode}) ...')
     train_corpus = os.path.join(cfg.corpus_dir, 'train.ft.txt')
     dev_corpus = os.path.join(cfg.corpus_dir, 'dev.ft.txt')
     test_corpus = os.path.join(cfg.corpus_dir, 'test.ft.txt')
@@ -187,9 +190,9 @@ def run(cfg, args):
             cfg.epoch = combo.get('epoch', cfg.epoch)
             cfg.lr = combo.get('lr', cfg.lr)
             cfg.word_ngrams = combo.get('wordNgrams', cfg.word_ngrams)
-            print(f'\n[3/6] 训练 FastText —— 组合 {idx}/{len(combos)}: {combo}')
+            print(f'\n[3/7] 训练 FastText —— 组合 {idx}/{len(combos)}: {combo}')
         else:
-            print('\n[3/6] 训练 FastText(loss=ova, 每标签独立 sigmoid) ...')
+            print('\n[3/7] 训练 FastText(loss=ova, 每标签独立 sigmoid) ...')
         t0 = time.time()
         model = train_fasttext(train_corpus, cfg, mode)
         print(f'  训练耗时 {time.time() - t0:.1f}s, 词表大小 {len(model.get_words())}')
@@ -202,11 +205,24 @@ def run(cfg, args):
     if len(combos) > 1:
         print(f'\n  最优组合: {best["combo"]} -> dev Micro-F1 {best["metrics"]["micro_f1"]}')
 
-    # ---------- 4. 阈值标定 ----------
-    probs_dev = predict_proba_matrix(model, X_dev_text, class_list, tokenizer, cfg)
+    # ---------- 4. 概率校准 ----------
+    # FastText 用 ova(每标签一个独立 sigmoid), 在 10 万条语料上训练 25 轮后会饱和:
+    # 5.9% 的标签概率正好等于 1.000, 而那一档的实际命中率只有 88%。不校准的话,
+    # 前端会显示"100.0%", 既不可信、又和 RF 的概率尺度不可比。
+    # 校准器**只在 dev 上拟合**, test 不参与, 所以下面的 test 指标依然干净。
+    probs_dev_raw = predict_proba_matrix(model, X_dev_text, class_list, tokenizer, cfg)
+    probs_test_raw = predict_proba_matrix(model, X_test_text, class_list, tokenizer, cfg)
+    print('\n[4/7] 在 dev 上拟合概率校准器 ...')
+    calibration = fit_calibrators(probs_dev_raw, Y_dev, class_list)
+    probs_dev = apply_calibrators(probs_dev_raw, calibration)
+    probs_test = apply_calibrators(probs_test_raw, calibration)
+    print(calibration_summary(probs_test_raw, probs_test, Y_test, calibration,
+                              '03-fasttext 概率校准效果(在 test 上评估)'))
+
+    # ---------- 5. 阈值标定 ----------
     grid = []
     if args.tune_threshold:
-        print(f'\n[4/6] 在 dev 上网格搜索双阈值(目标拒识率 <= {cfg.target_reject_rate:.0%}) ...')
+        print(f'\n[5/7] 在 dev 上网格搜索双阈值(目标拒识率 <= {cfg.target_reject_rate:.0%}) ...')
         grid = grid_search_thresholds(probs_dev, Y_dev, class_list,
                                       target_reject_rate=cfg.target_reject_rate)
         if grid:
@@ -220,11 +236,10 @@ def run(cfg, args):
         else:
             print('  [警告] 没有组合满足拒识率上限, 保持默认阈值')
     else:
-        print('\n[4/6] 跳过阈值标定')
+        print('\n[5/7] 跳过阈值标定')
 
-    # ---------- 5. 测试集评估 ----------
-    print('\n[5/6] 测试集最终评估')
-    probs_test = predict_proba_matrix(model, X_test_text, class_list, tokenizer, cfg)
+    # ---------- 6. 测试集评估 ----------
+    print('\n[6/7] 测试集最终评估')
     metrics = compute_metrics(Y_test, probs_test, class_list, threshold=cfg.label_threshold)
     biz = compute_business_metrics(probs_test, Y_test, class_list,
                                    cfg.label_threshold, cfg.global_threshold)
@@ -232,7 +247,7 @@ def run(cfg, args):
     print_metrics(metrics, title='03-fasttext 测试集结果(含业务指标)')
 
     # ---------- 6. 存盘 ----------
-    print('\n[6/6] 保存模型与产物 ...')
+    print('\n[7/7] 保存模型与产物 ...')
     os.makedirs(cfg.save_dir, exist_ok=True)
     os.makedirs(cfg.result_dir, exist_ok=True)
     model.save_model(cfg.model_save_path)
@@ -253,6 +268,9 @@ def run(cfg, args):
         'trained_at': time.strftime('%Y-%m-%d %H:%M:%S'),
         'train_size': len(X_train_text),
         'train_seconds': round(time.time() - t_start, 1),
+        # 概率校准器(Platt 的 a/b 系数, 每标签一组)。推理端必须 apply 一下,
+        # 否则线上给出的置信度和训练报告里的口径不一致。
+        'calibration': calibration,
     }
     meta_path = os.path.join(cfg.result_dir, 'model_meta.json')
     with open(meta_path, 'w', encoding='utf-8') as f:
@@ -262,6 +280,10 @@ def run(cfg, args):
     with open(cfg.metrics_save_path, 'w', encoding='utf-8') as f:
         json.dump({'stage': '03-fasttext', 'feature_mode': mode,
                    'thresholds': {'label': cfg.label_threshold, 'global': cfg.global_threshold},
+                   'calibration': {'method': calibration['method'],
+                                   'ece_raw': expected_calibration_error(probs_test_raw, Y_test),
+                                   'ece_calibrated': expected_calibration_error(probs_test, Y_test),
+                                   'per_label': calibration['per_label']},
                    'metrics': metrics}, f, ensure_ascii=False, indent=2)
     print(f'  指标 -> {cfg.metrics_save_path}')
 

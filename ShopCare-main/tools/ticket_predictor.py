@@ -53,7 +53,7 @@ __all__ = ['BaseTicketPredictor']
 
 # predict() 的返回字段(顺序即前端展示顺序); 用于 tools/verify_all_phases.py 做一致性校验
 RESULT_KEYS = (
-    'text', 'model_used', 'labels', 'confidences', 'avg_confidence', 'rejected',
+    'text', 'model_used', 'labels', 'confidences', 'all_scores', 'avg_confidence', 'rejected',
     'reject_reason', 'reject_reason_cn', 'llm_fallback', 'llm_reason',
     'need_human_review', 'resolved_by', 'top_k_scores', 'latency_ms',
 )
@@ -163,6 +163,10 @@ class BaseTicketPredictor:
             'need_human_review': decision['rejected'],
             'resolved_by': 'human' if decision['rejected'] else 'model',
             'top_k_scores': self._top_k(decision['all_scores'], top_k),
+            # 全部标签的分数(不只是激活的)。前端"9 类置信度分布"要靠它才能显示
+            # 模型在没激活的那些标签上给了多少分 —— 只看 confidences 的话,
+            # 未激活的标签一律是 0, 看不出"模型在犹豫什么"。
+            'all_scores': dict(decision['all_scores']),
             'latency_ms': 0.0,
         }
 
@@ -179,6 +183,9 @@ class BaseTicketPredictor:
                 result['llm_reason'] = llm_result['reason']
                 result['need_human_review'] = False
                 result['resolved_by'] = 'llm'
+                # 结论已经由 LLM 给出了, 本地模型的 9 类分布不再对应当前结论 ——
+                # 留着会让前端画出一张与激活标签对不上的图, 所以清掉
+                result['all_scores'] = {}
             else:
                 result['llm_reason'] = 'LLM 兜底解析失败, 已转人工复核'
                 result['need_human_review'] = True

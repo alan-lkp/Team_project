@@ -67,12 +67,17 @@ class FTConfig:
         self.lowercase = True
 
         # ==================== todo 4. 模型超参数 ====================
+        # 说明: epoch/lr 是按**当前语料规模(train 10 万条)**用
+        # `python 03-fasttext/ft_train.py --grid-search` 实测选出来的最优组合。
+        # 早期语料只有 4000 条时用的是 epoch=1 / lr=0.018 —— 那个配置在 10 万条上
+        # 严重欠训练(dev Micro-F1 只有 0.17,预测标签数 2.75 远高于真实的 1.55)。
+        # 换语料规模后请重新跑一次 --grid-search,不要沿用旧值。
         self.dim = 100                 # 词向量维度(小数据 50~100 足够)
-        self.epoch = 3               # 轮数; fasttext 迭代很快, 可以多跑几轮
-        self.lr = 0.005                # 学习率(ova 下的常用起点)
+        self.epoch = 25                # 轮数; 语料越大需要的轮数越多
+        self.lr = 0.5                  # 学习率(ova 下配合 epoch=25 的实测最优)
         self.word_ngrams = 2           # 用到 2-gram("快递 没" 这种搭配)
         self.bucket = 50000            # ngram/subword 哈希桶数; 模型体积 ≈ bucket × dim × 4 字节
-        self.min_count = 1             # 词最少出现次数; 设 1 是因为工单里有大量低频专有词
+        self.min_count = 2             # 词最少出现次数; 设 1 是因为工单里有大量低频专有词
         self.min_count_label = 1
         self.loss = 'ova'              # 多标签必选, 见 docstring
         self.thread = 8

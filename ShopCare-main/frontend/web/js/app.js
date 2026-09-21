@@ -278,15 +278,21 @@ function renderResult(result) {
   setHtml('wb-labels', pills.length ? pills.join('')
     : '<span class="muted small">未激活任何标签(已按拒识处理)</span>');
 
-  /* --- 9 类置信度条 --- */
+  /* --- 9 类置信度条 ---
+     数据源必须是 all_scores(全部 9 类的分数), 而不是 confidences:
+     confidences 只包含**被激活**的标签, 未激活的一律缺失 —— 拿它画图的话,
+     8 条柱子永远是空的, 看不出"模型在犹豫什么", 标题就成了假话。
+     LLM 直连不产生 9 类分布(all_scores 为空), 这时退回到 confidences。 */
   const confidences = result.confidences || {};
+  const allScores = (result.all_scores && Object.keys(result.all_scores).length)
+    ? result.all_scores : confidences;
   const active = new Set((result.labels || []).map((item) => item.label));
   const order = state.labelsMeta.length
     ? state.labelsMeta
-    : Object.keys(confidences).map((key) => ({ label: key, cn: key }));
+    : Object.keys(allScores).map((key) => ({ label: key, cn: key }));
   setHtml('wb-bars', order.map((meta) => {
-    const score = Number(confidences[meta.label] || 0);
-    const on = active.has(meta.label) || score >= 0.5;
+    const score = Number(allScores[meta.label] || 0);
+    const on = active.has(meta.label);
     return '<div class="bar-row' + (on ? ' on' : '') + '">' +
       '<span class="bar-name" title="' + escapeHtml(meta.cn) + '">' + escapeHtml(meta.cn) + '</span>' +
       '<span class="bar-track"><span class="bar-fill" style="width:' + (score * 100).toFixed(1) + '%"></span></span>' +

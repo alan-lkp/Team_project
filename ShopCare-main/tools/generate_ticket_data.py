@@ -20,6 +20,22 @@ ShopCare 电商客服工单语料生成器 (P1: 把链路先跑通)
     python tools/generate_ticket_data.py --n_train 20000 --n_dev 2000 --n_test 2000
     python tools/generate_ticket_data.py --preview 10                # 生成后预览 10 条
 
+[!] 不要再用本脚本出指标 —— 它有模板级泄漏
+=========================================
+本脚本对 train / dev / test **各自独立随机生成**。整句去重看着没问题(交集为 0),
+但所有 split 都从同一批子句模板池里采样, 所以 test 里 96% 的子句都能在 train 中原样
+找到 —— 模型学到的是「子句 -> 标签」的查表规则, 于是 RF / BERT 都会拿到 Micro-F1=1.000,
+这个指标没有任何区分度.
+
+需要重新生成语料时请改用:
+
+    python tools/build_dataset_v2.py
+
+它做了三层修复(扩池到 540 条模板 / 家族分组切分 / 槽位隔离), test 子句在 train 中
+原样出现的比例是 0.0000%. 详见该脚本的 docstring 与 README「三套对照模型」一节.
+
+本脚本保留仅作对照与历史参考.
+
 注意:
     本生成器只用于跑通工程链路与演示, 指标仅供参照, 不代表真实业务效果;
     真实数据请按 01-data/data_format.md 的格式替换 (可用 tools/check_dataset.py 做单标签升维).

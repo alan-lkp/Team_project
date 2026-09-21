@@ -227,17 +227,67 @@ def compute_business_metrics(y_prob, y_true=None, class_list=None,
 # ============================================================
 # todo 5. 阈值标定(在 dev 集上网格搜索)
 # ============================================================
+def avg_confidence_at(probs, label_threshold):
+    """算出「按该单标签阈值激活后, 每条工单的 avg_confidence」。
+
+    口径与 decide() 完全一致: 只对**激活的**标签求概率均值; 一个都没激活的记 0
+    (那种情况本来就会因为 no_label_activated 被拒识)。
+
+    这个函数是自适应阈值网格的基础 —— 见 grid_search_thresholds 的说明。
+    """
+    probs = _as_2d(probs)
+    mask = probs >= label_threshold
+    n = mask.sum(axis=1)
+    total = (probs * mask).sum(axis=1)
+    return np.where(n > 0, total / np.maximum(n, 1), 0.0)
+
+
+def _adaptive_global_candidates(probs, label_candidates, target_reject_rate,
+                                anchors=(0.6, 0.7, 0.75, 0.8, 0.85, 0.9)):
+    """按模型实际的置信度分布生成全局阈值候选。
+
+    为什么不能写死 (0.6, 0.7, ...)
+    ------------------------------
+    全局阈值是拿来和 decide() 算出的 avg_confidence 比大小的。不同模型的概率尺度
+    差别很大:
+
+        BERT(微调充分)    激活标签的 avg_confidence 常常 0.9 上下
+        RF(概率被树投票压缩)              常常只有 0.35 ~ 0.5
+
+    原来写死 0.6 起步,遇到 RF 这种模型时**每一个候选组合都会把全部工单拒掉**,
+    于是 `reject_rate > target_reject_rate` 对所有组合成立,搜索返回空列表 ——
+    上层就悄悄退回默认阈值(0.5/0.8),最后跑出"拒识率 100%、自动分流率 0%"
+    这种看起来像坏掉的结果。
+
+    改成对每个单标签阈值, 取该阈值下 avg_confidence 分布的分位数当候选:
+    要满足"拒识率 <= target"，全局阈值取到 target_reject_rate 分位附近即可,
+    再往上到 0.9 用来表达"宁可多拒也要准"的档位。
+    """
+    cands = set(anchors)
+    for lt in label_candidates:
+        conf = avg_confidence_at(probs, lt)
+        for q in (target_reject_rate, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.95):
+            cands.add(round(float(np.quantile(conf, q)), 3))
+    return tuple(sorted(c for c in cands if 0.0 < c <= 1.0))
+
+
 def grid_search_thresholds(y_prob, y_true, class_list,
-                           label_candidates=(0.3, 0.4, 0.5, 0.6, 0.7),
-                           global_candidates=(0.6, 0.7, 0.75, 0.8, 0.85, 0.9),
+                           label_candidates=(0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7),
+                           global_candidates=None,
                            target_reject_rate=0.15):
     """在验证集上标定双阈值
 
     目标: 在"拒识率 <= target_reject_rate"的前提下, 让自动分流的 Micro-F1 尽量高.
     返回: 按 micro_f1 降序排列的候选列表
+
+    global_candidates 默认 None —— 表示按模型实际的置信度分布自适应生成
+    (见 _adaptive_global_candidates)。要固定网格时显式传一个元组即可。
     """
     yt = (_as_2d(y_true) >= 0.5).astype(int)
     probs = _as_2d(y_prob)
+    if global_candidates is None:
+        global_candidates = _adaptive_global_candidates(
+            probs, label_candidates, target_reject_rate)
     results = []
     for lt in label_candidates:
         for gt in global_candidates:

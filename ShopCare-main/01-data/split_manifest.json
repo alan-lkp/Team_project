@@ -1,59 +1,170 @@
 {
-  "created_at": "2026-09-21 16:12:06",
+  "created_at": "2026-09-21 18:17:32",
+  "builder": "tools/build_dataset_v2.py",
   "seed": 42,
-  "sizes": {
-    "train": 4000,
-    "dev": 600,
-    "test": 600
-  },
+  "template_pool_size": 540,
   "families_per_split": {
     "train": {
+      "logistics": 36,
+      "quality": 36,
+      "after_sale": 36,
+      "invoice": 36,
+      "price_promo": 36,
+      "payment_account": 36,
+      "consult": 36,
+      "service": 36,
+      "invalid": 36
+    },
+    "dev": {
       "logistics": 12,
       "quality": 12,
       "after_sale": 12,
-      "invoice": 10,
-      "price_promo": 10,
-      "payment_account": 8,
-      "consult": 10,
-      "service": 10,
-      "invalid": 11
-    },
-    "dev": {
-      "logistics": 2,
-      "quality": 2,
-      "after_sale": 2,
-      "invoice": 1,
-      "price_promo": 1,
-      "payment_account": 1,
-      "consult": 2,
-      "service": 1,
-      "invalid": 2
+      "invoice": 12,
+      "price_promo": 12,
+      "payment_account": 12,
+      "consult": 12,
+      "service": 12,
+      "invalid": 12
     },
     "test": {
-      "logistics": 2,
-      "quality": 2,
-      "after_sale": 2,
-      "invoice": 1,
-      "price_promo": 1,
-      "payment_account": 1,
-      "consult": 2,
-      "service": 1,
-      "invalid": 2
+      "logistics": 12,
+      "quality": 12,
+      "after_sale": 12,
+      "invoice": 12,
+      "price_promo": 12,
+      "payment_account": 12,
+      "consult": 12,
+      "service": 12,
+      "invalid": 12
+    }
+  },
+  "family_ratio": {
+    "train": 0.6,
+    "dev": 0.2,
+    "test": 0.2
+  },
+  "family_category_matched": {
+    "apparel": 9,
+    "digital": 20,
+    "food": 4,
+    "pet": 1,
+    "baby": 1
+  },
+  "clause_repeat_cap": {
+    "train": 4,
+    "dev": 1,
+    "test": 1
+  },
+  "slot_vocab": {
+    "train": {
+      "goods": 99,
+      "goods_by_cat": 10,
+      "place": 46,
+      "day": 20
+    },
+    "dev_test": {
+      "goods": 53,
+      "goods_by_cat": 10,
+      "place": 16,
+      "day": 6
+    },
+    "disjoint": true,
+    "isolation_check": {
+      "goods": {
+        "train_only_values": 99,
+        "heldout_values": 53,
+        "train_values_found_in_dev_test": [
+          "书包",
+          "手机"
+        ],
+        "n_train_values_found_in_dev_test": 2,
+        "heldout_values_found_in_train": [],
+        "n_heldout_values_found_in_train": 0,
+        "n_train_values_found_in_dev_test_excl_generic": 0,
+        "n_heldout_values_found_in_train_excl_generic": 0,
+        "generic_stoplist": [
+          "书包",
+          "口罩",
+          "手机"
+        ]
+      },
+      "place": {
+        "train_only_values": 46,
+        "heldout_values": 16,
+        "train_values_found_in_dev_test": [],
+        "n_train_values_found_in_dev_test": 0,
+        "heldout_values_found_in_train": [],
+        "n_heldout_values_found_in_train": 0,
+        "n_train_values_found_in_dev_test_excl_generic": 0,
+        "n_heldout_values_found_in_train_excl_generic": 0,
+        "generic_stoplist": [
+          "书包",
+          "口罩",
+          "手机"
+        ]
+      },
+      "day": {
+        "train_only_values": 20,
+        "heldout_values": 6,
+        "train_values_found_in_dev_test": [],
+        "n_train_values_found_in_dev_test": 0,
+        "heldout_values_found_in_train": [],
+        "n_heldout_values_found_in_train": 0,
+        "n_train_values_found_in_dev_test_excl_generic": 0,
+        "n_heldout_values_found_in_train_excl_generic": 0,
+        "generic_stoplist": [
+          "书包",
+          "口罩",
+          "手机"
+        ]
+      }
     }
   },
   "leakage": {
+    "sizes": {
+      "train": 100000,
+      "dev": 8000,
+      "test": 8000
+    },
     "exact_overlap": {
       "train_dev": 0,
       "train_test": 0,
       "dev_test": 0
+    },
+    "clause_pool": {
+      "train": 122231,
+      "dev": 12461,
+      "test": 12391
     },
     "clause_overlap": {
       "train_dev": 0,
       "train_test": 0,
       "dev_test": 0
     },
+    "dup_within": {
+      "train": 0,
+      "dev": 0,
+      "test": 0
+    },
+    "repeat_within": {
+      "train": {
+        "distinct_clauses": 122231,
+        "max_repeats": 2,
+        "median_repeats": 1
+      },
+      "dev": {
+        "distinct_clauses": 12461,
+        "max_repeats": 1,
+        "median_repeats": 1
+      },
+      "test": {
+        "distinct_clauses": 12391,
+        "max_repeats": 1,
+        "median_repeats": 1
+      }
+    },
     "test_clause_covered_by_train_ratio": 0.0,
     "test_text_all_clauses_covered_by_train_ratio": 0.0
   },
-  "backup_dir": "D:\\develop\\aiDMX\\notes\\TMF\\Team_project\\ShopCare-main\\01-data\\backup\\leaky_20260921_161206"
+  "backup_dir": null
 }

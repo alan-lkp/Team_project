@@ -40,3 +40,9 @@ Thumbs.db
 # 400 MB 级的预训练权重, 按 docs/环境安装指南.md 自行放置, 不入库.
 # (02-rf / 03-fasttext 训练出来的模型产物体积可控, 属于项目交付的一部分, 不在此忽略)
 04-bert/bert-base-chinese/
+
+# ---------------- 语料重建时的自动备份 ----------------
+# tools/build_dataset_v2.py 每次重建前会把旧的 train/dev/test.txt 备份到
+# 01-data/backup/<时间戳>/. 这是防误操作的本地保险, 不需要入库 ——
+# 被覆盖掉的那一版本来就在 git 历史里(见 git log 01-data/)。
+01-data/backup/

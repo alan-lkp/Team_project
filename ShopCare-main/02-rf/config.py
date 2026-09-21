@@ -75,8 +75,13 @@ class RFConfig:
         self.sublinear_tf = True              # 用 1+log(tf) 压制长文本刷词频
 
         # ==================== todo 4. 随机森林超参数 ====================
+        # 说明: max_depth 是按**当前语料规模(train 10 万条)**用
+        # `python 02-rf/rf_train.py --grid-search` 实测选出来的。
+        # 早期语料只有 4000 条时用的是 max_depth=25 —— 在 10 万条上, 树深被限死后
+        # 概率估计会被压得很扁(最大概率均值只有 0.48), 连阈值都标不出来。
+        # 换语料规模后请重新跑一次 --grid-search, 不要沿用旧值。
         self.n_estimators = 300
-        self.max_depth = 25                 # 不限制深度, 用 min_samples_leaf 控制复杂度
+        self.max_depth = 40                 # 用 min_samples_leaf 控制复杂度, 不限死深度
         self.min_samples_leaf = 3
         self.rf_max_features = 'sqrt'         # 每次分裂只看 sqrt(特征数) 个特征
         self.class_weight = 'balanced_subsample'   # 应对标签长尾

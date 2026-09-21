@@ -39,6 +39,9 @@ for _p in (_STAGE_DIR, _PROJECT_ROOT):
 from config import RFConfig                                            # noqa: E402
 from tools.ml_metrics import (compute_business_metrics, compute_metrics,  # noqa: E402
                               grid_search_thresholds, print_metrics)
+from tools.prob_calibration import (apply_calibrators,                     # noqa: E402
+                                    expected_calibration_error, fit_calibrators,
+                                    summary as calibration_summary)
 from tools.text_tokenize import clean_text, get_tokenizer               # noqa: E402
 from tools.ticket_data import label_statistics, load_splits, to_xy      # noqa: E402
 
@@ -193,7 +196,7 @@ def run(cfg, args):
         return None
 
     # ---------- 1. 读数据 ----------
-    print('\n[1/6] 读取数据 ...')
+    print('\n[1/7] 读取数据 ...')
     train_pairs, dev_pairs, test_pairs, class_list = load_splits()
     print(f'  训练集 {len(train_pairs)} 条 / 验证集 {len(dev_pairs)} 条 / 测试集 {len(test_pairs)} 条')
     st = label_statistics(train_pairs, class_list)
@@ -213,7 +216,7 @@ def run(cfg, args):
     # 解析成实际模式并存进模型包, 避免推理端把 'auto' 重新解析成别的模式
     from tools.text_tokenize import get_tokenizer as _get_tok
     mode, _tok = _get_tok(args.feature_mode or cfg.feature_mode)
-    print(f'\n[2/6] TF-IDF 向量化(feature_mode={mode}) ...')
+    print(f'\n[2/7] TF-IDF 向量化(feature_mode={mode}) ...')
     vectorizer = build_vectorizer(cfg, mode, _tok)
     X_train = vectorizer.fit_transform(clean_texts(X_train_text))
     print(f'  实际特征维度: {X_train.shape[1]} (max_features={cfg.tfidf_max_features})')
@@ -226,9 +229,9 @@ def run(cfg, args):
         if params:
             cfg.n_estimators = params.get('n_estimators', cfg.n_estimators)
             cfg.max_depth = params.get('max_depth', cfg.max_depth)
-            print(f'\n[3/6] 训练 OvR 随机森林 —— 组合 {k}/{len(params_list)}: {params}')
+            print(f'\n[3/7] 训练 OvR 随机森林 —— 组合 {k}/{len(params_list)}: {params}')
         else:
-            print('\n[3/6] 训练 OvR 随机森林(9 个标签各一个二分类器) ...')
+            print('\n[3/7] 训练 OvR 随机森林(9 个标签各一个二分类器) ...')
         t0 = time.time()
         estimators, constants = train_ovr(X_train, Y_train, cfg, verbose=not params)
         print(f'  训练耗时 {time.time() - t0:.1f}s')
@@ -242,10 +245,23 @@ def run(cfg, args):
     if len(params_list) > 1:
         print(f'\n  最优组合: {best["params"]} -> dev Micro-F1 {best["metrics"]["micro_f1"]}')
 
-    # ---------- 4. 阈值标定 ----------
-    probs_dev = predict_proba_matrix(vectorizer, estimators, constants, X_dev_text)
+    # ---------- 4. 概率校准 ----------
+    # RF 的原始概率是 300 棵树的投票比例, 尺度被压得很扁(实测: 它说 0.6~0.8 时
+    # 实际命中率是 100%, 而它永远不会给出 1.0)。不校准的话, 前端会显示成
+    # "只有 42%"(像是模型坏了), 而且这个数字和 FastText 的 100% 根本不可比。
+    # 校准器**只在 dev 上拟合**, test 不参与, 所以下面的 test 指标依然干净。
+    probs_dev_raw = predict_proba_matrix(vectorizer, estimators, constants, X_dev_text)
+    probs_test_raw = predict_proba_matrix(vectorizer, estimators, constants, X_test_text)
+    print('\n[4/7] 在 dev 上拟合概率校准器 ...')
+    calibration = fit_calibrators(probs_dev_raw, Y_dev, class_list)
+    probs_dev = apply_calibrators(probs_dev_raw, calibration)
+    probs_test = apply_calibrators(probs_test_raw, calibration)
+    print(calibration_summary(probs_test_raw, probs_test, Y_test, calibration,
+                              '02-rf 概率校准效果(在 test 上评估)'))
+
+    # ---------- 5. 阈值标定 ----------
     if args.tune_threshold:
-        print(f'\n[4/6] 在 dev 上网格搜索双阈值(目标拒识率 <= {cfg.target_reject_rate:.0%}) ...')
+        print(f'\n[5/7] 在 dev 上网格搜索双阈值(目标拒识率 <= {cfg.target_reject_rate:.0%}) ...')
         grid = grid_search_thresholds(probs_dev, Y_dev, class_list,
                                       target_reject_rate=cfg.target_reject_rate)
         if grid:
@@ -266,12 +282,11 @@ def run(cfg, args):
                   f'({cfg.label_threshold}/{cfg.global_threshold})')
             grid = []
     else:
-        print('\n[4/6] 跳过阈值标定(--tune-threshold 未开启)')
+        print('\n[5/7] 跳过阈值标定(--tune-threshold 未开启)')
         grid = []
 
-    # ---------- 5. 测试集评估 ----------
-    print('\n[5/6] 测试集最终评估')
-    probs_test = predict_proba_matrix(vectorizer, estimators, constants, X_test_text)
+    # ---------- 6. 测试集评估 ----------
+    print('\n[6/7] 测试集最终评估')
     metrics = compute_metrics(Y_test, probs_test, class_list, threshold=cfg.label_threshold)
     biz = compute_business_metrics(probs_test, Y_test, class_list,
                                    cfg.label_threshold, cfg.global_threshold)
@@ -280,7 +295,7 @@ def run(cfg, args):
     print('\n  说明: 拒识的工单不进自动分流, 所以 auto_micro_f1 才是"真正自动处理那部分"的准确度')
 
     # ---------- 6. 存盘 ----------
-    print('\n[6/6] 保存模型与产物 ...')
+    print('\n[7/7] 保存模型与产物 ...')
     os.makedirs(cfg.save_dir, exist_ok=True)
     os.makedirs(cfg.result_dir, exist_ok=True)
 
@@ -301,6 +316,9 @@ def run(cfg, args):
         'trained_at': time.strftime('%Y-%m-%d %H:%M:%S'),
         'train_size': len(X_train_text),
         'train_seconds': round(time.time() - t_start, 1),
+        # 概率校准器(Platt 的 a/b 系数, 每标签一组)。推理端必须 apply 一下,
+        # 否则线上给出的置信度和训练报告里的口径不一致。
+        'calibration': calibration,
     }
     joblib.dump(bundle, cfg.model_save_path, compress=3)
     print(f'  模型 -> {cfg.model_save_path} ({os.path.getsize(cfg.model_save_path) / 1024:.0f} KB)')
@@ -309,6 +327,10 @@ def run(cfg, args):
         json.dump({'stage': '02-rf', 'model': cfg.model_name, 'feature_mode': mode,
                    'thresholds': {'label': cfg.label_threshold, 'global': cfg.global_threshold},
                    'dev_micro_f1_before_tuning': best['metrics']['micro_f1'],
+                   'calibration': {'method': calibration['method'],
+                                   'ece_raw': expected_calibration_error(probs_test_raw, Y_test),
+                                   'ece_calibrated': expected_calibration_error(probs_test, Y_test),
+                                   'per_label': calibration['per_label']},
                    'metrics': metrics}, f, ensure_ascii=False, indent=2)
     print(f'  指标 -> {cfg.metrics_save_path}')
 

@@ -54,6 +54,7 @@ class RFPredictor(BaseTicketPredictor):
         self.vectorizer = None
         self.estimators = None
         self.constants = None
+        self.calibration = None
         self.bundle_meta = {}
 
     # ---------------- 模型加载 ----------------
@@ -80,6 +81,9 @@ class RFPredictor(BaseTicketPredictor):
             self.vectorizer = bundle['vectorizer']
             self.estimators = bundle['estimators']
             self.constants = bundle['constants']
+            # 概率校准器(训练时在 dev 上拟合)。老模型包没有这个字段 —— 那就退化成
+            # 原始概率, 不报错; 但置信度会偏低, 重新训练一次即可。
+            self.calibration = bundle.get('calibration')
             self.bundle_meta = {k: v for k, v in bundle.items()
                                 if k not in ('vectorizer', 'estimators', 'constants')}
             # 训练时标定出来的阈值优先于配置默认值(前端"模型选择"里展示的就是这个值)
@@ -109,9 +113,22 @@ class RFPredictor(BaseTicketPredictor):
             'feature_mode': self.bundle_meta.get('feature_mode'),
             'trained_at': self.bundle_meta.get('trained_at'),
             'num_labels': len(self.cfg.class_list) if self.cfg else None,
+            'calibrated': bool(self.calibration),
         }
 
     # ---------------- 核心推理 ----------------
+    def _calibrate(self, probs):
+        """把原始概率过一遍校准器 —— 校准器是在 dev 上拟合的单调映射。
+
+        不做这一步的话, 线上给出的"置信度"就是 RF 的原始投票比例(尺度被压得很扁,
+        典型值 0.3~0.5), 和训练报告、和 FastText 都对不上。
+        """
+        import numpy as np
+        if not self.calibration:
+            return np.asarray(probs, dtype=float)
+        from tools.prob_calibration import apply_calibrators
+        return apply_calibrators(np.asarray(probs, dtype=float), self.calibration)
+
     def _infer_proba(self, text):
         from tools.text_tokenize import clean_text
         X = self.vectorizer.transform([clean_text(text)])
@@ -122,7 +139,7 @@ class RFPredictor(BaseTicketPredictor):
             else:
                 classes = list(clf.classes_)
                 probs.append(float(clf.predict_proba(X)[0, classes.index(1)]))
-        return probs
+        return self._calibrate([probs])[0].tolist()
 
     def _infer_proba_batch(self, texts):
         """批量推理: 一次 transform 全部文本, 比逐条快得多(服务层批量接口用这个)"""
@@ -136,7 +153,7 @@ class RFPredictor(BaseTicketPredictor):
             else:
                 classes = list(clf.classes_)
                 probs[:, i] = clf.predict_proba(X)[:, classes.index(1)]
-        return probs.tolist()
+        return self._calibrate(probs).tolist()
 
 
 # ============================================================
