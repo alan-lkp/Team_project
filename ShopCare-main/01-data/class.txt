@@ -1,9 +1,0 @@
-logistics
-quality
-after_sale
-invoice
-price_promo
-payment_account
-consult
-service
-invalid
