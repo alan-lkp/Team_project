@@ -1,0 +1,65 @@
+{
+  "input": "01-data\\dev.txt",
+  "total": 13760,
+  "processed": 13760,
+  "ok": 13760,
+  "fail": 0,
+  "elapsed_s": 1933.1,
+  "copy_ratio_flags": 9,
+  "failures": [
+    {
+      "idxs": [
+        3179
+      ],
+      "error": "flags=['copy'] cr=1.00"
+    },
+    {
+      "idxs": [
+        5414
+      ],
+      "error": "flags=['copy'] cr=0.90"
+    },
+    {
+      "idxs": [
+        6881
+      ],
+      "error": "flags=['len'] cr=0.00"
+    },
+    {
+      "idxs": [
+        8277
+      ],
+      "error": "flags=['copy'] cr=1.00"
+    },
+    {
+      "idxs": [
+        9474
+      ],
+      "error": "flags=['copy'] cr=0.86"
+    },
+    {
+      "idxs": [
+        10854
+      ],
+      "error": "flags=['copy'] cr=1.00"
+    },
+    {
+      "idxs": [
+        11216
+      ],
+      "error": "flags=['len'] cr=0.00"
+    },
+    {
+      "idxs": [
+        12627
+      ],
+      "error": "flags=['copy'] cr=0.88"
+    },
+    {
+      "idxs": [
+        12949
+      ],
+      "error": "flags=['copy'] cr=1.00"
+    }
+  ]
+}

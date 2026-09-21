@@ -28,6 +28,7 @@ for _p in (_STAGE_DIR, _PROJECT_ROOT):
 from config import FTConfig                                              # noqa: E402
 # 从训练脚本里复用分词函数: 训练/推理**必须**是同一份实现, 所以故意不做第二份拷贝
 from ft_train import EMPTY_TOKEN, tokenize_for_fasttext                  # noqa: E402
+from tools.ascii_path import readable                                    # noqa: E402
 from tools.text_tokenize import get_tokenizer                            # noqa: E402
 from tools.ticket_predictor import BaseTicketPredictor                   # noqa: E402
 from tools.ticket_data import DEMO_SAMPLES, load_class_list               # noqa: E402
@@ -77,7 +78,10 @@ class FTPredictor(BaseTicketPredictor):
                     f'  模型: {self.meta.get("class_list")}\n  当前: {self.cfg.class_list}\n'
                     '  请重新训练: python 03-fasttext/ft_train.py')
 
-            self.model = fasttext.load_model(self.cfg.model_save_path)
+            # load_model 也是 C++ 开文件, 中文路径会报"cannot be opened for loading"
+            # (而上一行的 os.path.exists 明明是 True) —— 桥接见 tools/ascii_path.py
+            with readable(self.cfg.model_save_path) as model_path:
+                self.model = fasttext.load_model(model_path)
             # 用训练时存档的分词模式, 而不是当前环境碰巧能用的模式
             _, self.tokenizer = get_tokenizer(self.meta.get('feature_mode', 'auto'))
             self.cfg.label_threshold = self.meta.get('label_threshold', self.cfg.label_threshold)

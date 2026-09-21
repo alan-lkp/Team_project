@@ -81,8 +81,8 @@ class RFConfig:
 
         # ==================== todo 4. 随机森林超参数 ====================
         self.n_estimators = 300
-        self.max_depth = None  # 不限制深度, 用 min_samples_leaf 控制复杂度
-        self.min_samples_leaf = 1
+        self.max_depth = 20  # 不限制深度, 用 min_samples_leaf 控制复杂度
+        self.min_samples_leaf = 3
         self.rf_max_features = "sqrt"  # 每次分裂只看 sqrt(特征数) 个特征
         self.class_weight = "balanced_subsample"  # 应对标签长尾
         self.n_jobs = -1  # 用满所有 CPU 核
@@ -90,11 +90,11 @@ class RFConfig:
 
         # ==================== todo 5. 拒识阈值(与 04-bert 同口径) ====================
         self.label_threshold = float(os.environ.get("LABEL_THRESHOLD", 0.5))
-        self.global_threshold = float(os.environ.get("GLOBAL_THRESHOLD", 0.8))
+        self.global_threshold = float(os.environ.get("GLOBAL_THRESHOLD", 0.5))
 
         # ==================== todo 6. 阈值标定 ====================
         self.tune_threshold = True  # 在 dev 上网格搜索双阈值
-        self.target_reject_rate = 0.15  # 拒识率上限: 超过这个值业务上不可接受
+        self.target_reject_rate = 0.1  # 拒识率上限: 超过这个值业务上不可接受
 
         # ==================== todo 7. 小规模超参搜索(可选, 很花时间) ====================
         self.enable_grid_search = False

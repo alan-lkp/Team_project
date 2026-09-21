@@ -2,621 +2,621 @@
   "logistics": [
     {
       "feature": "物流",
-      "importance": 0.018446
+      "importance": 0.019689
     },
     {
       "feature": "快递",
-      "importance": 0.015634
-    },
-    {
-      "feature": "已",
-      "importance": 0.013075
-    },
-    {
-      "feature": "显示 已",
-      "importance": 0.012728
+      "importance": 0.019015
     },
     {
       "feature": "送到",
-      "importance": 0.012656
+      "importance": 0.014473
     },
     {
-      "feature": "还 没",
-      "importance": 0.010927
+      "feature": "已",
+      "importance": 0.014339
     },
     {
-      "feature": "能 到",
-      "importance": 0.01053
-    },
-    {
-      "feature": "发出",
-      "importance": 0.009692
-    },
-    {
-      "feature": "到",
-      "importance": 0.009295
-    },
-    {
-      "feature": "包裹 一直",
-      "importance": 0.009254
-    },
-    {
-      "feature": "包裹",
-      "importance": 0.009214
+      "feature": "显示 已",
+      "importance": 0.011913
     },
     {
       "feature": "更新",
-      "importance": 0.009214
+      "importance": 0.011429
+    },
+    {
+      "feature": "到",
+      "importance": 0.011103
+    },
+    {
+      "feature": "还 没",
+      "importance": 0.010528
+    },
+    {
+      "feature": "得",
+      "importance": 0.009916
+    },
+    {
+      "feature": "东西 到",
+      "importance": 0.009732
     },
     {
       "feature": "中转站",
-      "importance": 0.009005
+      "importance": 0.009354
     },
     {
       "feature": "到 急用",
+      "importance": 0.009253
+    },
+    {
+      "feature": "没 送到",
+      "importance": 0.009061
+    },
+    {
+      "feature": "出不来",
       "importance": 0.008962
     },
     {
-      "feature": "发出 但是",
-      "importance": 0.008507
+      "feature": "没揽收",
+      "importance": 0.008795
     }
   ],
   "quality": [
     {
       "feature": "就",
-      "importance": 0.017132
+      "importance": 0.021669
     },
     {
       "feature": "收到",
-      "importance": 0.01584
-    },
-    {
-      "feature": "收到 的",
-      "importance": 0.014436
+      "importance": 0.020881
     },
     {
       "feature": "包装",
-      "importance": 0.013861
+      "importance": 0.020471
     },
     {
-      "feature": "有",
-      "importance": 0.010133
-    },
-    {
-      "feature": "头疼",
-      "importance": 0.009664
-    },
-    {
-      "feature": "味道 特别",
-      "importance": 0.009225
-    },
-    {
-      "feature": "味道",
-      "importance": 0.009161
+      "feature": "收到 的",
+      "importance": 0.017045
     },
     {
       "feature": "质量",
-      "importance": 0.008962
+      "importance": 0.011863
     },
     {
-      "feature": "刺鼻 闻着",
-      "importance": 0.008766
-    },
-    {
-      "feature": "一次",
-      "importance": 0.008677
-    },
-    {
-      "feature": "闻着",
-      "importance": 0.008382
-    },
-    {
-      "feature": "特别 刺鼻",
-      "importance": 0.008197
-    },
-    {
-      "feature": "生产日期 是",
-      "importance": 0.008134
+      "feature": "和",
+      "importance": 0.011695
     },
     {
       "feature": "不",
-      "importance": 0.008006
+      "importance": 0.011323
+    },
+    {
+      "feature": "一次",
+      "importance": 0.010465
+    },
+    {
+      "feature": "完全",
+      "importance": 0.009892
+    },
+    {
+      "feature": "有",
+      "importance": 0.008883
+    },
+    {
+      "feature": "味道 特别",
+      "importance": 0.008686
+    },
+    {
+      "feature": "完全 不",
+      "importance": 0.00824
+    },
+    {
+      "feature": "刺鼻 闻着",
+      "importance": 0.007592
+    },
+    {
+      "feature": "收到 就是",
+      "importance": 0.007525
+    },
+    {
+      "feature": "已经 过期",
+      "importance": 0.007515
     }
   ],
   "after_sale": [
     {
       "feature": "退款",
-      "importance": 0.045062
+      "importance": 0.048015
     },
     {
       "feature": "退货",
-      "importance": 0.01872
-    },
-    {
-      "feature": "寄",
-      "importance": 0.018054
-    },
-    {
-      "feature": "我要",
-      "importance": 0.016749
-    },
-    {
-      "feature": "运费",
-      "importance": 0.014796
-    },
-    {
-      "feature": "寄 回去",
-      "importance": 0.013305
+      "importance": 0.020761
     },
     {
       "feature": "申请",
-      "importance": 0.012934
+      "importance": 0.017211
     },
     {
       "feature": "回去",
-      "importance": 0.0125
+      "importance": 0.015967
     },
     {
       "feature": "换货",
-      "importance": 0.012399
+      "importance": 0.014762
     },
     {
-      "feature": "我 不想",
-      "importance": 0.010589
+      "feature": "寄",
+      "importance": 0.014008
     },
     {
-      "feature": "不想",
-      "importance": 0.010391
+      "feature": "售后",
+      "importance": 0.013963
     },
     {
-      "feature": "我要 退款",
-      "importance": 0.010326
-    },
-    {
-      "feature": "了 退款",
-      "importance": 0.009508
-    },
-    {
-      "feature": "想 维修",
-      "importance": 0.009358
+      "feature": "运费",
+      "importance": 0.013346
     },
     {
       "feature": "一直 没",
-      "importance": 0.008872
+      "importance": 0.012641
+    },
+    {
+      "feature": "我要",
+      "importance": 0.011559
+    },
+    {
+      "feature": "寄 回去",
+      "importance": 0.011401
+    },
+    {
+      "feature": "退",
+      "importance": 0.010512
+    },
+    {
+      "feature": "了 退款",
+      "importance": 0.010507
+    },
+    {
+      "feature": "没 发货",
+      "importance": 0.008713
+    },
+    {
+      "feature": "维修",
+      "importance": 0.008301
     }
   ],
   "invoice": [
     {
       "feature": "发票",
-      "importance": 0.105545
+      "importance": 0.107329
     },
     {
       "feature": "开",
-      "importance": 0.022942
+      "importance": 0.024392
     },
     {
       "feature": "要",
-      "importance": 0.016208
+      "importance": 0.017941
     },
     {
       "feature": "重开",
-      "importance": 0.013776
+      "importance": 0.015036
     },
     {
       "feature": "写错",
-      "importance": 0.013775
+      "importance": 0.014136
     },
     {
       "feature": "写错 了",
-      "importance": 0.01278
-    },
-    {
-      "feature": "订单",
-      "importance": 0.012753
-    },
-    {
-      "feature": "发票 金额",
-      "importance": 0.012396
+      "importance": 0.014025
     },
     {
       "feature": "抬头",
-      "importance": 0.011574
+      "importance": 0.012448
+    },
+    {
+      "feature": "发票 金额",
+      "importance": 0.010239
+    },
+    {
+      "feature": "下载",
+      "importance": 0.009975
     },
     {
       "feature": "金额 和",
-      "importance": 0.009976
+      "importance": 0.008389
     },
     {
-      "feature": "金额",
-      "importance": 0.009607
-    },
-    {
-      "feature": "和 订单",
-      "importance": 0.008519
-    },
-    {
-      "feature": "订单 已经",
-      "importance": 0.008518
-    },
-    {
-      "feature": "金额 对不上",
-      "importance": 0.007617
+      "feature": "订单",
+      "importance": 0.00829
     },
     {
       "feature": "需要",
-      "importance": 0.007592
+      "importance": 0.00815
+    },
+    {
+      "feature": "开成",
+      "importance": 0.008126
+    },
+    {
+      "feature": "可以",
+      "importance": 0.007979
+    },
+    {
+      "feature": "不能 把",
+      "importance": 0.007955
     }
   ],
   "price_promo": [
     {
+      "feature": "结算",
+      "importance": 0.016679
+    },
+    {
       "feature": "满减",
-      "importance": 0.015279
+      "importance": 0.01546
     },
     {
       "feature": "活动",
-      "importance": 0.012496
-    },
-    {
-      "feature": "结算",
-      "importance": 0.01205
+      "importance": 0.015341
     },
     {
       "feature": "写",
-      "importance": 0.011131
+      "importance": 0.010293
     },
     {
-      "feature": "券",
-      "importance": 0.010767
+      "feature": "一笔 钱",
+      "importance": 0.010095
     },
     {
-      "feature": "我 一笔",
-      "importance": 0.010385
+      "feature": "折扣",
+      "importance": 0.009933
     },
     {
-      "feature": "算进去 少减",
-      "importance": 0.010011
+      "feature": "申请 规则",
+      "importance": 0.009284
     },
     {
-      "feature": "的 贵",
-      "importance": 0.009479
+      "feature": "了 我",
+      "importance": 0.009175
     },
     {
-      "feature": "钱 订单",
-      "importance": 0.008911
+      "feature": "保护 怎么",
+      "importance": 0.008894
+    },
+    {
+      "feature": "能补",
+      "importance": 0.008887
+    },
+    {
+      "feature": "的 券",
+      "importance": 0.008782
     },
     {
       "feature": "的 时候",
-      "importance": 0.008353
+      "importance": 0.008739
     },
     {
-      "feature": "没 算进去",
-      "importance": 0.008323
+      "feature": "买 的",
+      "importance": 0.008621
     },
     {
-      "feature": "保护",
-      "importance": 0.008194
+      "feature": "券 怎么",
+      "importance": 0.008446
     },
     {
-      "feature": "会员",
-      "importance": 0.008159
-    },
-    {
-      "feature": "我 买",
-      "importance": 0.008094
-    },
-    {
-      "feature": "突然 失效",
-      "importance": 0.007939
+      "feature": "的 满减",
+      "importance": 0.008406
     }
   ],
   "payment_account": [
     {
       "feature": "支付",
-      "importance": 0.044622
+      "importance": 0.049647
     },
     {
       "feature": "账号",
-      "importance": 0.022009
-    },
-    {
-      "feature": "手机号",
-      "importance": 0.015555
-    },
-    {
-      "feature": "收不到",
-      "importance": 0.014928
-    },
-    {
-      "feature": "验证码",
-      "importance": 0.014532
-    },
-    {
-      "feature": "想 改绑",
-      "importance": 0.0125
-    },
-    {
-      "feature": "收不到 验证码",
-      "importance": 0.012417
+      "importance": 0.027835
     },
     {
       "feature": "了",
-      "importance": 0.012225
+      "importance": 0.018775
     },
     {
-      "feature": "密码",
-      "importance": 0.012089
+      "feature": "验证码",
+      "importance": 0.015586
     },
     {
-      "feature": "改绑 手机号",
-      "importance": 0.011605
+      "feature": "收不到",
+      "importance": 0.014303
     },
     {
-      "feature": "支付 密码",
-      "importance": 0.010638
-    },
-    {
-      "feature": "密码 忘",
-      "importance": 0.010441
-    },
-    {
-      "feature": "重置",
-      "importance": 0.010239
-    },
-    {
-      "feature": "了 怎么",
-      "importance": 0.009996
+      "feature": "显示",
+      "importance": 0.013484
     },
     {
       "feature": "被",
-      "importance": 0.009837
+      "importance": 0.013064
+    },
+    {
+      "feature": "订单",
+      "importance": 0.012023
+    },
+    {
+      "feature": "想 改绑",
+      "importance": 0.011831
+    },
+    {
+      "feature": "改绑",
+      "importance": 0.011454
+    },
+    {
+      "feature": "支付 密码",
+      "importance": 0.011317
+    },
+    {
+      "feature": "手机号",
+      "importance": 0.010843
+    },
+    {
+      "feature": "重置",
+      "importance": 0.010596
+    },
+    {
+      "feature": "时候 一直",
+      "importance": 0.010359
+    },
+    {
+      "feature": "怎么 重置",
+      "importance": 0.010352
     }
   ],
   "consult": [
     {
       "feature": "这个",
-      "importance": 0.032723
+      "importance": 0.042592
     },
     {
       "feature": "吗",
-      "importance": 0.028661
+      "importance": 0.035366
     },
     {
       "feature": "多久",
-      "importance": 0.025139
-    },
-    {
-      "feature": "是 多久",
-      "importance": 0.016286
-    },
-    {
-      "feature": "的 保修期",
-      "importance": 0.01288
-    },
-    {
-      "feature": "保修期 是",
-      "importance": 0.012661
-    },
-    {
-      "feature": "怎么",
-      "importance": 0.011599
+      "importance": 0.020629
     },
     {
       "feature": "适合",
-      "importance": 0.011429
+      "importance": 0.015625
     },
     {
-      "feature": "教程",
-      "importance": 0.010623
+      "feature": "保修期 是",
+      "importance": 0.013373
     },
     {
-      "feature": "教程 吗",
-      "importance": 0.010453
+      "feature": "怎么",
+      "importance": 0.012694
     },
     {
-      "feature": "有 教程",
-      "importance": 0.010211
-    },
-    {
-      "feature": "安装",
-      "importance": 0.009361
+      "feature": "想 问下",
+      "importance": 0.012475
     },
     {
       "feature": "怎么 安装",
-      "importance": 0.009256
+      "importance": 0.011011
     },
     {
-      "feature": "充电 吗",
-      "importance": 0.009187
+      "feature": "是 多久",
+      "importance": 0.010079
+    },
+    {
+      "feature": "飞机",
+      "importance": 0.009899
+    },
+    {
+      "feature": "的 保修期",
+      "importance": 0.009679
+    },
+    {
+      "feature": "支持",
+      "importance": 0.009417
     },
     {
       "feature": "飞机 吗",
-      "importance": 0.009073
+      "importance": 0.009089
+    },
+    {
+      "feature": "无线 充电",
+      "importance": 0.008918
+    },
+    {
+      "feature": "问下",
+      "importance": 0.008895
     }
   ],
   "service": [
     {
       "feature": "客服",
-      "importance": 0.079866
-    },
-    {
-      "feature": "让",
-      "importance": 0.014066
+      "importance": 0.064365
     },
     {
       "feature": "态度",
-      "importance": 0.013973
+      "importance": 0.017053
     },
     {
       "feature": "让 我",
-      "importance": 0.013058
+      "importance": 0.015146
     },
     {
       "feature": "客服 说",
-      "importance": 0.008562
+      "importance": 0.01167
     },
     {
-      "feature": "问题",
-      "importance": 0.007989
+      "feature": "被 客服",
+      "importance": 0.011669
     },
     {
-      "feature": "问个问题",
-      "importance": 0.007971
+      "feature": "让",
+      "importance": 0.010795
     },
     {
-      "feature": "特别 差",
-      "importance": 0.007486
+      "feature": "我 自己",
+      "importance": 0.008431
     },
     {
-      "feature": "结果 一直",
-      "importance": 0.007478
+      "feature": "我",
+      "importance": 0.008135
     },
     {
-      "feature": "客服 态度",
-      "importance": 0.007207
+      "feature": "电话 一直",
+      "importance": 0.007832
     },
     {
-      "feature": "补发 结果",
-      "importance": 0.007056
+      "feature": "客服 答应",
+      "importance": 0.007741
+    },
+    {
+      "feature": "四个 客服",
+      "importance": 0.007669
     },
     {
       "feature": "答应 给",
-      "importance": 0.00705
-    },
-    {
-      "feature": "补发",
-      "importance": 0.006905
-    },
-    {
-      "feature": "另外 客服",
-      "importance": 0.006817
+      "importance": 0.007554
     },
     {
       "feature": "态度 特别",
-      "importance": 0.006741
+      "importance": 0.007541
+    },
+    {
+      "feature": "自己 看",
+      "importance": 0.007451
+    },
+    {
+      "feature": "特别 差",
+      "importance": 0.007377
     }
   ],
   "invalid": [
     {
       "feature": "了",
-      "importance": 0.024911
+      "importance": 0.031586
     },
     {
       "feature": "的",
-      "importance": 0.019973
-    },
-    {
-      "feature": "另外",
-      "importance": 0.015668
-    },
-    {
-      "feature": "不",
-      "importance": 0.015153
+      "importance": 0.022575
     },
     {
       "feature": "想",
-      "importance": 0.014534
+      "importance": 0.022134
     },
     {
-      "feature": "说",
-      "importance": 0.013995
-    },
-    {
-      "feature": "而且",
-      "importance": 0.013792
-    },
-    {
-      "feature": "还有",
-      "importance": 0.013572
-    },
-    {
-      "feature": "怎么",
-      "importance": 0.013531
-    },
-    {
-      "feature": "发票",
-      "importance": 0.012888
-    },
-    {
-      "feature": "测试",
-      "importance": 0.012348
-    },
-    {
-      "feature": "订单",
-      "importance": 0.01159
-    },
-    {
-      "feature": "有",
-      "importance": 0.010375
-    },
-    {
-      "feature": "在",
-      "importance": 0.010229
+      "feature": "不",
+      "importance": 0.019733
     },
     {
       "feature": "在 吗",
-      "importance": 0.010111
+      "importance": 0.017156
+    },
+    {
+      "feature": "说",
+      "importance": 0.016605
+    },
+    {
+      "feature": "怎么",
+      "importance": 0.015707
+    },
+    {
+      "feature": "测试",
+      "importance": 0.013915
+    },
+    {
+      "feature": "啊",
+      "importance": 0.013621
+    },
+    {
+      "feature": "用",
+      "importance": 0.013376
+    },
+    {
+      "feature": "吗",
+      "importance": 0.013188
+    },
+    {
+      "feature": "在",
+      "importance": 0.01242
+    },
+    {
+      "feature": "发票",
+      "importance": 0.01228
+    },
+    {
+      "feature": "有",
+      "importance": 0.011476
+    },
+    {
+      "feature": "和",
+      "importance": 0.011397
     }
   ],
   "_global": [
     {
       "feature": "发票",
-      "importance": 0.122768
-    },
-    {
-      "feature": "客服",
-      "importance": 0.087528
-    },
-    {
-      "feature": "退款",
-      "importance": 0.056857
+      "importance": 0.122999
     },
     {
       "feature": "了",
-      "importance": 0.055453
+      "importance": 0.073163
     },
     {
-      "feature": "支付",
-      "importance": 0.049381
+      "feature": "客服",
+      "importance": 0.070235
     },
     {
       "feature": "吗",
-      "importance": 0.044204
+      "importance": 0.060444
     },
     {
-      "feature": "的",
-      "importance": 0.042436
+      "feature": "退款",
+      "importance": 0.057466
+    },
+    {
+      "feature": "支付",
+      "importance": 0.053151
     },
     {
       "feature": "这个",
-      "importance": 0.039413
+      "importance": 0.049276
     },
     {
-      "feature": "订单",
-      "importance": 0.038365
-    },
-    {
-      "feature": "怎么",
-      "importance": 0.033368
+      "feature": "的",
+      "importance": 0.042597
     },
     {
       "feature": "不",
-      "importance": 0.030473
+      "importance": 0.037555
+    },
+    {
+      "feature": "怎么",
+      "importance": 0.036883
     },
     {
       "feature": "想",
-      "importance": 0.02968
+      "importance": 0.036316
     },
     {
-      "feature": "多久",
-      "importance": 0.029455
+      "feature": "订单",
+      "importance": 0.034053
     },
     {
-      "feature": "有",
-      "importance": 0.027693
+      "feature": "收到",
+      "importance": 0.031829
     },
     {
       "feature": "快递",
-      "importance": 0.026181
+      "importance": 0.030531
+    },
+    {
+      "feature": "就",
+      "importance": 0.030442
     }
   ]
 }

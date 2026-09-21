@@ -3,96 +3,95 @@
   "model": "rf-tfidf",
   "feature_mode": "word",
   "thresholds": {
-    "label": 0.3,
+    "label": 0.6,
     "global": 0.6
   },
-  "dev_micro_f1_before_tuning": 1.0,
+  "dev_micro_f1_before_tuning": 0.9988,
   "metrics": {
-    "micro_f1": 0.7574,
-    "micro_precision": 0.8949,
-    "micro_recall": 0.6565,
-    "macro_f1": 0.7656,
-    "subset_accuracy": 0.4333,
-    "hamming_loss": 0.086,
-    "jaccard_mean": 0.6392,
-    "avg_pred_labels": 1.349,
+    "micro_f1": 0.1448,
+    "micro_precision": 0.9527,
+    "micro_recall": 0.0784,
+    "macro_f1": 0.1561,
+    "subset_accuracy": 0.0724,
+    "hamming_loss": 0.1891,
+    "jaccard_mean": 0.1029,
+    "avg_pred_labels": 0.151,
     "avg_true_labels": 1.839,
-    "threshold": 0.3,
+    "threshold": 0.6,
     "num_samples": 20822,
     "per_label": [
       {
         "label": "logistics",
         "support": 5843,
-        "precision": 0.9538,
-        "recall": 0.6671,
-        "f1": 0.7851
+        "precision": 1.0,
+        "recall": 0.0392,
+        "f1": 0.0754
       },
       {
         "label": "quality",
         "support": 5045,
-        "precision": 0.9433,
-        "recall": 0.5671,
-        "f1": 0.7083
+        "precision": 1.0,
+        "recall": 0.0129,
+        "f1": 0.0254
       },
       {
         "label": "after_sale",
         "support": 5227,
-        "precision": 0.9596,
-        "recall": 0.7452,
-        "f1": 0.8389
+        "precision": 1.0,
+        "recall": 0.14,
+        "f1": 0.2457
       },
       {
         "label": "invoice",
         "support": 2935,
-        "precision": 0.9989,
-        "recall": 0.6286,
-        "f1": 0.7716
+        "precision": 1.0,
+        "recall": 0.0422,
+        "f1": 0.0811
       },
       {
         "label": "price_promo",
         "support": 3593,
-        "precision": 0.7864,
-        "recall": 0.6844,
-        "f1": 0.7318
+        "precision": 1.0,
+        "recall": 0.0306,
+        "f1": 0.0594
       },
       {
         "label": "payment_account",
         "support": 2576,
-        "precision": 0.9437,
-        "recall": 0.8261,
-        "f1": 0.881
+        "precision": 1.0,
+        "recall": 0.0516,
+        "f1": 0.0982
       },
       {
         "label": "consult",
         "support": 6691,
-        "precision": 0.9527,
-        "recall": 0.421,
-        "f1": 0.584
+        "precision": 1.0,
+        "recall": 0.016,
+        "f1": 0.0315
       },
       {
         "label": "service",
         "support": 4101,
-        "precision": 0.9548,
-        "recall": 0.7374,
-        "f1": 0.8321
+        "precision": 1.0,
+        "recall": 0.0446,
+        "f1": 0.0854
       },
       {
         "label": "invalid",
         "support": 2286,
-        "precision": 0.6215,
-        "recall": 0.9689,
-        "f1": 0.7573
+        "precision": 0.8984,
+        "recall": 0.5766,
+        "f1": 0.7024
       }
     ],
-    "auto_rate": 0.1888,
-    "reject_rate": 0.8112,
-    "avg_confidence": 0.4535,
-    "avg_activated_labels": 1.349,
+    "auto_rate": 0.1479,
+    "reject_rate": 0.8521,
+    "avg_confidence": 0.099,
+    "avg_activated_labels": 0.151,
     "reject_reason_dist": {
-      "no_label_activated": 2363,
-      "low_confidence": 14527
+      "no_label_activated": 17743
     },
-    "auto_micro_f1": 0.8379,
-    "auto_macro_f1": 0.7871
+    "auto_micro_f1": 0.7294,
+    "auto_macro_f1": 0.5922
   }
 }

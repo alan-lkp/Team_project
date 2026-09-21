@@ -32,9 +32,9 @@ import time
 
 import requests
 
-DEFAULT_IN = os.path.join("01-data", "test.txt")
-DEFAULT_OUT = os.path.join("01-data", "test_paraphrase.txt")
-DEFAULT_CACHE = os.path.join("tools", "paraphrase_cache", "test_aug.jsonl")
+DEFAULT_IN = os.path.join("01-data", "dev.txt")
+DEFAULT_OUT = os.path.join("01-data", "dev_paraphrase.txt")
+DEFAULT_CACHE = os.path.join("tools", "paraphrase_cache", "dev_aug.jsonl")
 BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 MODEL = "qwen-plus"
 TEMPERATURE = 0.8

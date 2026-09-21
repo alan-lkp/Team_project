@@ -35,6 +35,7 @@ for _p in (_STAGE_DIR, _PROJECT_ROOT):
         sys.path.insert(0, _p)
 
 from config import FTConfig                                              # noqa: E402
+from tools.ascii_path import readable, writable                          # noqa: E402
 from tools.ml_metrics import (compute_business_metrics, compute_metrics,  # noqa: E402
                               grid_search_thresholds, print_metrics)
 from tools.text_tokenize import clean_text, get_tokenizer                 # noqa: E402
@@ -83,26 +84,33 @@ def write_corpus(path, pairs, cfg, tokenizer):
 # todo 2. 训练
 # ============================================================
 def train_fasttext(corpus_path, cfg, mode):
-    """调 fasttext.train_supervised 训练多标签模型"""
+    """调 fasttext.train_supervised 训练多标签模型
+
+    corpus_path 必须由调用方传绝对路径: 以前这里硬编码 './data/train.ft.txt',
+    于是只有在 cd 进 03-fasttext 之后才跑得动, 从项目根目录跑就报
+    "cannot be opened for training"(文档里的标准跑法恰恰是从根目录).
+    readable() 再包一层: Windows 上 fasttext 的 C++ 层打不开含中文的路径, 见 tools/ascii_path.py.
+    """
     import fasttext
 
     minn, maxn = cfg.subword_range(mode)
-    model = fasttext.train_supervised(
-        input=corpus_path,
-        lr=cfg.lr,
-        dim=cfg.dim,
-        epoch=cfg.epoch,
-        wordNgrams=cfg.word_ngrams,
-        loss=cfg.loss,              # ova -> 每个标签独立 sigmoid, 不是 softmax
-        bucket=cfg.bucket,
-        minCount=cfg.min_count,
-        minCountLabel=cfg.min_count_label,
-        minn=minn,
-        maxn=maxn,
-        thread=cfg.thread,
-        seed=cfg.seed,
-        verbose=cfg.verbose,
-    )
+    with readable(corpus_path) as corpus:
+        model = fasttext.train_supervised(
+            input=corpus,
+            lr=cfg.lr,
+            dim=cfg.dim,
+            epoch=cfg.epoch,
+            wordNgrams=cfg.word_ngrams,
+            loss=cfg.loss,              # ova -> 每个标签独立 sigmoid, 不是 softmax
+            bucket=cfg.bucket,
+            minCount=cfg.min_count,
+            minCountLabel=cfg.min_count_label,
+            minn=minn,
+            maxn=maxn,
+            thread=cfg.thread,
+            seed=cfg.seed,
+            verbose=cfg.verbose,
+        )
     return model
 
 
@@ -235,7 +243,9 @@ def run(cfg, args):
     print('\n[6/6] 保存模型与产物 ...')
     os.makedirs(cfg.save_dir, exist_ok=True)
     os.makedirs(cfg.result_dir, exist_ok=True)
-    model.save_model(cfg.model_save_path)
+    # save_model 走的是同一个 C++ 文件接口, 中文路径同样打不开 -> 先写暂存再拷回来
+    with writable(cfg.model_save_path) as save_path:
+        model.save_model(save_path)
     print(f'  模型 -> {cfg.model_save_path} ({os.path.getsize(cfg.model_save_path) / 1024:.0f} KB)')
 
     meta = {

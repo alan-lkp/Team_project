@@ -25,6 +25,7 @@ import sys
 import threading
 import time
 from contextlib import contextmanager
+from datetime import datetime
 
 # 让脚本既能被 "python backend/common/store.py" 直接跑, 也能被 uvicorn 以包的形式导入
 _PROJECT_ROOT = os.path.dirname(
@@ -204,6 +205,7 @@ class RedisStore:
             client = redis.Redis(
                 host=self.cfg.redis_host,
                 port=self.cfg.redis_port,
+                #protocol=2,
                 db=self.cfg.redis_db,
                 password=self.cfg.redis_password or None,
                 socket_timeout=self.cfg.redis_timeout,
@@ -785,7 +787,16 @@ class Store:
         dates = day_list(7)
         trend_map = {d: 0 for d in dates}
         for t in tickets:
-            d = (t.get("created_at") or "")[:10]
+            created_at = t.get("created_at")
+
+            if isinstance(created_at, datetime):
+                d = created_at.strftime("%Y-%m-%d")
+            elif isinstance(created_at, str):
+                d = created_at[:10]
+            else:
+                d = ""
+
+            # d = (t.get('created_at') or '')[:10]
             if d in trend_map:
                 trend_map[d] += 1
 
