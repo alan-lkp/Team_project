@@ -139,7 +139,7 @@ def main():
         ok = os.path.exists(p)
         if ok and p.endswith('bert-base-chinese'):
             ok = os.path.exists(os.path.join(p, 'config.json')) and (
-                os.path.exists(os.path.join(p, 'pytorch_model.bin'))
+                os.path.exists(os.path.join(p, 'pytorch_model.bin')程)
                 or os.path.exists(os.path.join(p, 'model.safetensors')))
         print(f'    {name:<22}{"已就绪" if ok else "未生成/未放置"}  ({p})')
 

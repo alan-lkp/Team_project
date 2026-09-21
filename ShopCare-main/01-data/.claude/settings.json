@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/8_视频/项目/Team_project/ShopCare-main/docs/**)"
+    ],
+    "additionalDirectories": [
+      "D:\\8_视频\\项目\\数据扩展脚本"
+    ]
+  }
+}
