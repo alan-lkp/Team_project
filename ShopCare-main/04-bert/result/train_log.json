@@ -1,0 +1,23 @@
+{
+  "config": [
+    "  项目根目录   : c:/Users/吴贵/Desktop/work/Team_project/ShopCare-main/",
+    "  标签体系     : 9 类 -> logistics, quality, after_sale, invoice, price_promo, payment_account, consult, service, invalid",
+    "  预训练模型   : c:\\Users\\吴贵\\Desktop\\work\\Team_project\\ShopCare-main\\04-bert\\bert-base-chinese",
+    "  最大长度     : 96",
+    "  LoRA         : r=8, alpha=16, dropout=0.1, target=['query', 'value']",
+    "  训练         : epochs=1, batch=32, lr=0.0002, patience=2",
+    "  难例动态采样 : True (α=0.5, β=1.0, γ=0.8)",
+    "  拒识阈值     : 单标签 0.5 / 全局 0.8",
+    "  设备         : cuda"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.0788,
+      "dev_micro_f1": 1.0,
+      "dev_macro_f1": 1.0,
+      "dev_subset_accuracy": 1.0,
+      "seconds": 1187.9
+    }
+  ]
+}

@@ -117,7 +117,7 @@ def load_splits(data_dir=None, class_path=None):
     data_dir = data_dir or DATA_DIR
     class_list = load_class_list(class_path)
     splits = []
-    for name in ('train.txt', 'dev.txt', 'test.txt'):
+    for name in ('train.txt', 'dev.txt', 'test_paraphrase.txt'):
         splits.append(read_ticket_file(os.path.join(data_dir, name), class_list))
     return splits[0], splits[1], splits[2], class_list
 

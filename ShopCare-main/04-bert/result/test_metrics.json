@@ -1,0 +1,108 @@
+{
+  "micro_f1": 1.0,
+  "macro_f1": 1.0,
+  "subset_accuracy": 1.0,
+  "hamming_loss": 0.0,
+  "label_match_accuracy": 1.0,
+  "avg_true_labels": 1.837,
+  "avg_pred_labels": 1.837,
+  "per_label": {
+    "logistics": {
+      "support": 5870,
+      "pred": 5870,
+      "tp": 5870,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "quality": {
+      "support": 5059,
+      "pred": 5059,
+      "tp": 5059,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "after_sale": {
+      "support": 5254,
+      "pred": 5254,
+      "tp": 5254,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "invoice": {
+      "support": 2952,
+      "pred": 2952,
+      "tp": 2952,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "price_promo": {
+      "support": 3614,
+      "pred": 3614,
+      "tp": 3614,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "payment_account": {
+      "support": 2586,
+      "pred": 2587,
+      "tp": 2586,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.9996,
+      "recall": 1.0,
+      "f1": 0.9998
+    },
+    "consult": {
+      "support": 6726,
+      "pred": 6726,
+      "tp": 6726,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "service": {
+      "support": 4130,
+      "pred": 4130,
+      "tp": 4130,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "invalid": {
+      "support": 2315,
+      "pred": 2315,
+      "tp": 2315,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "samples": 20958,
+  "threshold": 0.5,
+  "auto_dispatch_rate": 1.0,
+  "reject_rate": 0.0,
+  "avg_confidence": 0.9999,
+  "avg_labels_per_ticket": 1.837,
+  "rejected_micro_f1": null
+}

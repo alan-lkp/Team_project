@@ -67,7 +67,7 @@ class Config:
         self.lora_target_modules = ['query', 'value']   # 注入注意力的 Q/V 投影
 
         # ==================== todo 5. 训练超参数 ====================
-        self.epochs = 5
+        self.epochs = 1
         self.batch_size = 32
         self.learning_rate = 2e-4            # LoRA 专用学习率(比全量微调高一个量级)
         self.weight_decay = 0.01

@@ -21,9 +21,14 @@ import os
 
 import torch
 import torch.nn as nn
-
-from lora_utils import (inject_lora, mark_only_lora_trainable, print_trainable_summary,
-                        get_lora_state_dict, save_lora, load_lora)
+from lora_utils import (
+    get_lora_state_dict,
+    inject_lora,
+    load_lora,
+    mark_only_lora_trainable,
+    print_trainable_summary,
+    save_lora,
+)
 
 
 # ============================================================
@@ -32,15 +37,16 @@ from lora_utils import (inject_lora, mark_only_lora_trainable, print_trainable_s
 def load_backbone_local(bert_dir):
     """从本地目录加载 BERT 主干; 目录不存在时给出可执行的修复提示(不联网下载)"""
     from transformers import BertModel
-    config_file = os.path.join(bert_dir, 'config.json')
+
+    config_file = os.path.join(bert_dir, "config.json")
     if not os.path.exists(config_file):
         raise SystemExit(
-            '[错误] 找不到本地预训练模型:\n'
-            f'    {bert_dir}\n'
-            f'    缺少 config.json\n'
-            '  修复方式(二选一):\n'
-            '    1) 把 bert-base-chinese 整个目录放到 04-bert/bert-base-chinese/ 下;\n'
-            '    2) 设置环境变量 BERT_MODEL_DIR 指向已有的本地模型目录.'
+            "[错误] 找不到本地预训练模型:\n"
+            f"    {bert_dir}\n"
+            f"    缺少 config.json\n"
+            "  修复方式(二选一):\n"
+            "    1) 把 bert-base-chinese 整个目录放到 04-bert/bert-base-chinese/ 下;\n"
+            "    2) 设置环境变量 BERT_MODEL_DIR 指向已有的本地模型目录."
         )
     # 传入本地目录时 transformers 不会联网下载
     return BertModel.from_pretrained(bert_dir)
@@ -69,7 +75,9 @@ class BertMultiLabelClassifier(nn.Module):
         self.num_labels = cfg.num_labels
 
         # 主干: 允许外部传入(便于 06-蒸馏 阶段复用同一份主干)
-        self.bert = backbone if backbone is not None else load_backbone_local(cfg.bert_dir)
+        self.bert = (
+            backbone if backbone is not None else load_backbone_local(cfg.bert_dir)
+        )
         hidden_size = self.bert.config.hidden_size
 
         # 注入 LoRA(可选): 只改 query/value 两个投影层
@@ -82,8 +90,10 @@ class BertMultiLabelClassifier(nn.Module):
                 alpha=cfg.lora_alpha,
                 dropout=cfg.lora_dropout,
             )
-            print(f'  [LoRA] 已注入 {len(self.lora_modules)} 个低秩旁路 '
-                  f'(r={cfg.lora_r}, alpha={cfg.lora_alpha})')
+            print(
+                f"  [LoRA] 已注入 {len(self.lora_modules)} 个低秩旁路 "
+                f"(r={cfg.lora_r}, alpha={cfg.lora_alpha})"
+            )
 
         # 多标签输出头
         self.dropout = nn.Dropout(p=cfg.dropout)
@@ -91,13 +101,13 @@ class BertMultiLabelClassifier(nn.Module):
 
         # 冻结主干, 只训练 LoRA + 分类头
         if cfg.use_lora:
-            mark_only_lora_trainable(self, extra_trainable=('classifier',))
+            mark_only_lora_trainable(self, extra_trainable=("classifier",))
             print_trainable_summary(self)
         else:
             # 对照组: 不注入 LoRA, 只冻结主干, 训练分类头
             for param in self.bert.parameters():
                 param.requires_grad = False
-            print('  [LoRA] 已关闭, 仅训练分类头(对照组设置)')
+            print("  [LoRA] 已关闭, 仅训练分类头(对照组设置)")
             print_trainable_summary(self)
 
     def forward(self, input_ids, attention_mask=None, token_type_ids=None):
@@ -122,16 +132,16 @@ class BertMultiLabelClassifier(nn.Module):
         """保存 LoRA 增量 + 分类头(主干权重复用本地预训练模型, 不重复保存)"""
         os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
         meta = {
-            'num_labels': self.num_labels,
-            'class_list': self.cfg.class_list,
-            'bert_dir': self.cfg.bert_dir,
-            'use_lora': self.cfg.use_lora,
-            'lora_r': self.cfg.lora_r,
-            'lora_alpha': self.cfg.lora_alpha,
-            'lora_target_modules': list(self.cfg.lora_target_modules),
-            'max_len': self.cfg.max_len,
-            'label_threshold': self.cfg.label_threshold,
-            'global_threshold': self.cfg.global_threshold,
+            "num_labels": self.num_labels,
+            "class_list": self.cfg.class_list,
+            "bert_dir": self.cfg.bert_dir,
+            "use_lora": self.cfg.use_lora,
+            "lora_r": self.cfg.lora_r,
+            "lora_alpha": self.cfg.lora_alpha,
+            "lora_target_modules": list(self.cfg.lora_target_modules),
+            "max_len": self.cfg.max_len,
+            "label_threshold": self.cfg.label_threshold,
+            "global_threshold": self.cfg.global_threshold,
         }
         meta.update(extra or {})
         save_lora(self, path, extra=meta)
@@ -149,7 +159,9 @@ def build_loss(cfg, pos_weight=None):
         pos_weight: (num_labels,) 张量; 传 None 表示各类等权
     """
     if pos_weight is not None:
-        pos_weight = pos_weight.to(cfg.device) if hasattr(pos_weight, 'to') else pos_weight
+        pos_weight = (
+            pos_weight.to(cfg.device) if hasattr(pos_weight, "to") else pos_weight
+        )
     return nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
 
@@ -157,7 +169,7 @@ def load_pos_weight(cfg, path=None):
     """从磁盘读取训练时保存的 pos_weight(推理阶段一般不需要, 仅评估复现时用)"""
     path = path or cfg.pos_weight_path
     if os.path.exists(path):
-        return torch.load(path, map_location='cpu')
+        return torch.load(path, map_location="cpu")
     return None
 
 
@@ -183,8 +195,8 @@ def load_trained_model(cfg, path=None, device=None):
     path = path or cfg.model_save_path
     if not os.path.exists(path):
         raise SystemExit(
-            f'[错误] 未找到训练好的模型: {path}\n'
-            f'       请先运行: python 04-bert/train_bert.py'
+            f"[错误] 未找到训练好的模型: {path}\n"
+            f"       请先运行: python 04-bert/train_bert.py"
         )
     model = BertMultiLabelClassifier(cfg)
     meta = load_lora(model, path, strict=False)
@@ -196,39 +208,48 @@ def load_trained_model(cfg, path=None, device=None):
 # ============================================================
 # todo 5. 自测
 # ============================================================
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from config import Config
 
     cfg = Config()
     problems = cfg.check_files(need_model=True)
     if problems:
-        print('=' * 72)
-        print('自测无法进行, 请先解决以下问题:')
+        print("=" * 72)
+        print("自测无法进行, 请先解决以下问题:")
         for p in problems:
-            print('  - ' + p)
-        print('=' * 72)
+            print("  - " + p)
+        print("=" * 72)
         sys.exit(0)
 
-    print('=' * 72)
-    print('多标签模型自测')
-    print('=' * 72)
+    print("=" * 72)
+    print("多标签模型自测")
+    print("=" * 72)
     model, criterion = build_model(cfg)
-    print(f'\n  模型结构: {type(model).__name__}, 类别数={model.num_labels}')
-    print(f'  损失函数: {criterion}')
+    print(f"\n  模型结构: {type(model).__name__}, 类别数={model.num_labels}")
+    print(f"  损失函数: {criterion}")
 
     # 造两条假输入, 验证前向形状与概率范围
     batch_size, seq_len = 2, cfg.max_len
     fake_input = {
-        'input_ids': torch.randint(0, 1000, (batch_size, seq_len)).to(cfg.device),
-        'attention_mask': torch.ones((batch_size, seq_len), dtype=torch.long).to(cfg.device),
-        'token_type_ids': torch.zeros((batch_size, seq_len), dtype=torch.long).to(cfg.device),
+        "input_ids": torch.randint(0, 1000, (batch_size, seq_len)).to(cfg.device),
+        "attention_mask": torch.ones((batch_size, seq_len), dtype=torch.long).to(
+            cfg.device
+        ),
+        "token_type_ids": torch.zeros((batch_size, seq_len), dtype=torch.long).to(
+            cfg.device
+        ),
     }
     model.eval()
     with torch.no_grad():
         logits = model(**fake_input)
         probs = model.predict_proba(**fake_input)
-    print(f'\n  logits 形状: {tuple(logits.shape)}  (期望 ({batch_size}, {cfg.num_labels}))')
-    print(f'  概率范围   : [{probs.min().item():.4f}, {probs.max().item():.4f}] (应落在 0~1)')
-    print('\n[OK] 模型自测通过(以上为随机权重输出, 不代表真实效果)')
+    print(
+        f"\n  logits 形状: {tuple(logits.shape)}  (期望 ({batch_size}, {cfg.num_labels}))"
+    )
+    print(
+        f"  概率范围   : [{probs.min().item():.4f}, {probs.max().item():.4f}] (应落在 0~1)"
+    )
+    print("\n[OK] 模型自测通过(以上为随机权重输出, 不代表真实效果)")

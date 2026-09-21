@@ -249,6 +249,7 @@ def run(cfg, args):
         if (args.grid_search or cfg.enable_grid_search)
         else [None]
     )
+    #设置最佳分数
     best = None
     for k, params in enumerate(params_list, 1):
         if params:
@@ -317,7 +318,7 @@ def run(cfg, args):
 
     # ---------- 5. 测试集评估 ----------
     print("\n[5/6] 测试集最终评估")
-    probs_test = predict_proba_matrix(vectorizer, estimators, constants, X_test_text)
+    probs_test = predict_proba_matrix(vectorizer, estimators, constants, texts=X_test_text)
     metrics = compute_metrics(
         Y_test, probs_test, class_list, threshold=cfg.label_threshold
     )

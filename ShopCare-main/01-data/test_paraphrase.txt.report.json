@@ -1,0 +1,10 @@
+{
+  "input": "01-data\\test.txt",
+  "total": 20822,
+  "processed": 20822,
+  "ok": 20,
+  "fail": 0,
+  "elapsed_s": 8.0,
+  "copy_ratio_flags": 0,
+  "failures": []
+}
