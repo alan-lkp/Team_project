@@ -121,43 +121,17 @@ def should_use_llm(decision, llm_enabled=True):
 # ============================================================
 # todo 4. 阈值标定辅助(在 dev 集上网格搜索最优阈值)
 # ============================================================
-def grid_search_thresholds(probs, y_true, class_list,
-                           label_candidates=(0.3, 0.4, 0.5, 0.6, 0.7),
-                           global_candidates=(0.6, 0.7, 0.75, 0.8, 0.85, 0.9),
-                           target_reject_rate=0.15):
-    """在验证集上网格搜索双阈值
-
-    目标: 在"拒识率不超过 target_reject_rate"的前提下, 让自动分流的 Micro-F1 尽量高.
-    返回: 候选结果列表(按 micro_f1 降序), 每项含阈值组合与对应指标.
-    """
-    from sklearn.metrics import f1_score
-    import numpy as _np
-
-    yt = _np.asarray(y_true.tolist() if hasattr(y_true, 'tolist') else y_true).astype(int)
-    results = []
-    for label_thr in label_candidates:
-        for global_thr in global_candidates:
-            decisions = [decide(row, class_list, label_thr, global_thr)
-                         for row in (probs.tolist() if hasattr(probs, 'tolist') else probs)]
-            keep = [i for i, d in enumerate(decisions) if not d['rejected']]
-            reject_rate = 1 - len(keep) / max(len(decisions), 1)
-            if not keep:
-                continue
-            yp = _np.zeros_like(yt)
-            for i in keep:
-                for name in decisions[i]['labels']:
-                    yp[i, class_list.index(name)] = 1
-            micro = f1_score(yt[keep], yp[keep], average='micro', zero_division=0)
-            results.append({
-                'label_threshold': label_thr,
-                'global_threshold': global_thr,
-                'reject_rate': round(reject_rate, 4),
-                'auto_micro_f1': round(float(micro), 4),
-                'auto_samples': len(keep),
-                'feasible': reject_rate <= target_reject_rate,
-            })
-    results.sort(key=lambda r: (r['feasible'], r['auto_micro_f1']), reverse=True)
-    return results
+# 说明: 这里原来有一份**独立的** grid_search_thresholds(全局阈值候选写死 0.6~0.9)。
+# 已经删掉, 原因有两个:
+#   1. 它是死代码 —— 训练脚本从来没有调用过它, 阈值一直用的是 config 里的固定 0.5/0.8;
+#   2. 那份实现带着一个真实的坑: 全局阈值候选写死 0.6~0.9, 遇到概率尺度偏低的模型
+#      (比如 RF, 激活标签的平均置信度只有 0.4 上下)会**一个组合都搜不出来**,
+#      上层于是静默退回默认阈值, 跑出"拒识率 100%"这种结果。
+#
+# 现在统一用 tools/ml_metrics.py 里的实现(候选按模型实际置信度分布自适应生成),
+# 02-rf / 03-fasttext / 04-bert 三套模型共用同一套标定口径:
+#
+#     from tools.ml_metrics import grid_search_thresholds
 
 
 # ============================================================

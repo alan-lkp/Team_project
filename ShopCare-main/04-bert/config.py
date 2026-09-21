@@ -57,7 +57,10 @@ class Config:
             'BERT_MODEL_DIR',
             os.path.join(PROJECT_ROOT, '04-bert', 'bert-base-chinese')
         )
-        self.max_len = 96          # 工单多为短文本, 96 足够; 由 data_eda 的截断比例决定是否需要调大
+        # 工单多为短文本。当前语料最长 67 字(中位 17 字), 64 只会截断极少数长样本,
+        # 但 CPU 上能明显提速(注意力开销随序列长度增长)。数据换了记得回来核对一下
+        # 最长长度: 用 01-data/data_eda.py 或 check_dataset.py 都能看。
+        self.max_len = 64
 
         # ==================== todo 4. LoRA 参数 ====================
         self.use_lora = True                 # 关掉即退化为"冻结主干 + 只训分类头"的对照组
@@ -67,6 +70,12 @@ class Config:
         self.lora_target_modules = ['query', 'value']   # 注入注意力的 Q/V 投影
 
         # ==================== todo 5. 训练超参数 ====================
+        # epochs=2 是**按本机训练成本定的**, 不是调优结果:
+        # 这台机器只有 CPU(torch 2.14.0+cpu), 实测单步约 4.7s(bs=32, max_len=64),
+        # 10 万条 = 3125 步/轮 -> 一轮就要约 4 小时, 5 轮要 20 小时。
+        # 降到 2 轮约 8 小时。**有 GPU 的话请调回 4~5 轮**, LoRA 通常需要更多轮才收敛。
+        # 想再快只能降数据量(比如改用 2 万条子集, 约 1.6 小时), 但那样要同步说明
+        # "BERT 是在子集上训的", 以免和另两套模型的对照产生误解。
         self.epochs = 5
         self.batch_size = 32
         self.learning_rate = 2e-4            # LoRA 专用学习率(比全量微调高一个量级)
@@ -84,8 +93,13 @@ class Config:
         self.hard_w_max = 5.0                # 单样本权重上限(防止个别难例主导训练)
 
         # ==================== todo 7. 双阈值拒识(创新点 2) ====================
+        # 下面两个是**初始值**。训练脚本会在 dev 上网格搜索把它们覆盖掉
+        # (与 02-rf / 03-fasttext 共用 tools/ml_metrics.grid_search_thresholds),
+        # 随模型一起存进产物, 所以推理时读到的是标定后的值。
         self.label_threshold = float(os.environ.get('LABEL_THRESHOLD', 0.5))    # 单标签激活阈值
         self.global_threshold = float(os.environ.get('GLOBAL_THRESHOLD', 0.8))  # 全局平均置信度阈值
+        # 拒识率上限: 标定阈值时的业务约束, 与另两个模型的 config 保持一致
+        self.target_reject_rate = 0.15
 
         # ==================== todo 8. 设备 ====================
         # 延迟导入 torch: 让"只想看配置"的场景不必装 torch

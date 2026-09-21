@@ -72,6 +72,10 @@ class TicketPredictor:
         self.tokenizer = None
         self.model = None
         self.llm = None
+        self.meta = {}
+        # 概率校准器(训练时在 dev 上拟合)。和 02-rf / 03-fasttext 用同一套口径,
+        # 否则三套模型的"置信度"不可比 —— BERT 的 sigmoid 输出本身也会偏自信。
+        self.calibration = None
         self._loaded = False
         self.load_error = None
         self.load_seconds = None
@@ -89,6 +93,17 @@ class TicketPredictor:
 
             self.tokenizer = load_tokenizer(self.cfg)
             self.model, self.meta = load_trained_model(self.cfg)
+            # 校准器存在模型包的 meta 里(训练脚本写进去的)。
+            # 老产物没有这个字段 -> 退化成原始概率, 不报错; 重训一次即可。
+            self.calibration = self.meta.get('calibration')
+            # 训练时在 dev 上标定好的阈值优先于 config 的默认值。
+            # 少了这一步, 即使训练端标定了阈值, 线上用的还是 config 里的 0.5/0.8,
+            # 报告里的自动分流率/拒识率就和实际运行对不上。
+            # (02-rf / 03-fasttext 的推理端一直是这么做的, BERT 这边原本漏了)
+            if self.meta.get('label_threshold') is not None:
+                self.cfg.label_threshold = float(self.meta['label_threshold'])
+            if self.meta.get('global_threshold') is not None:
+                self.cfg.global_threshold = float(self.meta['global_threshold'])
             self._loaded = True
             self.load_error = None
         except SystemExit as exc:                          # 模型缺失时给出明确原因
@@ -115,6 +130,7 @@ class TicketPredictor:
             'llm_disabled_reason': (self.llm.disable_reason if self.llm else 'LLM 兜底未初始化'),
             'label_threshold': self.cfg.label_threshold,
             'global_threshold': self.cfg.global_threshold,
+            'calibrated': bool(self.calibration),
         }
 
     # ---------------- 核心预测 ----------------
@@ -156,6 +172,12 @@ class TicketPredictor:
         with torch.no_grad():
             probs = self.model.predict_proba(input_ids, attention_mask, token_type_ids)[0].cpu()
 
+        # 2b. 概率校准(与 02-rf / 03-fasttext 同一套口径, 都在 dev 上拟合)
+        if self.calibration:
+            from tools.prob_calibration import apply_calibrators
+            probs = torch.tensor(apply_calibrators(probs.numpy().reshape(1, -1),
+                                                   self.calibration)[0], dtype=probs.dtype)
+
         # 3. 双阈值拒识判定
         decision = decide(probs, self.cfg.class_list,
                           label_threshold=self.cfg.label_threshold,
@@ -174,6 +196,10 @@ class TicketPredictor:
             'llm_reason': None,
             'need_human_review': decision['rejected'],
             'resolved_by': 'model' if not decision['rejected'] else 'human',
+            # 与 02-rf / 03-fasttext 的返回契约保持一致: 既要 top_k, 也要**全部**标签的
+            # 分数。少了 all_scores, 前端"9 类置信度分布"对 BERT 会永远画成空槽,
+            # 而且 backend 的字段自检(RESULT_KEYS)会直接断言失败。
+            'all_scores': dict(decision['all_scores']),
             'top_k_scores': self._top_k(decision['all_scores'], top_k),
             'latency_ms': 0.0,
         }
@@ -191,6 +217,9 @@ class TicketPredictor:
                 result['llm_reason'] = llm_result['reason']
                 result['need_human_review'] = False
                 result['resolved_by'] = 'llm'
+                # 结论已由 LLM 给出, 本地模型的 9 类分布不再对应当前结论 -> 清掉,
+                # 避免前端画出一张与激活标签对不上的图
+                result['all_scores'] = {}
             else:
                 result['llm_fallback'] = True          # 尝试过兜底但失败
                 result['llm_reason'] = 'LLM 兜底解析失败, 已转人工复核'

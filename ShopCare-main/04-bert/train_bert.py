@@ -33,16 +33,26 @@ import random
 import sys
 import time
 
+import numpy as np
 import torch
 
 # 让脚本无论从哪个目录启动, 都能 import 同目录下的模块
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# 项目根目录: 为了用 tools/ 下共享的概率校准与阈值标定(与 02-rf / 03-fasttext 同一套,
+# 否则三套模型的"置信度"和"拒识阈值"口径不一致, 对照表就没法比)
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 
 from config import Config
 from dataloader_utils import build_all_dataloader, compute_pos_weight, load_tokenizer
 from hard_example_sampler import HardExampleSampler
-from model2dev_utils import compute_metrics, run_inference, save_metrics, print_metrics
+from model2dev_utils import (_to_np, compute_metrics, run_inference,
+                             save_metrics, print_metrics)
 from multilabel_model import BertMultiLabelClassifier, build_loss, build_model
+from tools.ml_metrics import grid_search_thresholds                        # noqa: E402
+from tools.prob_calibration import (apply_calibrators, fit_calibrators,   # noqa: E402
+                                    summary as calibration_summary)
 
 
 def str2bool(value):
@@ -106,7 +116,9 @@ def main():
     if args.batch_size is not None:
         cfg.batch_size = args.batch_size
     if args.lr is not None:
-        cfg.lr = args.lr
+        # 注意属性名是 learning_rate —— config 里没有 lr 这个字段。
+        # 原来写的是 cfg.lr, 于是 --lr 传了也静默无效(优化器读的是 cfg.learning_rate)。
+        cfg.learning_rate = args.lr
     cfg.use_lora = str2bool(args.use_lora)
     cfg.use_hard_sampling = str2bool(args.use_hard_sampling)
     dry_run = str2bool(args.dry_run)
@@ -224,16 +236,58 @@ def main():
 
     print(f'\n[5/6] 训练结束: 最优 epoch={best_epoch}, dev Micro-F1={best_micro_f1:.4f}')
 
-    # todo 7. 用最优权重在测试集上做最终评估
-    print('\n[6/6] 加载最优模型, 在测试集上评估...')
+    # todo 7. 概率校准 + 双阈值标定 + 测试集最终评估
+    print('\n[6/6] 加载最优模型, 在 dev 上校准概率并标定阈值...')
     from multilabel_model import load_trained_model
     best_model, meta = load_trained_model(cfg, cfg.model_save_path)
+
+    # ---- 6.1 概率校准: 只在 dev 上拟合, test 不参与 ----
+    # 与 02-rf / 03-fasttext 用同一套工具, 保证三套模型的"置信度"可比。
+    # BERT 的 sigmoid 输出同样会偏自信, 不校准的话对照表里的"平均置信度"又是鸡同鸭讲。
+    dev_probs, dev_true, _ = run_inference(best_model, dev_loader, cfg)
+    dev_probs = np.asarray(_to_np(dev_probs))
+    dev_true = np.asarray(_to_np(dev_true))
+    calibration = fit_calibrators(dev_probs, dev_true, cfg.class_list)
+    dev_probs_cal = apply_calibrators(dev_probs, calibration)
+
+    # ---- 6.2 双阈值标定(业务约束: 拒识率 <= target_reject_rate) ----
+    print(f'  在 dev 上网格搜索双阈值(目标拒识率 <= {cfg.target_reject_rate:.0%}) ...')
+    grid = grid_search_thresholds(dev_probs_cal, dev_true, cfg.class_list,
+                                  target_reject_rate=cfg.target_reject_rate)
+    if grid:
+        top = grid[0]
+        cfg.label_threshold = top['label_threshold']
+        cfg.global_threshold = top['global_threshold']
+        print(f"  候选组合 {len(grid)} 个, 最优: 单标签阈值 {top['label_threshold']} / "
+              f"全局阈值 {top['global_threshold']}")
+        print(f"  -> 自动分流率 {top['auto_rate']:.2%}, 拒识率 {top['reject_rate']:.2%}, "
+              f"自动分流 Micro-F1 {top['auto_micro_f1']}")
+    else:
+        print('  [警告] 没有组合能满足拒识率上限, 保持默认阈值 '
+              f'({cfg.label_threshold}/{cfg.global_threshold})')
+
+    # ---- 6.3 把校准器与标定后的阈值写回模型产物 ----
+    # 推理端(bert_predict_fun)会从 meta 里读这两样, 保证线上线下同一口径
+    best_model.save(cfg.model_save_path, extra={
+        'calibration': calibration,
+        'tuned_on': 'dev',
+        'tuned_target_reject_rate': cfg.target_reject_rate,
+    })
+    print(f'  校准器与标定阈值已写回 -> {cfg.model_save_path}')
+
+    # ---- 6.4 测试集最终评估(用校准后的概率) ----
     if test_loader is not None:
         probs, y_true, _ = run_inference(best_model, test_loader, cfg)
-        test_metrics = compute_metrics(y_true, probs, cfg.class_list, threshold=cfg.label_threshold)
+        probs = np.asarray(_to_np(probs))
+        y_true = np.asarray(_to_np(y_true))
+        probs_cal = apply_calibrators(probs, calibration)
+        print(calibration_summary(probs, probs_cal, y_true, calibration,
+                                  '04-bert 概率校准效果(在 test 上评估)'))
+        test_metrics = compute_metrics(y_true, probs_cal, cfg.class_list,
+                                       threshold=cfg.label_threshold)
         test_metrics['threshold'] = cfg.label_threshold
         from model2dev_utils import compute_business_metrics
-        test_metrics.update(compute_business_metrics(probs, y_true, cfg, cfg.class_list))
+        test_metrics.update(compute_business_metrics(probs_cal, y_true, cfg, cfg.class_list))
         print_metrics(test_metrics, title='测试集最终指标')
         save_metrics(test_metrics, os.path.join(cfg.result_dir, 'test_metrics.json'))
     else:
