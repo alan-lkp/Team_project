@@ -86,7 +86,7 @@
     ],
     "auto_rate": 1.0,
     "reject_rate": 0.0,
-    "avg_confidence": 0.9689,
+    "avg_confidence": 0.9685,
     "avg_activated_labels": 1.552,
     "reject_reason_dist": {},
     "auto_micro_f1": 1.0,

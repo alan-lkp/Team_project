@@ -8,6 +8,7 @@ ShopCare 数据探索分析 (EDA) —— 01-data 阶段
       3. 标签共现矩阵: 哪些标签经常一起出现(多标签任务的直接证据);
       4. 文本长度分布: 用于确定 BERT 的 max_len 取值(避免过多截断).
     同时做基础异常检测: 空行、未知标签、超长文本、重复文本.
+    新增: 自动剔除重复文本, 并生成 *_dedup.txt 文件.
 
 设计说明:
     只依赖 Python 标准库 —— 这样在"还没装 pandas/torch 的环境"里也能先跑起来做数据体检,
@@ -46,6 +47,17 @@ def load_dataset(path):
     return rows
 
 
+def deduplicate_dataset(rows):
+    """基于文本内容去重"""
+    seen = set()
+    dedup_rows = []
+    for text, labels in rows:
+        if text not in seen:
+            seen.add(text)
+            dedup_rows.append((text, labels))
+    return dedup_rows, len(rows) - len(dedup_rows)
+
+
 def percentile(sorted_values, p):
     """计算分位数(不依赖 numpy 的轻量实现)"""
     if not sorted_values:
@@ -55,17 +67,31 @@ def percentile(sorted_values, p):
     return sorted_values[low] + (sorted_values[high] - sorted_values[low]) * (k - low)
 
 
-def analyze(name, path, class_list, max_len=96, top_combos=10):
+def analyze(name, path, class_list, max_len=96, top_combos=10, save_dedup=True):
     """对单个数据集做完整分析并打印报告"""
     if not os.path.exists(path):
         print(f'\n[{name}] 文件不存在: {path}')
         return None
 
     rows = load_dataset(path)
-    total = len(rows)
-    if total == 0:
+    raw_total = len(rows)
+    if raw_total == 0:
         print(f'\n[{name}] 文件为空')
         return None
+
+    # ================= 新增：去重逻辑 =================
+    rows, dup_count = deduplicate_dataset(rows)
+    total = len(rows)
+
+    if dup_count > 0:
+        print(f'\n[{name}] 发现并剔除了 {dup_count} 条重复文本。')
+        if save_dedup:
+            out_path = os.path.join(DATA_DIR, f'{name}_dedup.txt')
+            with open(out_path, 'w', encoding='utf-8') as f:
+                for text, labels in rows:
+                    f.write(f"{text}\t{','.join(labels)}\n")
+            print(f'[{name}] 去重后的数据已保存至: {out_path}')
+    # =================================================
 
     label_counter = Counter()
     combo_counter = Counter()
@@ -87,7 +113,7 @@ def analyze(name, path, class_list, max_len=96, top_combos=10):
     over_max = sum(1 for x in lengths if x > max_len)
 
     print('\n' + '=' * 72)
-    print(f'[{name}] {path}')
+    print(f'[{name}] {path} (原始 {raw_total} 条, 去重后 {total} 条)')
     print('=' * 72)
     print(f'样本条数      : {total}')
     print(f'平均标签数    : {avg_labels:.3f}   (多标签任务参考区间 1.6 ~ 2.2)')
@@ -131,13 +157,11 @@ def analyze(name, path, class_list, max_len=96, top_combos=10):
     print(f'  超过 max_len({max_len}) 的样本: {over_max} 条 ({over_max / total * 100:.1f}%)'
           f'  —— 占比高则应调大 max_len 或做截断策略')
 
-    print('\n--- 5. 异常检测 ---')
-    dup = Counter(t for t, _ in rows)
-    dup_items = [(t, c) for t, c in dup.items() if c > 1]
-    print(f'  重复文本: {len(dup_items)} 种(共 {sum(c for _, c in dup_items)} 条)')
-    print(f'  未知标签: {dict(unknown) if unknown else "无"}')
+    print('\n--- 5. 异常检测 (基于去重后数据) ---')
+    # 此时去重后，重复文本理论上为 0，保留此块用于检测无标签行和未知标签
     empty_label_rows = sum(1 for _, l in rows if not l)
     print(f'  无标签行: {empty_label_rows}')
+    print(f'  未知标签: {dict(unknown) if unknown else "无"}')
 
     return {
         'total': total,
@@ -151,6 +175,7 @@ def main():
     parser = argparse.ArgumentParser(description='ShopCare 数据探索分析(EDA)')
     parser.add_argument('--max_len', type=int, default=96, help='BERT 最大长度, 用于统计截断比例')
     parser.add_argument('--files', type=str, default='train,dev,test', help='要分析的数据集名(逗号分隔)')
+    parser.add_argument('--no_save', action='store_true', help='加上此参数则不保存去重后的文件，仅在内存中分析')
     args = parser.parse_args()
 
     class_path = os.path.join(DATA_DIR, 'class.txt')
@@ -164,7 +189,9 @@ def main():
     print('=' * 72)
 
     for name in [x.strip() for x in args.files.split(',') if x.strip()]:
-        analyze(name, os.path.join(DATA_DIR, f'{name}.txt'), class_list, max_len=args.max_len)
+        # 传参控制是否保存去重文件
+        analyze(name, os.path.join(DATA_DIR, f'{name}.txt'), class_list,
+                max_len=args.max_len, save_dedup=not args.no_save)
 
     print('\n' + '=' * 72)
     print('EDA 完成。若某类样本极少(长尾标签), 训练时请在损失函数中提高其 pos_weight。')
