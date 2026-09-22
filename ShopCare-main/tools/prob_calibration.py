@@ -67,7 +67,11 @@ platt 于是拟合出一条极陡的曲线来迁就这条尾部(实测 a=7.19), 
     isotonic                 0.0239    1.000     0.9610
     equal_freq(20箱 prior=20) 0.0251    0.963       (无此档)
 
-`auto` 会把三种都拟合一遍, 按 dev 上的对数损失挑最好的。
+方法必须**显式指定**, 不提供"自动挑一个"的选项。原因: 唯一客观的挑选标准是 dev 上的
+对数损失, 而实测这个标准会选中 isotonic —— 它在 dev 上确实最低, 但代价是把 dev 里恰好
+100% 命中的分箱直接映射成 1.000, 换到 test 上就成了新的过度自信(2.3% 的标签输出正好
+1.0, 而 platt 只有 0.3%)。用一个会在评测集上变差的指标去自动选校准器, 不如按每个模型
+自己的输出分布手工定一个, 而且在报告里说得清"哪套模型用了哪种方法、为什么"。
 
 用法
 ====
@@ -92,7 +96,7 @@ import numpy as np
 # 校准器内部对概率做 logit 变换前先截断, 避免 log(0) = -inf
 _EPS = 1e-6
 
-METHODS = ('auto', 'platt', 'isotonic', 'equal_freq')
+METHODS = ('platt', 'isotonic', 'equal_freq')
 
 
 def _logit(p):
@@ -252,7 +256,9 @@ def fit_calibrators(probs, y_true, class_list=None, method='platt',
                     n_bins=20, prior=20.0):
     """在验证集上为每个标签拟合校准器。
 
-    method: 'platt' / 'isotonic' / 'equal_freq' / 'auto'(三种都试, 按对数损失选更好的)
+    method: 'platt' / 'isotonic' / 'equal_freq', **必须显式指定**(没有自动挑选, 理由见模块
+            docstring)。当前三个调用点: 02-rf 显式用 'equal_freq', 03-fasttext 与 04-bert 用
+            默认的 'platt'。
     n_bins, prior: 仅 'equal_freq' 使用 —— 分箱数与平滑先验的等效样本数。
    返回一个 JSON 可序列化的 dict。
     """
@@ -267,46 +273,25 @@ def fit_calibrators(probs, y_true, class_list=None, method='platt',
 
     n_labels = probs.shape[1]
     names = list(class_list) if class_list is not None else [str(i) for i in range(n_labels)]
-    chosen = method
     calibrators = []
     per_label = []
 
-    # 'auto' 需要先把三种方法都拟合出来, 再统一比较, 所以这里分两轮
-    candidates = {}
-    for kind in ('platt', 'isotonic', 'equal_freq'):
-        if method not in ('auto', kind):
-            continue
-        params_list = []
-        for i in range(n_labels):
-            if kind == 'platt':
-                params = _fit_platt(probs[:, i], y_true[:, i])
-            elif kind == 'isotonic':
-                params = _fit_isotonic(probs[:, i], y_true[:, i])
-            else:
-                params = _fit_binned(probs[:, i], y_true[:, i], n_bins, prior)
-            if params:
-                params = dict(params, kind=kind)
-            params_list.append(params)
-        candidates[kind] = params_list
+    for i in range(n_labels):
+        if method == 'platt':
+            params = _fit_platt(probs[:, i], y_true[:, i])
+        elif method == 'isotonic':
+            params = _fit_isotonic(probs[:, i], y_true[:, i])
+        else:
+            params = _fit_binned(probs[:, i], y_true[:, i], n_bins, prior)
 
-    if method == 'auto':
-        scores = {}
-        for kind, params_list in candidates.items():
-            calib = {'method': kind, 'calibrators': params_list}
-            scores[kind] = _log_loss(apply_calibrators(probs, calib), y_true)
-        chosen = min(scores, key=scores.get)
-        reason = ', '.join(f'{k}={v:.4f}' for k, v in scores.items())
-    else:
-        reason = f'指定 {method}'
-
-    for i, params in enumerate(candidates[chosen]):
         if params:
+            params = dict(params, kind=method)
             calibrators.append(params)
             lo, hi = float(probs[:, i].min()), float(probs[:, i].max())
             # equal_freq 额外记下分箱数与平滑先验, 便于复现和排查
             extra = ({'n_bins': params['n_bins'], 'prior': params['prior']}
-                     if params['kind'] == 'equal_freq' else {})
-            per_label.append({'label': names[i], 'kind': params['kind'],
+                     if method == 'equal_freq' else {})
+            per_label.append({'label': names[i], 'kind': method,
                               'raw_range': [round(lo, 4), round(hi, 4)], **extra})
         else:
             calibrators.append(None)
@@ -314,8 +299,8 @@ def fit_calibrators(probs, y_true, class_list=None, method='platt',
                               'note': '训练集里该标签只有单一类别, 不校准'})
 
     return {
-        'method': chosen,
-        'method_reason': reason,
+        'method': method,
+        'method_reason': '显式指定',
         'calibrators': calibrators,
         'per_label': per_label,
     }
