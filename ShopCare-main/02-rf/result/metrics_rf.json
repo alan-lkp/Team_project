@@ -3,175 +3,193 @@
   "model": "rf-tfidf",
   "feature_mode": "word",
   "thresholds": {
-    "label": 0.4,
-    "global": 0.455
+    "label": 0.35,
+    "global": 0.39
   },
-  "dev_micro_f1_before_tuning": 0.3701,
+  "dev_micro_f1_before_tuning": 0.3887,
   "calibration": {
-    "method": "platt",
-    "ece_raw": 0.1231,
-    "ece_calibrated": 0.014,
+    "method": "equal_freq",
+    "ece_raw": 0.1968,
+    "ece_calibrated": 0.0198,
     "per_label": [
       {
         "label": "logistics",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.0779,
-          0.6622
-        ]
+          0.2153,
+          0.6251
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "quality",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.0572,
-          0.6772
-        ]
+          0.1718,
+          0.5462
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "after_sale",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.1012,
-          0.6973
-        ]
+          0.2318,
+          0.6548
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "invoice",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.077,
-          0.7063
-        ]
+          0.2095,
+          0.6567
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "price_promo",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.0933,
-          0.5008
-        ]
+          0.2184,
+          0.5453
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "payment_account",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.053,
-          0.7121
-        ]
+          0.1607,
+          0.7301
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "consult",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.0469,
-          0.7213
-        ]
+          0.1346,
+          0.6575
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "service",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.0682,
-          0.6282
-        ]
+          0.1625,
+          0.6127
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       },
       {
         "label": "invalid",
-        "kind": "platt",
+        "kind": "equal_freq",
         "raw_range": [
-          0.001,
-          0.7683
-        ]
+          0.0341,
+          0.6696
+        ],
+        "n_bins": 20,
+        "prior": 20.0
       }
     ]
   },
   "metrics": {
-    "micro_f1": 0.6701,
-    "micro_precision": 0.7164,
-    "micro_recall": 0.6294,
-    "macro_f1": 0.6669,
-    "subset_accuracy": 0.4014,
-    "hamming_loss": 0.1011,
-    "jaccard_mean": 0.5581,
-    "avg_pred_labels": 1.29,
+    "micro_f1": 0.6533,
+    "micro_precision": 0.6557,
+    "micro_recall": 0.6509,
+    "macro_f1": 0.6536,
+    "subset_accuracy": 0.3645,
+    "hamming_loss": 0.1127,
+    "jaccard_mean": 0.5448,
+    "avg_pred_labels": 1.458,
     "avg_true_labels": 1.468,
-    "threshold": 0.4,
+    "threshold": 0.35,
     "num_samples": 8000,
     "per_label": [
       {
         "label": "logistics",
         "support": 1674,
-        "precision": 0.6905,
-        "recall": 0.3172,
-        "f1": 0.4347
+        "precision": 0.5602,
+        "recall": 0.4922,
+        "f1": 0.524
       },
       {
         "label": "quality",
         "support": 1387,
-        "precision": 0.6326,
-        "recall": 0.4816,
-        "f1": 0.5469
+        "precision": 0.676,
+        "recall": 0.4888,
+        "f1": 0.5674
       },
       {
         "label": "after_sale",
         "support": 1474,
-        "precision": 0.6551,
-        "recall": 0.8209,
-        "f1": 0.7287
+        "precision": 0.6166,
+        "recall": 0.8324,
+        "f1": 0.7084
       },
       {
         "label": "invoice",
         "support": 835,
-        "precision": 0.9761,
-        "recall": 0.8323,
-        "f1": 0.8985
+        "precision": 0.9795,
+        "recall": 0.6874,
+        "f1": 0.8079
       },
       {
         "label": "price_promo",
         "support": 997,
-        "precision": 0.6512,
-        "recall": 0.5787,
-        "f1": 0.6129
+        "precision": 0.5957,
+        "recall": 0.5276,
+        "f1": 0.5596
       },
       {
         "label": "payment_account",
         "support": 730,
-        "precision": 0.9212,
-        "recall": 0.4644,
-        "f1": 0.6175
+        "precision": 0.8571,
+        "recall": 0.5425,
+        "f1": 0.6644
       },
       {
         "label": "consult",
         "support": 1866,
-        "precision": 0.6987,
-        "recall": 0.8339,
-        "f1": 0.7603
+        "precision": 0.6973,
+        "recall": 0.806,
+        "f1": 0.7477
       },
       {
         "label": "service",
         "support": 1144,
-        "precision": 0.8141,
-        "recall": 0.6774,
-        "f1": 0.7395
+        "precision": 0.5633,
+        "recall": 0.8558,
+        "f1": 0.6794
       },
       {
         "label": "invalid",
         "support": 1639,
-        "precision": 0.6933,
-        "recall": 0.6358,
-        "f1": 0.6633
+        "precision": 0.6842,
+        "recall": 0.5723,
+        "f1": 0.6233
       }
     ],
-    "auto_rate": 0.812,
-    "reject_rate": 0.188,
-    "avg_confidence": 0.6206,
-    "avg_activated_labels": 1.29,
+    "auto_rate": 0.8794,
+    "reject_rate": 0.1206,
+    "avg_confidence": 0.5953,
+    "avg_activated_labels": 1.458,
     "reject_reason_dist": {
-      "no_label_activated": 1207,
-      "low_confidence": 297
+      "no_label_activated": 935,
+      "low_confidence": 30
     },
-    "auto_micro_f1": 0.7194,
-    "auto_macro_f1": 0.7143
+    "auto_micro_f1": 0.6823,
+    "auto_macro_f1": 0.6854
   }
 }

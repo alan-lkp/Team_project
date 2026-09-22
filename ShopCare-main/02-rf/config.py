@@ -75,16 +75,23 @@ class RFConfig:
         self.sublinear_tf = True              # 用 1+log(tf) 压制长文本刷词频
 
         # ==================== todo 4. 随机森林超参数 ====================
-        # 说明: max_depth 是按**当前语料规模(train 10 万条)**用
-        # `python 02-rf/rf_train.py --grid-search` 实测选出来的。
-        # 早期语料只有 4000 条时用的是 max_depth=25 —— 在 10 万条上, 树深被限死后
-        # 概率估计会被压得很扁(最大概率均值只有 0.48), 连阈值都标不出来。
-        # 换语料规模后请重新跑一次 --grid-search, 不要沿用旧值。
+        # min_df=2 是有实测依据的: 换成 1 会让特征从 27708 涨到 34321(词表里会出现
+        # "鼠标 随便" 这种只由一条模板产生的 bigram), 测试集 F1 反而从 0.3661 掉到
+        # 0.3155。别为了"特征更多"把它调回 1。
+        #
+        # max_depth / min_samples_leaf 一起控制单棵树的复杂度。这两个值是当前语料下的
+        # 经验值, 不是网格搜索结果 —— 换语料规模后值得重跑一次
+        # `python 02-rf/rf_train.py --grid-search`。
+        #
+        # 注意: 不要用 train 集分数判断这组参数好不好。随机森林在训练集上必然接近满分
+        # (每棵树都在自助样本上长到底), train 分数对它不是泛化信号 —— 实测把上面几个
+        # 参数换过 5 组, train−test 的差距全在 +0.57 以上, 与参数无关。要看泛化请比
+        # dev/test 指标, 或者用 OOB 分数。
         self.n_estimators = 300
-        self.max_depth = 40                 # 用 min_samples_leaf 控制复杂度, 不限死深度
-        self.min_samples_leaf = 3
+        self.max_depth = 20                 # 限制单棵树深度; 叶子规模另由 min_samples_leaf 约束
+        self.min_samples_leaf = 5
         self.rf_max_features = 'sqrt'         # 每次分裂只看 sqrt(特征数) 个特征
-        self.class_weight = 'balanced_subsample'   # 应对标签长尾
+        self.class_weight = 'balanced'   # 应对标签长尾
         self.n_jobs = -1                      # 用满所有 CPU 核
         self.random_state = 42
 

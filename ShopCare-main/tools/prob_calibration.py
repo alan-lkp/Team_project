@@ -30,30 +30,58 @@
 单调保证**不改变排序**,所以 Micro-F1 不会因为校准而变(阈值会被重新标定),
 变的是"概率"这个数字本身的含义。
 
-支持两种方法:
+支持三种方法:
 
-  * `platt`   : 对 logit(p) 做一维逻辑回归, 2 个参数/标签。平滑、不会输出正好 0/1。
-  * `isotonic`: 保序回归, 直接拟合经验正确率。非参数、更贴合数据, 但会输出阶梯
-                函数(同一个台阶内的样本概率完全相同)。
+  * `platt`     : 对 logit(p) 做一维逻辑回归, 2 个参数/标签。平滑、不会输出正好 0/1。
+  * `isotonic`  : 保序回归, 直接拟合经验正确率。非参数, 但会输出阶梯函数
+                  (同一个台阶内的样本概率完全相同)。
+  * `equal_freq`: **等频分箱** + 平滑。按分位数切箱, 每箱样本数相同。见下面的说明。
 
-默认用 **platt**, 这是实测选出来的, 不是拍脑袋:
+**默认是 `platt`**, 但 02-rf 显式改用 `equal_freq` —— 它治的是 platt 治不了的病。
 
-    02-rf 上两种方法的对比(校准器拟合于 dev, 指标在 test 上算)
-        platt     test ECE 0.0806 -> 0.0270    概率正好 1.0 的标签占 0.3%
-        isotonic  test ECE 0.0806 -> 0.0352    概率正好 1.0 的标签占 2.3%
+为什么 RF 需要 equal_freq
+-------------------------
+随机森林的概率被压缩在一个很窄的区间(实测 02-rf 只有 [0.055, 0.78])。
+platt 是一条全局 sigmoid, 它要在**整个区间**上拟合, 而高分段几乎没有样本:
 
-isotonic 在 dev 上的对数损失更低, 但那是**拟合过度**: dev 里恰好 100% 命中的分箱
-会被直接映射成 1.000, 换到 test 上就是新的过度自信 —— 而"显示 100%"正是这套系统
-想避免的东西。platt 平滑、不外推饱和, test 上反而更准。
+    dev 上 quality 标签: 原始概率 >0.45 的 148 条, >0.5 的 35 条, >0.55 的 3 条
+
+platt 于是拟合出一条极陡的曲线来迁就这条尾部(实测 a=7.19), 把原始 0.482
+**外推**成 0.9649; 而 dev 的尾部本身并不单调(logistics 在 [0.55,0.70) 的命中率
+0.50 反而低于 [0.50,0.55) 的 0.79), 说明那段基本是噪声 —— 在噪声上拟合出的
+陡峭斜率, 就是"前端显示 99%"的来源。
+
+等频分箱从两个方向解决它:
+
+  1. **每箱样本数相同**。定宽分箱会让高分段空掉, 等频分箱保证尾部拿到的样本量
+     和低分段一样多, 从根上消除"从个位数样本外推"。
+  2. **落箱时夹到端点**。观测范围之外的输入夹到首/尾箱, 绝不外推。
+
+代价是输出变成阶梯(同一箱内概率相同), 但因此**永远到不了 1.0** —— 实测 02-rf
+最大输出从 platt 的 1.000 降到 0.963, 而 test Micro-F1 反而从 0.6154 升到 0.6330。
+
+实测对比(02-rf, 校准器拟合于 dev, 指标算在 test):
+
+    方法                     全局ECE   最大输出   ≥0.99 那一档的实际命中率
+    platt(不校准前 0.2026)    0.0218    1.000     0.8401   ← 声称 99.6%, 实际 84%
+    isotonic                 0.0239    1.000     0.9610
+    equal_freq(20箱 prior=20) 0.0251    0.963       (无此档)
+
+`auto` 会把三种都拟合一遍, 按 dev 上的对数损失挑最好的。
 
 用法
 ====
-    from tools.prob_calibration import fit_calibrators, apply_calibrators, summary
+    from tools.prob_calibration import (fit_calibrators, apply_calibrators,
+                                        expected_calibration_error, summary)
 
-    calib = fit_calibrators(probs_dev, Y_dev, class_list, method='auto')
-    probs_dev_c  = apply_calibrators(probs_dev, calib)
+    calib = fit_calibrators(probs_dev, Y_dev, class_list)            # 默认 platt
+    calib = fit_calibrators(probs_dev, Y_dev, class_list,            # 02-rf 用这个
+                            method='equal_freq', n_bins=20, prior=20.0)
     probs_test_c = apply_calibrators(probs_test, calib)
-    print(summary(probs_dev, probs_test, Y_dev, Y_test, calib))
+    print(summary(probs_test, probs_test_c, Y_test, calib))
+
+推理端只读产物里的 `calibrators` 列表(逐标签带 `kind`), 不解析 `method` 字符串,
+所以新旧方法的产物可以共存, 换方法不需要动任何推理代码。
 
 校准器只存纯数字(JSON 可序列化), 能直接塞进 02-rf 的 joblib 包和
 03-fasttext 的 model_meta.json, 推理端 apply 一下即可。
@@ -64,7 +92,7 @@ import numpy as np
 # 校准器内部对概率做 logit 变换前先截断, 避免 log(0) = -inf
 _EPS = 1e-6
 
-METHODS = ('auto', 'platt', 'isotonic')
+METHODS = ('auto', 'platt', 'isotonic', 'equal_freq')
 
 
 def _logit(p):
@@ -113,12 +141,76 @@ def _apply_isotonic(p, params):
     return np.interp(np.asarray(p, dtype=float), params['x'], params['y'])
 
 
+def _fit_binned(p, y, n_bins=20, prior=20.0):
+    """等频分箱校准: 按分位数切箱, 每箱样本数相同。
+
+    为什么不能用定宽分箱
+    --------------------
+    随机森林的概率被压在一个很窄的区间(实测 02-rf 只有 [0.055, 0.78]),
+    定宽分箱会让高分段基本空掉 —— dev 上 quality 标签原始概率 >0.5 的只有
+    35 条、>0.55 的只有 3 条。在这种区间上做任何拟合都是从个位数样本外推。
+    等频分箱保证每箱样本数都是 n/箱数, 尾部拿到的样本量和低分段一样多。
+
+    为什么要平滑
+    ------------
+    一箱恰好 100% 命中时, 直接取经验正确率会输出 1.000 —— 那正是这套系统想
+    避免的"声称一个测不出来的精度"。所以向全局正例率 base 收缩:
+
+        rate = (hits + prior * base) / (n + prior)
+
+    prior 是"先验的等效样本数": 一箱至少要有 prior 条样本, 才能把估计从全局
+    先验明显拉开。prior 越大越保守。
+
+    返回的 dict 直接 JSON 可序列化, 会被写进模型产物。
+    """
+    p = np.asarray(p, dtype=float)
+    y = np.asarray(y, dtype=float)
+    if len(np.unique(y)) < 2:
+        return None
+    qs = np.unique(np.quantile(p, np.linspace(0.0, 1.0, n_bins + 1)))
+    if len(qs) < 3:
+        # 概率取值太少(RF 可能只输出少数几个离散值), 连一箱都切不出来
+        return None
+    edges = qs[1:-1]                    # 内部切点; 两端不设界, 范围外自然夹到端点箱
+    idx = np.clip(np.searchsorted(edges, p, side='right'), 0, len(edges))
+    base = float(y.mean())
+    rates = []
+    for k in range(len(edges) + 1):
+        m = idx == k
+        n, hits = int(m.sum()), float(y[m].sum())
+        rates.append((hits + prior * base) / (n + prior) if n + prior > 0 else base)
+    # 保序: 分箱是逐箱独立估的, 噪声可能让相邻箱非单调, 累积取最大即恢复单调。
+    # 单调才不会打乱排序, 阈值语义(分数越高越可能为正)才成立。
+    rates = np.maximum.accumulate(np.asarray(rates, dtype=float))
+    return {'kind': 'equal_freq',
+            'edges': [float(v) for v in edges],
+            'rates': [float(v) for v in rates],
+            'n_bins': int(n_bins), 'prior': float(prior)}
+
+
+def _apply_binned(p, params):
+    """落箱: searchsorted 找箱号, clip 保证落在观测范围外的输入夹到端点箱, 不外推。"""
+    edges = np.asarray(params['edges'], dtype=float)
+    rates = np.asarray(params['rates'], dtype=float)
+    idx = np.clip(np.searchsorted(edges, np.asarray(p, dtype=float), side='right'),
+                  0, len(rates) - 1)
+    return rates[idx]
+
+
 def _apply_one(p, params):
     if not params:
         return np.asarray(p, dtype=float)      # 退化标签: 原样返回
-    if params['kind'] == 'platt':
+    kind = params['kind']
+    if kind == 'platt':
         return _apply_platt(p, params)
-    return _apply_isotonic(p, params)
+    if kind == 'isotonic':
+        return _apply_isotonic(p, params)
+    if kind == 'equal_freq':
+        return _apply_binned(p, params)
+    # 白名单之外必须报错, 不能兜底。老版本这里是 `else: return _apply_isotonic(...)`,
+    # 于是任何新的 kind 都会掉进 isotonic 分支 —— 运气好读 params['x'] 时 KeyError,
+    # 运气不好(产物里恰好有同名 key)则静默给出一个看起来正常、实际完全错误的概率。
+    raise ValueError(f'未知的校准器类型: {kind!r}')
 
 
 def apply_calibrators(probs, calib):
@@ -156,11 +248,13 @@ def expected_calibration_error(probs, y_true, bins=15):
     return round(float(ece), 4)
 
 
-def fit_calibrators(probs, y_true, class_list=None, method='platt'):
+def fit_calibrators(probs, y_true, class_list=None, method='platt',
+                    n_bins=20, prior=20.0):
     """在验证集上为每个标签拟合校准器。
 
-    method: 'platt' / 'isotonic' / 'auto'(两种都试, 按对数损失选更好的)
-    返回一个 JSON 可序列化的 dict。
+    method: 'platt' / 'isotonic' / 'equal_freq' / 'auto'(三种都试, 按对数损失选更好的)
+    n_bins, prior: 仅 'equal_freq' 使用 —— 分箱数与平滑先验的等效样本数。
+   返回一个 JSON 可序列化的 dict。
     """
     if method not in METHODS:
         raise ValueError(f'method 必须是 {METHODS} 之一, 收到 {method!r}')
@@ -177,15 +271,19 @@ def fit_calibrators(probs, y_true, class_list=None, method='platt'):
     calibrators = []
     per_label = []
 
-    # 'auto' 需要先把两种方法都拟合出来, 再统一比较, 所以这里分两轮
+    # 'auto' 需要先把三种方法都拟合出来, 再统一比较, 所以这里分两轮
     candidates = {}
-    for kind in ('platt', 'isotonic'):
+    for kind in ('platt', 'isotonic', 'equal_freq'):
         if method not in ('auto', kind):
             continue
         params_list = []
         for i in range(n_labels):
-            fitter = _fit_platt if kind == 'platt' else _fit_isotonic
-            params = fitter(probs[:, i], y_true[:, i])
+            if kind == 'platt':
+                params = _fit_platt(probs[:, i], y_true[:, i])
+            elif kind == 'isotonic':
+                params = _fit_isotonic(probs[:, i], y_true[:, i])
+            else:
+                params = _fit_binned(probs[:, i], y_true[:, i], n_bins, prior)
             if params:
                 params = dict(params, kind=kind)
             params_list.append(params)
@@ -205,8 +303,11 @@ def fit_calibrators(probs, y_true, class_list=None, method='platt'):
         if params:
             calibrators.append(params)
             lo, hi = float(probs[:, i].min()), float(probs[:, i].max())
+            # equal_freq 额外记下分箱数与平滑先验, 便于复现和排查
+            extra = ({'n_bins': params['n_bins'], 'prior': params['prior']}
+                     if params['kind'] == 'equal_freq' else {})
             per_label.append({'label': names[i], 'kind': params['kind'],
-                              'raw_range': [round(lo, 4), round(hi, 4)]})
+                              'raw_range': [round(lo, 4), round(hi, 4)], **extra})
         else:
             calibrators.append(None)
             per_label.append({'label': names[i], 'kind': None,

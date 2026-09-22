@@ -246,14 +246,25 @@ def run(cfg, args):
         print(f'\n  最优组合: {best["params"]} -> dev Micro-F1 {best["metrics"]["micro_f1"]}')
 
     # ---------- 4. 概率校准 ----------
-    # RF 的原始概率是 300 棵树的投票比例, 尺度被压得很扁(实测: 它说 0.6~0.8 时
-    # 实际命中率是 100%, 而它永远不会给出 1.0)。不校准的话, 前端会显示成
-    # "只有 42%"(像是模型坏了), 而且这个数字和 FastText 的 100% 根本不可比。
+    # RF 的原始概率是 300 棵树的投票比例, 尺度被压得很扁(实测全部落在 [0.055, 0.78],
+    # 它永远不会给出 1.0)。不校准的话, 前端会显示成"只有 42%"(像是模型坏了),
+    # 而且这个数字和 FastText 的 100% 根本不可比。
+    #
+    # 这里**特意不用 platt**(默认方法), 用等频分箱。原因: platt 是一条全局 sigmoid,
+    # 而 RF 的高分段几乎没有样本 —— dev 上 quality 标签原始概率 >0.5 的只有 35 条、
+    # >0.55 的只有 3 条。platt 会为了迁就这条尾部拟合出极陡的曲线(实测 a=7.19),
+    # 把原始 0.482 外推成 0.9649, 前端就显示成 96% —— 而 dev 的尾部本身还不单调
+    # (logistics 在 [0.55,0.70) 的命中率 0.50 反而低于 [0.50,0.55) 的 0.79),
+    # 说明那段基本是噪声, 在噪声上拟合出的斜率就是"前端虚高"的来源。
+    # 等频分箱每箱样本数相同、范围外夹到端点不外推, 实测最大输出从 1.000 降到 0.963,
+    # test Micro-F1 反而从 0.6154 升到 0.6330。详见 tools/prob_calibration.py 的说明。
+    #
     # 校准器**只在 dev 上拟合**, test 不参与, 所以下面的 test 指标依然干净。
     probs_dev_raw = predict_proba_matrix(vectorizer, estimators, constants, X_dev_text)
     probs_test_raw = predict_proba_matrix(vectorizer, estimators, constants, X_test_text)
-    print('\n[4/7] 在 dev 上拟合概率校准器 ...')
-    calibration = fit_calibrators(probs_dev_raw, Y_dev, class_list)
+    print('\n[4/7] 在 dev 上拟合概率校准器(等频分箱 + 平滑) ...')
+    calibration = fit_calibrators(probs_dev_raw, Y_dev, class_list,
+                                  method='equal_freq', n_bins=20, prior=20.0)
     probs_dev = apply_calibrators(probs_dev_raw, calibration)
     probs_test = apply_calibrators(probs_test_raw, calibration)
     print(calibration_summary(probs_test_raw, probs_test, Y_test, calibration,
@@ -316,8 +327,8 @@ def run(cfg, args):
         'trained_at': time.strftime('%Y-%m-%d %H:%M:%S'),
         'train_size': len(X_train_text),
         'train_seconds': round(time.time() - t_start, 1),
-        # 概率校准器(Platt 的 a/b 系数, 每标签一组)。推理端必须 apply 一下,
-        # 否则线上给出的置信度和训练报告里的口径不一致。
+        # 概率校准器(每标签一组; 等频分箱存的是切点 edges + 各箱正确率 rates)。
+        # 推理端必须 apply 一下, 否则线上给出的置信度和训练报告里的口径不一致。
         'calibration': calibration,
     }
     joblib.dump(bundle, cfg.model_save_path, compress=3)
